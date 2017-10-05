@@ -1,7 +1,7 @@
 {
-  "name": "my-project",
+  "name": "pos-mamba-websdk-template",
   "version": "1.0.0",
-  "description": "My Mamba project",
+  "description": "Mamba websdk template",
   "private": true,
   "main": "index.js",
   "scripts": {

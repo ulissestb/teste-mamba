@@ -1,4 +1,5 @@
 const path = require('path')
+const packageJSON = require('../package.json')
 
 let config = {
   root: path.join(__dirname, '../'),
@@ -11,7 +12,7 @@ let config = {
   },
   dist: {
     root: 'dist',
-    name: 'my-app'
+    name: packageJSON.name
   },
   lib: {
     mambaWebSdk: {
