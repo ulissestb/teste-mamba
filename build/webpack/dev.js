@@ -18,6 +18,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     symlinks: false // See https://github.com/webpack/webpack/issues/811
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
