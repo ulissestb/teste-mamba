@@ -7,6 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WebpackDeleteAfterEmit = require('webpack-delete-after-emit')
 
 module.exports = {
   entry: path.join(config.root, config.src.indexJS),
@@ -84,6 +85,10 @@ module.exports = {
     ]
   },
   plugins: [
+    // Remove roboto regular, because it's already shipped on the POS
+    new WebpackDeleteAfterEmit({
+      globs: ['fonts/Roboto-Regular.ttf'] // Relative to webpack output path
+    }),
     new webpack.optimize.UglifyJsPlugin({
       include: /\.js$/,
       compress: {
