@@ -85,6 +85,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
     // Remove roboto regular, because it's already shipped on the POS
     new WebpackDeleteAfterEmit({
       globs: ['fonts/Roboto-Regular.ttf'] // Relative to webpack output path

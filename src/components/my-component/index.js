@@ -7,5 +7,6 @@ export default {
   onCreate () {
     log.hello('Mamba developer')
     console.log('this is my-component on your console')
+    console.log(`Node env = ${process.env.NODE_ENV}`)
   }
 }
