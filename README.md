@@ -23,7 +23,7 @@
 
 ## Usage
 1. [Clone](https://github.com/stone-payments/pos-mamba-websdk-template) or [Download](https://github.com/stone-payments/pos-mamba-websdk-template/archive/master.zip) this repository
-2. Clone the [mamba-websdk](https://github.com/stone-payments/pos-mamba-websdk/tree/master/mamba-websdk) into another folder
+2. Clone the [mamba-websdk](https://github.com/stone-payments/pos-mamba-websdk) into another folder
 3. Install the template's npm dependencies
 ```bash
 npm install
