@@ -48,7 +48,7 @@
     "progress-bar-webpack-plugin": "1.9.3",
     "rimraf": "2.6.1",
     "sass-lint": "1.10.2",
-	"sass-lint-fix": "^1.10.2",
+    "sass-lint-fix": "1.10.2",
     "sass-loader": "6.0.5",
     "sasslint-webpack-plugin": "1.0.4",
     "snazzy": "7.0.0",

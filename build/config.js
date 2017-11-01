@@ -1,5 +1,6 @@
 const path = require('path')
 const packageJSON = require('../package.json')
+const buildConfig = require('mamba-websdk/build/config')
 
 let config = {
   root: path.join(__dirname, '../'),
@@ -18,7 +19,8 @@ let config = {
     mambaWebSdk: {
       assets: 'node_modules/mamba-websdk/dist/assets'
     }
-  }
+  },
+  aliases: buildConfig.aliases
 }
 
 module.exports = config
