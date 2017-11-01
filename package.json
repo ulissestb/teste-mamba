@@ -12,7 +12,7 @@
     "test:lint": "standard ./src ./test --verbose | snazzy && tslint ./src/**/*.ts ./test/**/*.ts && npm run lint:scss",
     "test:unit": "mocha --compilers ts:ts-node/register --recursive test/unit",
     "lint:js": "standard --fix ./src",
-    "lint:scss": "sass-lint ./src/**/*.scss --verbose",
+    "lint:scss": "sass-lint ./src/**/*.scss --fix --verbose",
     "lint:ts": "tslint --fix ./src/**/*.ts ./test/**/*.ts",
     "lint": "npm run lint:js && npm run lint:ts && npm run lint:scss"
   },
@@ -47,6 +47,7 @@
     "progress-bar-webpack-plugin": "1.9.3",
     "rimraf": "2.6.1",
     "sass-lint": "1.10.2",
+	"sass-lint-fix": "^1.10.2",
     "sass-loader": "6.0.5",
     "sasslint-webpack-plugin": "1.0.4",
     "snazzy": "7.0.0",
