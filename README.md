@@ -57,3 +57,52 @@ npm link mamba-websdk
   - Checks sass files formatting
 
 - `npm run clean` - Clean dist folder
+
+## Webpack aliases
+With webpack you can create custom aliases to filepaths to avoid having to follow the entire filepath to import a module
+```javascript
+/*
+On your mamba app project
+File build/config.js
+*/
+aliases: Object.assign({
+    //Your custom aliases go here
+
+    //Premade aliases to help
+    appComponents: path.resolve(__dirname, '../src/components'),
+    appShared: path.resolve(__dirname, '../src/shared'),
+    appStyles: path.resolve(__dirname, '../src/styles')
+  }, buildConfig.aliases)
+```
+With the aliases above, you could import a component in the components folder like this
+```javascript
+import YOUR_COMPONENT from 'appComponents/your_component'
+```
+
+There are also some aliases in the mamba-websdk that should be noted
+```javascript
+/*
+On mamba-websdk project
+File build/config.js
+*/
+aliases:
+    {
+      styles: path.resolve(__dirname, '../src/styles'),
+      components: path.resolve(__dirname, '../src/components')
+    }
+```
+Same as the previous import example, you could can import a module from mamba-websdk like this
+```javascript
+import MAMBA_COMPONENT from 'components/mamba_component'
+```
+
+When importing from a .scss or .less you need to add a __~__ at the beginning
+```scss
+/*
+On your mamba app project
+File src/styles/_custom-variables.scss
+*/
+@import '~styles/base/colorVariables';
+
+```
+

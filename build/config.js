@@ -20,7 +20,14 @@ let config = {
       assets: 'node_modules/mamba-websdk/dist/assets'
     }
   },
-  aliases: buildConfig.aliases
+  aliases: Object.assign({
+    //Your custom aliases go here
+
+    
+    appComponents: path.resolve(__dirname, '../src/components'),
+    appShared: path.resolve(__dirname, '../src/shared'),
+    appStyles: path.resolve(__dirname, '../src/styles')
+  }, buildConfig.aliases)
 }
 
 module.exports = config
