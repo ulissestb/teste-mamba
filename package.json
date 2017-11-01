@@ -19,6 +19,7 @@
   "author": "Bruno Calou <bcalou@stone.com.br>",
   "devDependencies": {
     "@types/mocha": "2.2.42",
+    "@types/node": "8.0.47",
     "awesome-typescript-loader": "3.2.3",
     "babel-core": "6.25.0",
     "babel-loader": "7.0.0",
