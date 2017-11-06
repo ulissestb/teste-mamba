@@ -16,7 +16,8 @@ module.exports = {
     filename: config.dist.name + '.js'
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    alias: config.aliases
   },
   module: {
     rules: [
