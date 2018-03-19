@@ -4,7 +4,8 @@
   "description": "Ready-to-go Preact starter project powered by webpack.",
   "scripts": {
     "generateTar": "generateTar",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
+    "dev":
+      "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
     "start": "serve build -s -c 1",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --progress",
@@ -12,36 +13,28 @@
     "test": "npm run -s lint && jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "eslint src test",
-    "format": "prettier --config './.prettierrc' --write './*.js' '{src,test}/**/*.{js,jsx}' && eslint -c './.eslintrc' --fix './*.js' '{src,test}/**/*.{js,jsx}'"
+    "format": "npm run format:css; npm run format:js",
+    "format:js":
+      "prettier --config './.prettierrc' --write './*.js' '{src,test}/**/*.{js,jsx}' && eslint -c './.eslintrc' --fix './*.js' '{src,test}/**/*.{js,jsx}'",
+    "format:css":
+      "prettier --config './.prettierrc' --write 'src/**/*.{scss,sass}'"
   },
-  "keywords": [
-    "preact",
-    "boilerplate",
-    "webpack"
-  ],
+  "keywords": ["preact", "boilerplate", "webpack"],
   "license": "MIT",
   "author": "Jason Miller <jason@developit.ca>",
   "jest": {
-    "setupFiles": [
-      "./test/setup.js"
-    ],
+    "setupFiles": ["./test/setup.js"],
     "testURL": "http://localhost:8080",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules"],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "identity-obj-proxy",
       "^react$": "preact-compat",
       "^react-dom$": "preact-compat"
     },
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ]
+    "collectCoverageFrom": ["src/**/*.{js,jsx}"]
   },
   "devDependencies": {
     "autoprefixer": "^7.0.1",
