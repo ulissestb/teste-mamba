@@ -18,7 +18,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.jsx', '.js', '.json', '.less', '.scss'],
+    extensions: ['.ts', '.tsx', '.jsx', '.js', '.json', '.sass', '.scss'],
     modules: [
       path.resolve(__dirname, 'src/lib'),
       path.resolve(__dirname, 'node_modules'),
@@ -63,7 +63,7 @@ module.exports = {
         use: 'babel-loader',
       },
       {
-        // Transform our own .(less|css) files with PostCSS and CSS-modules
+        // Transform our own .(scss|css) files with PostCSS and CSS-modules
         test: /\.(scss|css)$/,
         // include: [path.resolve(__dirname, 'src/components')],
         use: ExtractTextPlugin.extract({
