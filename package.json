@@ -2,6 +2,7 @@
   "name": "preact-boilerplate",
   "version": "6.0.0",
   "description": "Ready-to-go Preact starter project powered by webpack.",
+  "browserlist": "Safari >= 5",
   "scripts": {
     "generateTar": "generateTar",
     "dev":
