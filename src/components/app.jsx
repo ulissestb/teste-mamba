@@ -4,7 +4,7 @@ import Home from './home'
 import { NavigationPage } from '../navigation-page/index'
 
 export default class App extends Component {
-  render() {
+  render () {
     return (
       <div id="app">
         <Header />

@@ -14,13 +14,15 @@
     "test": "npm run -s lint && jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "npm run lint:css; npm run lint:js",
-    "lint:js": "eslint './*.js' '{src,test}/**/*.{js,jsx}'",
-    "lint:css": "stylelint -f verbose 'src/**/*.{css,sass,scss,sss,less}'",
+    "lint:js": "eslint *.js '{src,test}/**/*.{js,jsx}'",
+    "lint:css": "stylelint 'src/**/*.{css,sass,scss,sss,less}'",
     "format": "npm run format:css; npm run format:js",
     "format:js":
-      "prettier --write './*.js' '{src,test}/**/*.{js,jsx}' && eslint --fix './*.js' '{src,test}/**/*.{js,jsx}'",
+      "prettier --write *.js '{src,test}/**/*.{js,jsx}' && eslint --fix *.js '{src,test}/**/*.{js,jsx}'",
     "format:css":
-      "prettier --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint -f verbose --fix 'src/**/*.{css,sass,scss,sss,less}'"
+      "prettier --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint --fix 'src/**/*.{css,sass,scss,sss,less}'",
+    "eslint-check":
+      "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },
   "keywords": ["preact", "boilerplate", "webpack"],
   "license": "MIT",

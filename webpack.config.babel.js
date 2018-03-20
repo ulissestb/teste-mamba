@@ -35,16 +35,16 @@ module.exports = {
   module: {
     rules: [
       // {
-      // 	enforce: 'pre',
-      // 	test: /\.tsx?$/,
-      // 	loader: 'tslint-loader',
-      // 	exclude: /node_modules/,
-      // 	options: {
-      // 		configFile: path.resolve(__dirname, './tslint.json'),
-      // 		emitErrors: true,
-      // 		failOnHint: true,
-      // 		typeCheck: true
-      // 	}
+      //   enforce: 'pre',
+      //   test: /\.tsx?$/,
+      //   loader: 'tslint-loader',
+      //   exclude: /node_modules/,
+      //   options: {
+      //     configFile: path.resolve(__dirname, './tslint.json'),
+      //     emitErrors: true,
+      //     failOnHint: true,
+      //     typeCheck: true
+      //   }
       // },
       {
         test: /\.tsx?$/,
@@ -124,59 +124,59 @@ module.exports = {
       inject: false,
     }),
     // new CopyWebpackPlugin([
-    // 	{ from: './manifest.json', to: './' },
-    // 	{ from: './favicon.ico', to: './' }
+    //  { from: './manifest.json', to: './' },
+    //  { from: './favicon.ico', to: './' }
     // ])
   ].concat(
     ENV === 'production'
       ? [
-        new webpack.optimize.UglifyJsPlugin({
-          output: {
-            comments: false,
-          },
-          compress: {
-            unsafe_comps: true,
-            properties: true,
-            keep_fargs: false,
-            pure_getters: true,
-            collapse_vars: true,
-            unsafe: true,
-            warnings: false,
-            screw_ie8: true,
-            sequences: true,
-            dead_code: true,
-            drop_debugger: true,
-            comparisons: true,
-            conditionals: true,
-            evaluate: true,
-            booleans: true,
-            loops: true,
-            unused: true,
-            hoist_funs: true,
-            if_return: true,
-            join_vars: true,
-            cascade: true,
-            drop_console: true,
-          },
-        }),
+          new webpack.optimize.UglifyJsPlugin({
+            output: {
+              comments: false,
+            },
+            compress: {
+              unsafe_comps: true,
+              properties: true,
+              keep_fargs: false,
+              pure_getters: true,
+              collapse_vars: true,
+              unsafe: true,
+              warnings: false,
+              screw_ie8: true,
+              sequences: true,
+              dead_code: true,
+              drop_debugger: true,
+              comparisons: true,
+              conditionals: true,
+              evaluate: true,
+              booleans: true,
+              loops: true,
+              unused: true,
+              hoist_funs: true,
+              if_return: true,
+              join_vars: true,
+              cascade: true,
+              drop_console: true,
+            },
+          }),
 
-        // new OfflinePlugin({
-        // 	relativePaths: false,
-        // 	AppCache: false,
-        // 	excludes: ['_redirects'],
-        // 	ServiceWorker: {
-        // 		events: true
-        // 	},
-        // 	cacheMaps: [
-        // 		{
-        // 			match: /.*/,
-        // 			to: '/',
-        // 			requestTypes: ['navigate']
-        // 		}
-        // 	],
-        // 	publicPath: '/'
-        // })
-      ]
+          // new OfflinePlugin({
+          //  relativePaths: false,
+          //  AppCache: false,
+          //  excludes: ['_redirects'],
+          //  ServiceWorker: {
+          //  events: true
+          //  },
+          //  cacheMaps: [
+          //  {
+          //  match: /.*/,
+          //  to: '/',
+          //  requestTypes: ['navigate']
+          //  }
+          //  ],
+          //  publicPath: '/'
+          // })
+        ]
       : [],
   ),
 

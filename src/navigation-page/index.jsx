@@ -1,7 +1,7 @@
 import { Component } from 'preact'
 
 export class NavigationPage extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.path = props.path
     this.handleHashChange()
@@ -13,14 +13,14 @@ export class NavigationPage extends Component {
   path
   element
 
-  getPath() {
+  getPath () {
     console.log(`window.location.hash: ${window.location.hash}`)
     const path = window.location.hash.split('#')[1]
     if (path) return `/${path}`
     return '/'
   }
 
-  validatePath(path) {
+  validatePath (path) {
     console.log(`parsed path: ${path}`)
     if (this.path === path) {
       this.setState({ isActive: true })
@@ -29,11 +29,11 @@ export class NavigationPage extends Component {
     }
   }
 
-  handleHashChange() {
+  handleHashChange () {
     this.validatePath(this.getPath())
   }
 
-  render() {
+  render () {
     if (this.state.isActive !== false) return this.props.children[0]
   }
 }
