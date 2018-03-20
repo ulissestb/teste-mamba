@@ -1,17 +1,21 @@
 {
-   "sourceMaps": true,
-   "presets": [
-      [
-         "env",
-         {
-            "loose": true,
-            "debug": false
-         }
-      ],
-      "stage-0"
-   ],
-   "plugins": [
-      "transform-decorators-legacy",
-      ["transform-react-jsx", { "pragma": "h" }]
-   ]
+  "sourceMaps": true,
+  "presets": [
+    [
+      "env",
+      {
+        "useBuiltIns": false,
+        "loose": true,
+        "targets": {
+          "browsers": ["safari >= 5"]
+        },
+        "debug": false
+      }
+    ],
+    "stage-0"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    ["transform-react-jsx", { "pragma": "h" }]
+  ]
 }
