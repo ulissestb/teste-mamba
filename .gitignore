@@ -1,8 +1,13 @@
+# Dynamically created
+node_modules/
+/dist/
+
+# Workspace files
+/coverage/
+/.idea/
+/.vscode/
+
+# Garbage
 .DS_Store
-/node_modules
 /npm-debug.log
 /debug.log
-/build
-/coverage
-/.idea
-/.vscode

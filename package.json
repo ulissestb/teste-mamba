@@ -9,10 +9,10 @@
   "scripts": {
     "dev":
       "cross-env NODE_ENV=development webpack-dev-server --inline --hot --progress",
-    "start": "serve build -s -c 1",
+    "start": "serve dist -s -c 1",
     "prestart": "npm run build",
     "build": "cross-env NODE_ENV=production webpack --progress",
-    "prebuild": "mkdirp build && ncp src/assets build/assets",
+    "prebuild": "mkdirp dist && ncp src/assets dist/assets",
     "test": "npm run -s lint && jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "npm run lint:css; npm run lint:js",
