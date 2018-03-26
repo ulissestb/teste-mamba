@@ -2,7 +2,7 @@ import { h } from 'preact'
 
 import style from './style.scss'
 
-import { MbButton } from 'preact-mamba-websdk'
+import MbButton from '@mamba/button'
 
 export default () => {
   return (
@@ -14,6 +14,7 @@ export default () => {
       <a href="#page4">Page 4</a>
       <MbButton
         mbText="Mamba Button"
+        className="mb-button"
         clickHandler={() => {
           alert('mamba')
         }}

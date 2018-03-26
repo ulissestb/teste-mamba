@@ -4,10 +4,10 @@
     [
       "env",
       {
-        "useBuiltIns": false,
+        "useBuiltIns": true,
         "loose": true,
         "targets": {
-          "browsers": ["safari >= 5"]
+          "browsers": ["Safari >= 5.1"]
         },
         "debug": false
       }

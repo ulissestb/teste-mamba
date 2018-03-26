@@ -1,5 +1,7 @@
 // import 'promise-polyfill';
 // import 'isomorphic-fetch';
+import 'phantomjs-function-bind-polyfill'
+import 'babel-polyfill'
 import { h, render } from 'preact'
 // import './style';
 
