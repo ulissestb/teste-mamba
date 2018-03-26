@@ -7,6 +7,9 @@ node_modules/
 /.idea/
 /.vscode/
 
+# Logs
+yarn-error.log
+
 # Garbage
 .DS_Store
 /npm-debug.log
