@@ -1,4 +1,4 @@
-const ENV = process.env.NODE_ENV
+const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   extends: [
@@ -27,7 +27,7 @@ module.exports = {
   },
   rules: {
     indent: ['error', 2, { SwitchCase: 1, flatTernaryExpressions: true }],
-    'no-console': ENV === 'production' ? 2 : 0,
+    'no-console': isProd ? 2 : 0,
     'space-before-function-paren': 2,
     'jsx-quotes': ['error', 'prefer-double'],
   },
