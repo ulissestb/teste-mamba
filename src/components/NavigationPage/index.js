@@ -1,6 +1,11 @@
-import { Component } from 'preact'
+import { Component } from 'preact-compat'
+import PropTypes from 'prop-types'
 
-export class NavigationPage extends Component {
+export default class NavigationPage extends Component {
+  static propTypes = {
+    path: PropTypes.string.isRequired
+  }
+
   constructor (props) {
     super(props)
     this.path = props.path
@@ -14,14 +19,14 @@ export class NavigationPage extends Component {
   element
 
   getPath () {
-    console.log(`window.location.hash: ${window.location.hash}`)
+    // console.log(`window.location.hash: ${window.location.hash}`)
     const path = window.location.hash.split('#')[1]
     if (path) return `/${path}`
     return '/'
   }
 
   validatePath (path) {
-    console.log(`parsed path: ${path}`)
+    // console.log(`parsed path: ${path}`)
     if (this.path === path) {
       this.setState({ isActive: true })
     } else {

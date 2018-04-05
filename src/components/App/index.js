@@ -1,7 +1,9 @@
 import { h, Component } from 'preact'
-import Header from './header'
-import Home from './home'
-import { NavigationPage } from '../navigation-page/index'
+import Header from '../Header'
+import Home from '../Home'
+import NavigationPage from '../NavigationPage'
+
+import './style.scss';
 
 export default class App extends Component {
   render () {
