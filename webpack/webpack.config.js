@@ -24,11 +24,11 @@ module.exports = {
   },
   context: resolve(PROJECT_ROOT, 'src'),
   entry: {
-    vendor: [
+    lib: [
       /** Necessary polyfill for Mamba Environment */
       'phantomjs-function-bind-polyfill',
     ],
-    main: [
+    app: [
       /** App entry point */
       './index.js',
     ],

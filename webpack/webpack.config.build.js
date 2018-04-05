@@ -39,22 +39,36 @@ if (IS_PROD) {
     }),
     /**
      * In production build, replace required 'prop-types' with a empty module stub.
-     * This is dangerous if there's any module requesting PropTypes.properties in bundle.
      *
      * We can do this because all @mamba/components wrap their propTypes
      * with a if(process.env.NODE_ENV === 'production') which is removed when evaluated to false by the uglify process.
+     *
+     * This is a little bit dangerous if there's any other external module requesting PropTypes.properties in bundle.
      **/
     new webpack.NormalModuleReplacementPlugin(
       /prop-?types$/i,
-      resolve(PROJECT_ROOT, 'test', '__mocks__', 'moduleStub.js'),
+      resolve(PROJECT_ROOT, '__mocks__', 'moduleStub.js'),
     ),
-    /** Separate entry.vendor packages from the main chunk */
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
+    /** Generate hashes based on module's relative path */
+    new webpack.HashedModuleIdsPlugin(),
+    /** Separate 'entry.lib' packages from the app chunk */
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'lib',
+      minChunks: Infinity,
+    }),
+    /** Separate webpack bootstrap code from the app chunk  */
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'manifest',
+      minChunks: Infinity,
+    }),
   )
 
   if (!IS_ANALYZING_BUNDLE) {
     plugins.push(
-      /** For scope hoisting */
+      /**
+       * For scope hoisting.
+       * @see https://medium.com/webpack/brief-introduction-to-scope-hoisting-in-webpack-8435084c171f
+       * */
       new webpack.optimize.ModuleConcatenationPlugin(),
     )
   }
@@ -63,7 +77,7 @@ if (IS_PROD) {
 /** Webpack configuration used for bulding */
 module.exports = merge(require('./webpack.config.js'), {
   entry: {
-    vendor: ['preact', 'preact-compat'],
+    lib: ['preact', 'preact-compat'],
   },
   devtool: 'source-map',
   plugins,
