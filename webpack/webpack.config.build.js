@@ -58,7 +58,7 @@ if (IS_PROD) {
     }),
     /** Separate webpack bootstrap code from the app chunk  */
     new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
+      name: 'webpack.bootstrap',
       minChunks: Infinity,
     }),
   )
