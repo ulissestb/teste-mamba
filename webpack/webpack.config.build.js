@@ -27,16 +27,16 @@ let plugins = [
 if (IS_PROD) {
   plugins = plugins.concat(
     /** Minifiy the bundle */
-    // new UglifyJsPlugin({
-    //   cache: true, // Enables file caching
-    //   parallel: true, // Use multiple CPUs if available,
-    //   sourceMap: true, // Enables sourcemap,
-    //   uglifyOptions: {
-    //     output: {
-    //       comments: false,
-    //     },
-    //   },
-    // }),
+    new UglifyJsPlugin({
+      cache: true, // Enables file caching
+      parallel: true, // Use multiple CPUs if available,
+      sourceMap: true, // Enables sourcemap,
+      uglifyOptions: {
+        output: {
+          comments: false,
+        },
+      },
+    }),
     /**
      * In production build, replace required 'prop-types' with a empty module stub.
      * This is dangerous if there's any module requesting PropTypes.properties in bundle.
