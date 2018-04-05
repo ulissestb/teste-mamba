@@ -1,16 +1,15 @@
 # Dynamically created
 node_modules/
 /dist/
+bundle.stats.json
 
 # Workspace files
 /coverage/
-/.idea/
-/.vscode/
-
-# Logs
-yarn-error.log
+.idea/
+.vscode/
 
 # Garbage
 .DS_Store
-/npm-debug.log
-/debug.log
+yarn-error.log
+npm-debug.log
+debug.log
