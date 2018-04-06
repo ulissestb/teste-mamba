@@ -1,9 +1,11 @@
 const { resolve } = require('path')
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const { readFileSync } = require('fs')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
+const { minify: htmlMinifier } = require('html-minifier')
+const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin
 
 /** Defaults process.env.NODE_ENV to 'development */
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
@@ -14,20 +16,213 @@ const IS_DEV = !IS_PROD
 /** Current project working directory */
 const PROJECT_ROOT = resolve(__dirname, '..')
 
-module.exports = {
-  target: 'web',
-  stats: {
-    modules: false,
-    chunks: false,
-    colors: true,
-    children: false,
+const webpackResolve = {
+  /** Do not resolve symlinks */
+  symlinks: false,
+  extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.scss', '.sass', '.css'],
+  alias: {
+    react: 'preact-compat',
+    'react-dom': 'preact-compat',
+    components: resolve(PROJECT_ROOT, 'src/components'),
+    style: resolve(PROJECT_ROOT, 'src/style'),
+    /** Ensure we're always importing the same preact/preact-compat package */
+    'preact-compat': resolve(PROJECT_ROOT, 'node_modules', 'preact-compat'),
+    preact: resolve(PROJECT_ROOT, 'node_modules', 'preact'),
   },
+}
+
+const optimization = {
+  /** Create a separate chunk for webpack runtime */
+  runtimeChunk: { name: 'runtime' },
+  splitChunks: {
+    cacheGroups: {
+      /** Disable default chunk groups */
+      default: false,
+      vendor: false,
+      /** Chunk that contains used libraries */
+      libraries: {
+        test: /preact/,
+        name: 'lib',
+        chunks: 'initial',
+        minSize: 0,
+        minChunks: 1,
+      },
+      /** Chunk that contains used polyfills */
+      polyfills: {
+        test: /core-js/,
+        name: 'polyfills',
+        chunks: 'initial',
+        minSize: 0,
+        minChunks: 1,
+        priority: Infinity,
+      },
+      /** Chunk for all used css files */
+      styles: {
+        test: /\.css$/,
+        name: 'styles',
+        chunks: 'all',
+        enforce: true,
+      },
+    },
+  },
+}
+
+const rules = [
+  {
+    test: /\.tsx?$/,
+    loader: 'ts-loader',
+    exclude: /node_modules/,
+  },
+  {
+    test: /\.jsx?$/,
+    enforce: 'pre',
+    exclude: resolve(PROJECT_ROOT, 'src'),
+    use: 'source-map-loader',
+  },
+  {
+    test: /\.jsx?$/,
+    exclude: /node_modules/,
+    use: [
+      {
+        loader: 'babel-loader',
+        options: {
+          compact: false,
+          cacheDirectory: true,
+        },
+      },
+      {
+        loader: 'eslint-loader',
+        options: {
+          emitWarning: IS_DEV,
+        },
+      },
+    ],
+  },
+  {
+    // SASS
+    test: /\.s[ac]ss$/,
+    enforce: 'pre',
+    resolve: {
+      mainFields: ['scss', 'style', 'main'],
+    },
+    use: [
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: IS_DEV,
+        },
+      },
+    ],
+  },
+  {
+    test: /\.(css|less|s[ac]ss|styl)$/,
+    use: [
+      MiniCssExtractPlugin.loader,
+      {
+        loader: 'css-loader',
+        options: { sourceMap: IS_DEV },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: [
+            require('postcss-import')(),
+            require('autoprefixer')(),
+            require('postcss-reporter')({ clearReportedMessages: true }),
+          ],
+          sourceMap: IS_DEV,
+        },
+      },
+    ],
+  },
+  {
+    test: /\.(xml|html|txt|md)$/,
+    use: 'raw-loader',
+  },
+  {
+    test: /\.(eot|woff2?|otf|ttf)$/,
+    loader: 'url-loader',
+    options: {
+      // TODO: Test if an inline font works on the POS
+      limit: 1, // Copy font files instead of inserting them on the css
+      outputPath: 'assets/',
+      name: './fonts/[name].[ext]',
+    },
+  },
+  {
+    test: /\.(gif|jpe?g|png|ico|svg)$/,
+    loader: 'url-loader',
+    options: {
+      limit: 1,
+      outputPath: 'assets/',
+      name: './images/[name].[ext]',
+    },
+  },
+]
+
+const plugins = [
+  new MiniCssExtractPlugin({
+    filename: 'style.css',
+    chunkFilename: '[name].css',
+  }),
+  new StyleLintPlugin(),
+  new ProgressBarPlugin({
+    format:
+      '\u001b[90m\u001b[44mBuild\u001b[49m\u001b[39m [:bar] \u001b[32m\u001b[1m:percent\u001b[22m\u001b[39m (:elapseds) \u001b[2m:msg\u001b[22m',
+    renderThrottle: 100,
+    summary: false,
+    clear: true,
+  }),
+  new MiniHtmlWebpackPlugin({
+    context: {
+      title: 'Mamba Application',
+    },
+    template: ({ css, js, title, publicPath }) => {
+      /** Gets the Function.prototype.bind polyfill content to prepend to the html template scripts */
+      const bindPolyfillCode = readFileSync(
+        resolve(
+          PROJECT_ROOT,
+          'node_modules',
+          'phantomjs-function-bind-polyfill',
+          'index.js',
+        ),
+        'utf8',
+      )
+
+      const HTML_TEMPLATE = `<!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="UTF-8">
+            <title>${title}</title>
+            <script type="text/javascript">${bindPolyfillCode}</script>
+            ${generateCSSReferences(css, publicPath)}
+          </head>
+          <body>
+            ${generateJSReferences(js, publicPath)}
+          </body>
+        </html>`
+
+      return IS_PROD
+        ? htmlMinifier(HTML_TEMPLATE, {
+          collapseWhitespace: true,
+          conservativeCollapse: true,
+          minifyCSS: true,
+          minifyJS: true,
+          keepClosingSlash: true,
+          preserveLineBreaks: false,
+          removeComments: true,
+        })
+        : HTML_TEMPLATE
+    },
+  }),
+]
+
+module.exports = {
+  mode: IS_PROD ? 'production' : 'development',
+  cache: true,
+  target: 'web',
   context: resolve(PROJECT_ROOT, 'src'),
   entry: {
-    lib: [
-      /** Necessary polyfill for Mamba Environment */
-      'phantomjs-function-bind-polyfill',
-    ],
     app: [
       /** App entry point */
       './index.js',
@@ -35,31 +230,14 @@ module.exports = {
   },
   output: {
     path: resolve(PROJECT_ROOT, 'dist'),
-    publicPath: '/',
+    publicPath: './',
     filename: '[name].js',
   },
-  resolve: {
-    /** Do not resolve symlinks */
-    symlinks: false,
-    extensions: [
-      '.js',
-      '.jsx',
-      '.ts',
-      '.tsx',
-      '.json',
-      '.scss',
-      '.sass',
-      '.css',
-    ],
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat',
-      components: resolve(PROJECT_ROOT, 'src/components'),
-      style: resolve(PROJECT_ROOT, 'src/style'),
-      /** Ensure we're always importing the same preact/preact-compat package */
-      'preact-compat': resolve(PROJECT_ROOT, 'node_modules', 'preact-compat'),
-      preact: resolve(PROJECT_ROOT, 'node_modules', 'preact'),
-    },
+  stats: {
+    modules: false,
+    chunks: false,
+    colors: true,
+    children: false,
   },
   /** Polyfill only the 'process' node global */
   node: {
@@ -71,130 +249,8 @@ module.exports = {
     Buffer: false,
     setImmediate: false,
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'ts-loader',
-        exclude: /node_modules/,
-      },
-      {
-        test: /\.jsx?$/,
-        enforce: 'pre',
-        exclude: resolve(PROJECT_ROOT, 'src'),
-        use: 'source-map-loader',
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              compact: false,
-              cacheDirectory: true,
-            },
-          },
-          {
-            loader: 'eslint-loader',
-            options: {
-              emitWarning: IS_DEV,
-            },
-          },
-        ],
-      },
-      {
-        // SASS
-        test: /\.s[ac]ss$/,
-        enforce: 'pre',
-        use: [
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: IS_DEV,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.(css|less|s[ac]ss|styl)$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: '[local]',
-                minimize: {
-                  core: IS_PROD,
-                  discardComments: IS_PROD,
-                },
-                sourceMap: IS_DEV,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                parser: require('postcss-scss'),
-                plugins: [
-                  require('postcss-import')(),
-                  require('autoprefixer')(),
-                  require('postcss-reporter')({ clearReportedMessages: true }),
-                ],
-                sourceMap: IS_DEV,
-              },
-            },
-          ],
-        }),
-      },
-      {
-        test: /\.json$/,
-        use: 'json-loader',
-      },
-      {
-        test: /\.(xml|html|txt|md)$/,
-        use: 'raw-loader',
-      },
-      {
-        test: /\.(eot|woff2?|otf|ttf)$/,
-        loader: 'url-loader',
-        options: {
-          // TODO: Test if an inline font works on the POS
-          limit: 1, // Copy font files instead of inserting them on the css
-          outputPath: 'assets/',
-          name: './fonts/[name].[ext]',
-        },
-      },
-      {
-        test: /\.(gif|jpe?g|png|ico|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 1,
-          outputPath: 'assets/',
-          name: './images/[name].[ext]',
-        },
-      },
-    ],
-  },
-  plugins: [
-    new webpack.EnvironmentPlugin({ NODE_ENV: 'development' }),
-    new ExtractTextPlugin({
-      filename: 'style.css',
-      allChunks: true,
-    }),
-    new StyleLintPlugin(),
-    new ProgressBarPlugin({
-      format:
-        '\u001b[90m\u001b[44mBuild\u001b[49m\u001b[39m [:bar] \u001b[32m\u001b[1m:percent\u001b[22m\u001b[39m (:elapseds) \u001b[2m:msg\u001b[22m',
-      renderThrottle: 100,
-      summary: false,
-      clear: true,
-    }),
-    new HtmlWebpackPlugin({
-      template: './index.ejs',
-      minify: { collapseWhitespace: true },
-      inject: false,
-    }),
-  ],
+  resolve: webpackResolve,
+  optimization,
+  module: { rules },
+  plugins,
 }

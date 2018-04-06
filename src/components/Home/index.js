@@ -13,7 +13,14 @@ export default () => {
       <a href="#page4">Page 4</a>
       <Button
         text="Mamba Button"
-        className="mb-button"
+        className="mb-button mb-button-red"
+        onClick={() => {
+          alert('mamba')
+        }}
+      />
+      <Button
+        text="Mamba Button 2"
+        className="mb-button mb-button-green"
         onClick={() => {
           alert('mamba')
         }}

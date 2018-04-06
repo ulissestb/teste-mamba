@@ -3,7 +3,7 @@ import Header from '../Header'
 import Home from '../Home'
 import NavigationPage from '../NavigationPage'
 
-import './style.scss';
+import './style.scss'
 
 export default class App extends Component {
   render () {

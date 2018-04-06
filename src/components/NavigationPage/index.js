@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export default class NavigationPage extends Component {
   static propTypes = {
-    path: PropTypes.string.isRequired
+    path: PropTypes.string.isRequired,
   }
 
   constructor (props) {

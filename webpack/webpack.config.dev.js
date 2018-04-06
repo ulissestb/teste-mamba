@@ -11,11 +11,12 @@ const DIST_PATH = resolve(PROJECT_ROOT, 'dist')
 module.exports = merge(require('./webpack.config.js'), {
   devtool: 'cheap-module-eval-source-map',
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-  ],
+  plugins: [new webpack.HotModuleReplacementPlugin()],
+
+  optimization: {
+    namedModules: true,
+    noEmitOnErrors: true,
+  },
 
   devServer: {
     contentBase: DIST_PATH,
