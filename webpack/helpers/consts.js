@@ -10,5 +10,11 @@ module.exports.IS_DEV = process.env.NODE_ENV === 'development'
 /** Current project working directory */
 module.exports.PROJECT_ROOT = resolve(__dirname, '..', '..')
 
+/** Modules path */
+module.exports.MODULES_ROOT = resolve(
+  module.exports.PROJECT_ROOT,
+  'node_modules',
+)
+
 /** Current project 'dist' directory */
 module.exports.DIST_PATH = resolve(module.exports.PROJECT_ROOT, 'dist')

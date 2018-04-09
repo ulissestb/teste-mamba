@@ -3,8 +3,14 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
+const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
 
-const { PROJECT_ROOT, IS_DEV, IS_PROD } = require('./helpers/consts.js')
+const {
+  PROJECT_ROOT,
+  MODULES_ROOT,
+  IS_DEV,
+  IS_PROD,
+} = require('./helpers/consts.js')
 const htmlTemplate = require('./helpers/htmlTemplate.js')
 
 const webpackResolve = {
@@ -17,8 +23,8 @@ const webpackResolve = {
     components: resolve(PROJECT_ROOT, 'src/components'),
     style: resolve(PROJECT_ROOT, 'src/style'),
     /** Ensure we're always importing the same preact/preact-compat package */
-    'preact-compat': resolve(PROJECT_ROOT, 'node_modules', 'preact-compat'),
-    preact: resolve(PROJECT_ROOT, 'node_modules', 'preact'),
+    'preact-compat': resolve(MODULES_ROOT, 'preact-compat'),
+    preact: resolve(MODULES_ROOT, 'preact'),
   },
 }
 
@@ -42,10 +48,9 @@ const optimization = {
       polyfills: {
         test: /core-js/,
         name: 'polyfills',
-        chunks: 'initial',
+        chunks: 'all',
         minSize: 0,
         minChunks: 1,
-        priority: Infinity,
       },
       /** Chunk for all used css files */
       styles: {
@@ -148,6 +153,7 @@ const rules = [
 ]
 
 const plugins = [
+  new RuntimeBindPolyfillPlugin(),
   new MiniCssExtractPlugin({
     filename: 'style.css',
     chunkFilename: '[name].css',
