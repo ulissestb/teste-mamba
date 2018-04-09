@@ -32,19 +32,21 @@ module.exports = class RuntimeBindPolyfillPlugin {
         /** Get runtime chunks */
         const runtimeChunks = chunks.filter(chunk => chunk.hasRuntime())
 
-        /** Found any runtime chunks? */
-        if (runtimeChunks.length) {
-          /** For each runtime chunk found, prepend the bind polyfill code to it */
-          runtimeChunks.forEach(runtimeChunk => {
-            const [runtimeFile] = runtimeChunk.files
-
-            compilation.assets[runtimeFile] = new ConcatSource(
-              BIND_POLYFILL_CODE,
-              '\n',
-              compilation.assets[runtimeFile],
-            )
-          })
+        /** Found any runtime chunks? If not, return */
+        if (!runtimeChunks.length) {
+          return
         }
+
+        /** For each runtime chunk found, prepend the bind polyfill code to it */
+        runtimeChunks.forEach(runtimeChunk => {
+          const [runtimeFile] = runtimeChunk.files
+
+          compilation.assets[runtimeFile] = new ConcatSource(
+            BIND_POLYFILL_CODE,
+            '\n',
+            compilation.assets[runtimeFile],
+          )
+        })
       })
     })
   }
