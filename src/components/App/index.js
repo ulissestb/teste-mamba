@@ -3,6 +3,7 @@ import Header from '../Header'
 import Home from '../Home'
 import NavigationPage from '../NavigationPage'
 
+import '../../external.scss'
 import './style.scss'
 
 export default class App extends Component {
