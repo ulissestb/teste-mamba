@@ -60,11 +60,6 @@ const optimization = {
 
 const rules = [
   {
-    test: /\.tsx?$/,
-    loader: 'ts-loader',
-    exclude: /node_modules/,
-  },
-  {
     test: /\.jsx?$/,
     enforce: 'pre',
     exclude: resolve(PROJECT_ROOT, 'src'),
@@ -94,6 +89,7 @@ const rules = [
     test: /\.s[ac]ss$/,
     enforce: 'pre',
     resolve: {
+      /** When importing from a scss file, let's use package.json's 'scss' and 'style' fields before the actual 'main' one */
       mainFields: ['scss', 'style', 'main'],
     },
     use: [
@@ -165,9 +161,7 @@ const plugins = [
     clear: true,
   }),
   new MiniHtmlWebpackPlugin({
-    context: {
-      title: 'Mamba Application',
-    },
+    context: { title: 'Mamba Application' },
     template: htmlTemplate,
   }),
 ]
@@ -188,13 +182,14 @@ module.exports = {
     publicPath: './',
     filename: '[name].js',
   },
+  /** Minimal useful output log */
   stats: {
     modules: false,
     chunks: false,
     colors: true,
     children: false,
   },
-  /** Polyfill only the 'process' node global */
+  /** Polyfill only the 'process' node global (needed for preact-compat) */
   node: {
     console: false,
     global: false,
