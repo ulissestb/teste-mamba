@@ -1,9 +1,6 @@
-const { resolve } = require('path')
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-
-const PROJECT_ROOT = resolve(__dirname, '..')
-const DIST_PATH = resolve(PROJECT_ROOT, 'dist')
+const { DIST_PATH } = require('./helpers/consts.js')
 
 /**
  * Webpack configuration used for development

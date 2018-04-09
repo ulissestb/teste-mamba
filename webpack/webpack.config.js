@@ -1,20 +1,11 @@
 const { resolve } = require('path')
-const { readFileSync } = require('fs')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
-const { minify: htmlMinifier } = require('html-minifier')
-const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin
 
-/** Defaults process.env.NODE_ENV to 'development */
-process.env.NODE_ENV = process.env.NODE_ENV || 'development'
-
-const IS_PROD = process.env.NODE_ENV === 'production'
-const IS_DEV = !IS_PROD
-
-/** Current project working directory */
-const PROJECT_ROOT = resolve(__dirname, '..')
+const { PROJECT_ROOT, IS_DEV, IS_PROD } = require('./helpers/consts.js')
+const htmlTemplate = require('./helpers/htmlTemplate.js')
 
 const webpackResolve = {
   /** Do not resolve symlinks */
@@ -177,43 +168,7 @@ const plugins = [
     context: {
       title: 'Mamba Application',
     },
-    template: ({ css, js, title, publicPath }) => {
-      /** Gets the Function.prototype.bind polyfill content to prepend to the html template scripts */
-      const bindPolyfillCode = readFileSync(
-        resolve(
-          PROJECT_ROOT,
-          'node_modules',
-          'phantomjs-function-bind-polyfill',
-          'index.js',
-        ),
-        'utf8',
-      )
-
-      const HTML_TEMPLATE = `<!DOCTYPE html>
-        <html>
-          <head>
-            <meta charset="UTF-8">
-            <title>${title}</title>
-            <script type="text/javascript">${bindPolyfillCode}</script>
-            ${generateCSSReferences(css, publicPath)}
-          </head>
-          <body>
-            ${generateJSReferences(js, publicPath)}
-          </body>
-        </html>`
-
-      return IS_PROD
-        ? htmlMinifier(HTML_TEMPLATE, {
-          collapseWhitespace: true,
-          conservativeCollapse: true,
-          minifyCSS: true,
-          minifyJS: true,
-          keepClosingSlash: true,
-          preserveLineBreaks: false,
-          removeComments: true,
-        })
-        : HTML_TEMPLATE
-    },
+    template: htmlTemplate,
   }),
 ]
 

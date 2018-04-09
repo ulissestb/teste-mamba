@@ -1,17 +1,12 @@
+const { resolve } = require('path')
+const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const { resolve } = require('path')
-const webpack = require('webpack')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const IS_PROD = process.env.NODE_ENV === 'production'
-
-/** Current project working directory */
-const PROJECT_ROOT = resolve(__dirname, '..')
-/** Current project 'dist' directory */
-const DIST_PATH = resolve(PROJECT_ROOT, 'dist')
+const { IS_PROD, PROJECT_ROOT, DIST_PATH } = require('./helpers/consts.js')
 
 /** Webpack plugins to be used while building */
 let plugins = [
@@ -64,9 +59,6 @@ module.exports = merge(require('./webpack.config.js'), {
         parallel: true, // Use multiple CPUs if available,
         sourceMap: true, // Enables sourcemap,
         uglifyOptions: {
-          mangle: {
-            reserved: ['process'], // Prevent renaming of `process.env...`
-          },
           output: {
             comments: false,
           },
