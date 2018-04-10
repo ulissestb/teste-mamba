@@ -16,7 +16,7 @@ const htmlTemplate = require('./helpers/htmlTemplate.js')
 const webpackResolve = {
   /** Do not resolve symlinks */
   symlinks: false,
-  extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.scss', '.sass', '.css'],
+  extensions: ['.js', '.jsx', '.json', '.scss', '.sass', '.css'],
   alias: {
     react: 'preact-compat',
     'react-dom': 'preact-compat',
@@ -38,7 +38,7 @@ const optimization = {
       vendor: false,
       /** Chunk that contains used libraries */
       libraries: {
-        test: /preact/,
+        test: /node_modules\/p?react|prop-?types|history/i,
         name: 'lib',
         chunks: 'initial',
         minSize: 0,

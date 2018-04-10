@@ -13,6 +13,7 @@ let plugins = [
   new CleanWebpackPlugin([DIST_PATH], { root: PROJECT_ROOT }),
   new CopyWebpackPlugin([
     { from: './assets/', to: resolve(DIST_PATH, 'assets') },
+    { from: resolve(PROJECT_ROOT, 'manifest.xml'), to: resolve(DIST_PATH) },
   ]),
 ]
 
@@ -26,6 +27,8 @@ if (IS_PROD) {
      * with a if(process.env.NODE_ENV === 'production') which is removed when evaluated to false by the uglify process.
      *
      * This is a little bit dangerous if there's any other external module requesting PropTypes.properties in bundle.
+     *
+     * Update: currently commented because of react-router-dom.
      **/
     new webpack.NormalModuleReplacementPlugin(
       /prop-?types$/i,

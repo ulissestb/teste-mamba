@@ -14,12 +14,20 @@ module.exports = merge(require('./webpack.config.js'), {
     namedModules: true,
     noEmitOnErrors: true,
   },
-
   devServer: {
     contentBase: DIST_PATH,
-    port: process.env.PORT || 8080,
-    historyApiFallback: true,
+    compress: true,
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'DENY',
+    },
     open: true,
-    inline: true,
+    overlay: {
+      warnings: true,
+      errors: true,
+    },
+    port: 8080,
+    publicPath: 'http://localhost:8080/',
+    hot: true,
   },
 })
