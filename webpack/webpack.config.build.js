@@ -27,8 +27,6 @@ if (IS_PROD) {
      * with a if(process.env.NODE_ENV === 'production') which is removed when evaluated to false by the uglify process.
      *
      * This is a little bit dangerous if there's any other external module requesting PropTypes.properties in bundle.
-     *
-     * Update: currently commented because of react-router-dom.
      **/
     new webpack.NormalModuleReplacementPlugin(
       /prop-?types$/i,
@@ -41,10 +39,8 @@ if (IS_PROD) {
 
 /** Webpack configuration used for bulding */
 module.exports = merge(require('./webpack.config.js'), {
-  devtool: 'source-map',
   plugins,
   optimization: {
-    /** If analyzing bundle, don't concatenate modules */
     minimize: IS_PROD,
     minimizer: [
       /** Minify the bundle's css */
