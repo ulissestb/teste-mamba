@@ -95,13 +95,13 @@ const rules = [
     enforce: 'pre',
     resolve: {
       /** When importing from a scss file, let's use package.json's 'scss' and 'style' fields before the actual 'main' one */
-      mainFields: ['scss', 'style', 'main'],
+      mainFields: ['style', 'main'],
     },
     use: [
       {
         loader: 'sass-loader',
         options: {
-          sourceMap: IS_DEV,
+          sourceMap: true, // 'resolve-url-loader' requires this to be always true
         },
       },
     ],
@@ -123,6 +123,15 @@ const rules = [
             require('postcss-reporter')({ clearReportedMessages: true }),
           ],
           sourceMap: IS_DEV,
+        },
+      },
+      {
+        loader: 'resolve-url-loader',
+        options: {
+          sourceMap: IS_DEV,
+          keepQuery: true,
+          fail: true,
+          debug: IS_DEV,
         },
       },
     ],
