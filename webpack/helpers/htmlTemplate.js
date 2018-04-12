@@ -13,6 +13,7 @@ module.exports = ({ css, js, title, publicPath }) => {
             ${generateCSSReferences(css, publicPath)}
           </head>
           <body>
+            <div id="root"></div>
             ${generateJSReferences(js, publicPath)}
           </body>
         </html>`
