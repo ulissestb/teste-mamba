@@ -50,6 +50,7 @@ module.exports = merge(require('./webpack.config.js'), {
         cssProcessorOptions: {
           core: IS_PROD,
           discardComments: IS_PROD,
+          autoprefixer: false, // We already use autoprefixer in postcss-loader
         },
       }),
       /** Minifiy the bundle */
