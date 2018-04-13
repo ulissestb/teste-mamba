@@ -1,7 +1,4 @@
-const ENV = process.env.NODE_ENV || 'development'
-const IS_PROD = ENV === 'production'
-const IS_TEST = ENV === 'test'
-const IS_DEV = ENV === 'development'
+const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/helpers/consts.js')
 
 const presets = [
   [
@@ -23,11 +20,22 @@ const presets = [
 const plugins = ['@babel/plugin-proposal-decorators']
 
 if (IS_PROD) {
-  /** Remove component's proptypes and 'prop-types' package import */
-  plugins.push([
-    'transform-react-remove-prop-types',
-    { mode: 'remove', removeImport: true },
-  ])
+  plugins.push(
+    /** Remove component's proptypes and 'prop-types' package import */
+    [
+      'transform-react-remove-prop-types',
+      { mode: 'remove', removeImport: true },
+    ],
+    /** Scope hoisting for constant components (ex: <span>sample text</span>) */
+    '@babel/plugin-transform-react-constant-elements',
+  )
+}
+
+if (IS_DEV) {
+  plugins.push(
+    '@babel/plugin-transform-react-jsx-self',
+    '@babel/plugin-transform-react-jsx-source',
+  )
 }
 
 module.exports = {

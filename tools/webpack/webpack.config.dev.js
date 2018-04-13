@@ -1,6 +1,6 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-const { DIST_PATH } = require('./helpers/consts.js')
+const { DIST_PATH } = require('../helpers/consts.js')
 
 /**
  * Webpack configuration used for development

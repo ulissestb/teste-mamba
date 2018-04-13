@@ -6,7 +6,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const { IS_PROD, PROJECT_ROOT, DIST_PATH } = require('./helpers/consts.js')
+const {
+  IS_PROD,
+  IS_DEV,
+  PROJECT_ROOT,
+  DIST_PATH,
+} = require('../helpers/consts.js')
 
 /** Webpack plugins to be used while building */
 let plugins = [
@@ -39,6 +44,7 @@ if (IS_PROD) {
 
 /** Webpack configuration used for bulding */
 module.exports = merge(require('./webpack.config.js'), {
+  devtool: IS_DEV && 'source-map',
   plugins,
   optimization: {
     minimize: IS_PROD,

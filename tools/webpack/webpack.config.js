@@ -3,15 +3,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
-const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
+const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 
 const {
   PROJECT_ROOT,
   MODULES_ROOT,
   IS_DEV,
   IS_PROD,
-} = require('./helpers/consts.js')
-const htmlTemplate = require('./helpers/htmlTemplate.js')
+} = require('../helpers/consts.js')
+const htmlTemplate = require('../helpers/htmlTemplate.js')
 
 const webpackResolve = {
   /** Do not resolve symlinks */

@@ -599,20 +599,27 @@
     "@babel/helper-get-function-arity" "7.0.0-beta.44"
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
+"@babel/plugin-transform-react-constant-elements@^7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.0.0-beta.44.tgz#326b28dc2fc3b0a8bab0823c30bcfb584b74ca4a"
+  dependencies:
+    "@babel/helper-annotate-as-pure" "7.0.0-beta.44"
+    "@babel/helper-plugin-utils" "7.0.0-beta.44"
+
 "@babel/plugin-transform-react-display-name@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-display-name/-/plugin-transform-react-display-name-7.0.0-beta.44.tgz#e7937554e209d72804808581c334945af238481d"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
 
-"@babel/plugin-transform-react-jsx-self@7.0.0-beta.44":
+"@babel/plugin-transform-react-jsx-self@7.0.0-beta.44", "@babel/plugin-transform-react-jsx-self@^7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.0.0-beta.44.tgz#5ae463928b5a8d432f8523ef783add643b5c2bc4"
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.44"
     "@babel/plugin-syntax-jsx" "7.0.0-beta.44"
 
-"@babel/plugin-transform-react-jsx-source@7.0.0-beta.44":
+"@babel/plugin-transform-react-jsx-source@7.0.0-beta.44", "@babel/plugin-transform-react-jsx-source@^7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.0.0-beta.44.tgz#629101210cf86fe3cfb89a4278fb8d0966bdfc81"
   dependencies:
