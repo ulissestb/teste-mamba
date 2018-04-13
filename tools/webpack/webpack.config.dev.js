@@ -2,9 +2,7 @@ const merge = require('webpack-merge')
 const webpack = require('webpack')
 const { DIST_PATH } = require('../helpers/consts.js')
 
-/**
- * Webpack configuration used for development
- */
+/** Webpack configuration used for development */
 module.exports = merge(require('./webpack.config.js'), {
   devtool: 'source-map',
 
