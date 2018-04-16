@@ -1,4 +1,5 @@
 const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/helpers/utils.js')
+const EnforcePreactCompatPlugin = require('./tools/helpers/EnforcePreactCompatPlugin.js')
 
 const presets = [
   [
@@ -27,6 +28,7 @@ const plugins = [
       import: 'createElement',
     },
   ],
+  EnforcePreactCompatPlugin,
 ]
 
 if (IS_PROD) {
