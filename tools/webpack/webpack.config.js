@@ -41,9 +41,9 @@ const optimization = {
       /** Disable default chunk groups */
       default: false,
       vendor: false,
-      /** Chunk that contains used libraries */
+      /** Chunk that contains every external dependency that doesn't begin with '@mamba' */
       libraries: {
-        test: /node_modules\/p?react|prop-?types|history/i,
+        test: /node_modules(?!\/@mamba)/i,
         name: 'lib',
         chunks: 'initial',
         minSize: 0,
@@ -56,13 +56,6 @@ const optimization = {
         chunks: 'all',
         minSize: 0,
         minChunks: 1,
-      },
-      /** Chunk for all used css files */
-      styles: {
-        test: /\.css$/,
-        name: 'styles',
-        chunks: 'all',
-        enforce: true,
       },
     },
   },
