@@ -5,7 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const { IS_PROD, IS_DEV, fromRoot, fromDist } = require('../helpers/utils.js')
+const { fromRoot, fromDist } = require('../helpers/utils.js')
+const { IS_DEV, IS_PROD } = require('../helpers/consts.js')
 
 /** Webpack plugins to be used while building */
 const plugins = [

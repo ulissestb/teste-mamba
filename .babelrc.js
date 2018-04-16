@@ -1,4 +1,9 @@
-const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/helpers/utils.js')
+const {
+  IS_PROD,
+  IS_DEV,
+  IS_TEST,
+  PRAGMA_HANDLE,
+} = require('./tools/helpers/consts.js')
 const EnforcePreactCompatPlugin = require('./tools/helpers/EnforcePreactCompatPlugin.js')
 
 const presets = [
@@ -15,7 +20,7 @@ const presets = [
     },
   ],
   ['@babel/preset-stage-0', { loose: true }],
-  ['@babel/preset-react', { development: IS_DEV, pragma: 'createElement' }],
+  ['@babel/preset-react', { development: IS_DEV, pragma: PRAGMA_HANDLE }],
 ]
 
 const plugins = [
@@ -24,10 +29,12 @@ const plugins = [
     'babel-plugin-jsx-pragmatic',
     {
       module: 'preact-compat',
-      export: 'createElement',
-      import: 'createElement',
+      export: PRAGMA_HANDLE,
+      import: PRAGMA_HANDLE,
     },
   ],
+  /** Scope hoisting for constant components (ex: <span>sample text</span>) */
+  '@babel/plugin-transform-react-constant-elements',
   EnforcePreactCompatPlugin,
 ]
 
@@ -38,8 +45,6 @@ if (IS_PROD) {
       'transform-react-remove-prop-types',
       { mode: 'remove', removeImport: true },
     ],
-    /** Scope hoisting for constant components (ex: <span>sample text</span>) */
-    '@babel/plugin-transform-react-constant-elements',
   )
 }
 

@@ -4,12 +4,8 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 
-const {
-  fromRoot,
-  fromModulesRoot,
-  IS_DEV,
-  IS_PROD,
-} = require('../helpers/utils.js')
+const { fromRoot, fromModulesRoot } = require('../helpers/utils.js')
+const { IS_DEV, IS_PROD } = require('../helpers/consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
 const mainLibs = ['preact', 'preact-compat', 'prop-types', 'classnames']
