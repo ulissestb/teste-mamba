@@ -1,6 +1,6 @@
 const merge = require('webpack-merge')
 const webpack = require('webpack')
-const { DIST_PATH } = require('../helpers/consts.js')
+const { fromDist } = require('../helpers/utils.js')
 
 /** Webpack configuration used for development */
 module.exports = merge(require('./webpack.config.js'), {
@@ -13,7 +13,7 @@ module.exports = merge(require('./webpack.config.js'), {
     noEmitOnErrors: true,
   },
   devServer: {
-    contentBase: DIST_PATH,
+    contentBase: fromDist(),
     compress: true,
     headers: {
       'X-Content-Type-Options': 'nosniff',

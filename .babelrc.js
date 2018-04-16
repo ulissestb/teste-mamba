@@ -1,4 +1,4 @@
-const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/helpers/consts.js')
+const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/helpers/utils.js')
 
 const presets = [
   [
@@ -14,10 +14,20 @@ const presets = [
     },
   ],
   ['@babel/preset-stage-0', { loose: true }],
-  ['@babel/preset-react', { development: IS_DEV, pragma: 'h' }],
+  ['@babel/preset-react', { development: IS_DEV, pragma: 'createElement' }],
 ]
 
-const plugins = ['@babel/plugin-proposal-decorators']
+const plugins = [
+  '@babel/plugin-proposal-decorators',
+  [
+    'babel-plugin-jsx-pragmatic',
+    {
+      module: 'preact-compat',
+      export: 'createElement',
+      import: 'createElement',
+    },
+  ],
+]
 
 if (IS_PROD) {
   plugins.push(

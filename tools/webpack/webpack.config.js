@@ -1,4 +1,3 @@
-const { resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
@@ -6,11 +5,11 @@ const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 
 const {
-  PROJECT_ROOT,
-  MODULES_ROOT,
+  fromRoot,
+  fromModulesRoot,
   IS_DEV,
   IS_PROD,
-} = require('../helpers/consts.js')
+} = require('../helpers/utils.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
 const mainLibs = ['preact', 'preact-compat', 'prop-types', 'classnames']
@@ -28,7 +27,7 @@ const webpackResolve = {
      * Fixes linked components using their own dependencies.
      */
     ...mainLibs.reduce((acc, libName) => {
-      acc[libName] = resolve(MODULES_ROOT, libName)
+      acc[libName] = fromModulesRoot(libName)
       return acc
     }, {}),
   },
@@ -73,7 +72,7 @@ const rules = [
   {
     test: /\.jsx?$/,
     enforce: 'pre',
-    exclude: resolve(PROJECT_ROOT, 'src'),
+    exclude: fromRoot('src'),
     use: 'source-map-loader',
   },
   {
@@ -191,15 +190,17 @@ module.exports = {
   mode: IS_PROD ? 'production' : 'development',
   cache: true,
   target: 'web',
-  context: resolve(PROJECT_ROOT, 'src'),
+  context: fromRoot('src'),
   entry: {
     app: [
+      /** External scss/css */
+      './external.scss',
       /** App entry point */
       './index.js',
     ],
   },
   output: {
-    path: resolve(PROJECT_ROOT, 'dist'),
+    path: fromRoot('dist'),
     publicPath: './',
     filename: '[name].js',
   },

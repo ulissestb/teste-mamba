@@ -1,11 +1,10 @@
-import { h } from 'preact'
-import style from './style.scss'
+import './style.scss'
 
 import Button from '@mamba/button'
 
 export default () => {
   return (
-    <div className={style.home}>
+    <div className="home">
       <h1>Home</h1>
       <Button
         text="Mamba Button"

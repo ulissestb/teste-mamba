@@ -1,5 +1,5 @@
 // import 'babel-polyfill'
-import { h, render } from 'preact'
+import { render } from 'preact-compat'
 import App from './components/App'
 
 let root

@@ -28,7 +28,7 @@ module.exports = {
   },
   settings: {
     react: {
-      pragma: 'h',
+      pragma: 'createElement',
     },
   },
   rules: {
@@ -36,6 +36,7 @@ module.exports = {
     'no-console': IS_PROD ? 2 : 0,
     'space-before-function-paren': 2,
     'jsx-quotes': ['error', 'prefer-double'],
+    'react/react-in-jsx-scope': 0, // Babel automatically imports the pragma
     'react/display-name': 0, // Allow anonymous stateless components
     'react/prop-types': [
       2,

@@ -1,4 +1,3 @@
-const { resolve } = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -6,19 +5,14 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const {
-  IS_PROD,
-  IS_DEV,
-  PROJECT_ROOT,
-  DIST_PATH,
-} = require('../helpers/consts.js')
+const { IS_PROD, IS_DEV, fromRoot, fromDist } = require('../helpers/utils.js')
 
 /** Webpack plugins to be used while building */
 const plugins = [
-  new CleanWebpackPlugin([DIST_PATH], { root: PROJECT_ROOT }),
+  new CleanWebpackPlugin([fromDist()], { root: fromRoot() }),
   new CopyWebpackPlugin([
-    { from: './assets/', to: resolve(DIST_PATH, 'assets') },
-    { from: resolve(PROJECT_ROOT, 'manifest.xml'), to: resolve(DIST_PATH) },
+    { from: './assets/', to: fromDist('assets') },
+    { from: fromRoot('manifest.xml'), to: fromDist() },
   ]),
 ]
 
@@ -35,10 +29,12 @@ if (IS_PROD) {
      */
     new webpack.NormalModuleReplacementPlugin(
       /prop-?types$/i,
-      resolve(PROJECT_ROOT, '__mocks__', 'moduleStub.js'),
+      fromRoot('__mocks__', 'moduleStub.js'),
     ),
     /**
-     * Replace 'preact-compat' with 'preact' since we already removed all prop-types.
+     * Replace 'preact-compat' with 'preact'. We can do this because:
+     * - PropTypes are excluded in production bundles.
+     * - Preact also exports 'createElement'.
      *
      * Note: This is can also be dangerous, but for now it's safe to use.
      */

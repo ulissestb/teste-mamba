@@ -1,4 +1,3 @@
-import { h } from 'preact'
 import { Component } from 'preact-compat'
 import { Link } from 'preact-router/match'
 
