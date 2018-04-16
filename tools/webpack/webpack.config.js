@@ -13,6 +13,7 @@ const {
 } = require('../helpers/consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
+const mainLibs = ['preact', 'preact-compat', 'prop-types', 'classnames']
 const webpackResolve = {
   /** Do not resolve symlinks */
   symlinks: false,
@@ -20,11 +21,16 @@ const webpackResolve = {
   alias: {
     react: 'preact-compat',
     'react-dom': 'preact-compat',
-    components: resolve(PROJECT_ROOT, 'src/components'),
-    style: resolve(PROJECT_ROOT, 'src/style'),
-    /** Ensure we're always importing the same preact/preact-compat package */
-    'preact-compat': resolve(MODULES_ROOT, 'preact-compat'),
-    preact: resolve(MODULES_ROOT, 'preact'),
+    'create-react-class': 'preact-compat/lib/create-react-class',
+    'react-addons-css-transition-group': 'preact-css-transition-group',
+    /**
+     * Ensure we're always importing the main packages from this project's root.
+     * Fixes linked components using their own dependencies.
+     */
+    ...mainLibs.reduce((acc, libName) => {
+      acc[libName] = resolve(MODULES_ROOT, libName)
+      return acc
+    }, {}),
   },
 }
 
