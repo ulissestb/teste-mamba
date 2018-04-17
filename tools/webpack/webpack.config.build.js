@@ -36,10 +36,11 @@ if (IS_PROD) {
      * Replace 'preact-compat' with 'preact'. We can do this because:
      * - PropTypes are excluded in production bundles.
      * - Preact also exports 'createElement'.
+     * We can,'t do this when using a component which depends on 'preact-compat' (Ex: tabs)
      *
-     * Note: This is can also be dangerous, but for now it's safe to use.
+     * Note: turned off by default.
      */
-    new webpack.NormalModuleReplacementPlugin(/^preact-compat$/i, 'preact'),
+    // new webpack.NormalModuleReplacementPlugin(/^preact-compat$/i, 'preact'),
     /** Generate hashes based on module's relative path */
     new webpack.HashedModuleIdsPlugin(),
   )
@@ -59,14 +60,60 @@ const optimization = {
         autoprefixer: false, // We already use autoprefixer in postcss-loader
       },
     }),
-    /** Minifiy the bundle */
+    /** Minifiy the bundle. Based on create-react-app */
     new UglifyJsPlugin({
-      cache: true, // Enables file caching
-      parallel: true, // Use multiple CPUs if available,
-      sourceMap: true, // Enables sourcemap,
+      /** Enable file caching */
+      cache: true,
+      /**
+       * Use multi-process parallel running to improve the build speed
+       * Default number of concurrent runs: os.cpus().length - 1
+       */
+      parallel: true,
+      sourceMap: true,
       uglifyOptions: {
+        parse: {
+          /**
+           * We want uglify-js to parse ecma 8 code. However, we don't want it
+           * to apply any minfication steps that turns valid ecma 5 code
+           * into invalid ecma 5 code. This is why the 'compress' and 'output'
+           * sections only apply transformations that are ecma 5 safe
+           * https://github.com/facebook/create-react-app/pull/4234
+           */
+          ecma: 8,
+        },
+        compress: {
+          ecma: 5,
+          warnings: false,
+          /**
+           * Disabled because of an issue with Uglify breaking seemingly valid code:
+           * https://github.com/facebook/create-react-app/issues/2376
+           * Pending further investigation:
+           * https://github.com/mishoo/UglifyJS2/issues/2011
+           */
+          comparisons: false,
+          /** NEED TO FALSE for not inlining preact's VNode constructor */
+          reduce_funcs: false,
+          /** Functions that doesn't have side-effects */
+          pure_funcs: [
+            'classCallCheck',
+            '_classCallCheck',
+            '_possibleConstructorReturn',
+            'Object.freeze',
+            'invariant',
+            'warning',
+          ],
+        },
+        mangle: {
+          safari10: true,
+        },
         output: {
+          ecma: 5,
           comments: false,
+          /**
+           *  Turned on because emoji and regex is not minified properly using default
+           * https://github.com/facebook/create-react-app/issues/2488
+           */
+          ascii_only: true,
         },
       },
     }),

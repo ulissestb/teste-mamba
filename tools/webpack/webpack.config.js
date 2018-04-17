@@ -1,5 +1,5 @@
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
@@ -162,12 +162,8 @@ const plugins = [
     chunkFilename: '[name].css',
   }),
   new StyleLintPlugin(),
-  new ProgressBarPlugin({
-    format:
-      '\u001b[90m\u001b[44mBuild\u001b[49m\u001b[39m [:bar] \u001b[32m\u001b[1m:percent\u001b[22m\u001b[39m (:elapseds) \u001b[2m:msg\u001b[22m',
-    renderThrottle: 100,
-    summary: false,
-    clear: true,
+  new SimpleProgressPlugin({
+    messageTemplate: [':bar', ':percent', ':elapseds', ':msg'].join(' '),
   }),
   new MiniHtmlWebpackPlugin({
     context: { title: 'Mamba Application' },
