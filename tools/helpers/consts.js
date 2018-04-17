@@ -6,6 +6,7 @@ module.exports = {
   IS_TEST: process.env.NODE_ENV === 'test',
   IS_DEV: process.env.NODE_ENV === 'development',
 
-  /** Pragma handler */
+  /** Pragma config */
   PRAGMA_HANDLE: 'createElement',
+  PRAGMA_MODULE: 'preact-compat',
 }

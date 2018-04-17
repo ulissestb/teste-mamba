@@ -91,7 +91,7 @@ const optimization = {
            * https://github.com/mishoo/UglifyJS2/issues/2011
            */
           comparisons: false,
-          /** NEED TO FALSE for not inlining preact's VNode constructor */
+          /** NEED TO BE FALSE for not inlining preact's VNode constructor */
           reduce_funcs: false,
           /** Functions that doesn't have side-effects */
           pure_funcs: [

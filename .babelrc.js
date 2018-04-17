@@ -3,6 +3,7 @@ const {
   IS_DEV,
   IS_TEST,
   PRAGMA_HANDLE,
+  PRAGMA_MODULE,
 } = require('./tools/helpers/consts.js')
 const EnforcePreactCompatPlugin = require('./tools/helpers/EnforcePreactCompatPlugin.js')
 
@@ -28,7 +29,7 @@ const plugins = [
   [
     'babel-plugin-jsx-pragmatic',
     {
-      module: 'preact-compat',
+      module: PRAGMA_MODULE,
       export: PRAGMA_HANDLE,
       import: PRAGMA_HANDLE,
     },
