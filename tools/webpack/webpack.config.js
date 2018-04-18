@@ -60,12 +60,6 @@ const optimization = {
 const rules = [
   {
     test: /\.jsx?$/,
-    enforce: 'pre',
-    exclude: fromRoot('src'),
-    use: 'source-map-loader',
-  },
-  {
-    test: /\.jsx?$/,
     exclude: /node_modules/,
     use: [
       {
@@ -84,24 +78,11 @@ const rules = [
     ],
   },
   {
-    // SASS
-    test: /\.s[ac]ss$/,
-    enforce: 'pre',
+    test: /\.(css|less|s[ac]ss|styl)$/,
     resolve: {
-      /** When importing from a scss file, let's use package.json's 'scss' and 'style' fields before the actual 'main' one */
+      /** When importing from a style file, let's use package.json's 'style' field before the actual 'main' one */
       mainFields: ['style', 'main'],
     },
-    use: [
-      {
-        loader: 'sass-loader',
-        options: {
-          sourceMap: true, // 'resolve-url-loader' requires this to be always true
-        },
-      },
-    ],
-  },
-  {
-    test: /\.(css|less|s[ac]ss|styl)$/,
     use: [
       MiniCssExtractPlugin.loader,
       {
@@ -126,6 +107,12 @@ const rules = [
           keepQuery: true,
           fail: true,
           debug: IS_DEV,
+        },
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          sourceMap: true, // 'resolve-url-loader' requires this to be always true
         },
       },
     ],
