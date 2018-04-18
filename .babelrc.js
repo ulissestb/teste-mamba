@@ -7,7 +7,7 @@ const presets = [
     '@babel/preset-env',
     {
       /** Polyfill only used built-ins */
-      useBuiltIns: 'usage',
+      useBuiltIns: IS_PROD ? 'usage' : false,
       loose: true,
       /** Only parse modules if testing. If not, let webpack handle it */
       modules: IS_TEST ? 'commonjs' : false,
