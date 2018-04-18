@@ -6,7 +6,11 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const { fromRoot, fromDist } = require('../helpers/utils.js')
-const { IS_PROD } = require('../helpers/consts.js')
+const { IS_PROD } = require('../consts.js')
+const {
+  dangerousReplacePreactCompat,
+  dangerousRemovePropTypes,
+} = require('../config.js')
 
 /** Webpack plugins to be used while building */
 const plugins = [
@@ -20,30 +24,38 @@ const plugins = [
 /** If building for production... */
 if (IS_PROD) {
   plugins.push(
-    /**
-     * In production build, replace required 'prop-types' with a empty module stub.
-     *
-     * We can do this because all @mamba/components wrap their propTypes
-     * with a if(process.env.NODE_ENV === 'production') which is removed when evaluated to false by the uglify process.
-     *
-     * Note: This is a little bit dangerous if there's any other external module requesting PropTypes.properties in bundle.
-     */
-    new webpack.NormalModuleReplacementPlugin(
-      /prop-?types$/i,
-      fromRoot('__mocks__', 'moduleStub.js'),
-    ),
-    /**
-     * Replace 'preact-compat' with 'preact'. We can do this because:
-     * - PropTypes are excluded in production bundles.
-     * - Preact also exports 'createElement'.
-     * We can,'t do this when using a component which depends on 'preact-compat' (Ex: tabs)
-     *
-     * Note: turned off by default.
-     */
-    // new webpack.NormalModuleReplacementPlugin(/^preact-compat$/i, 'preact'),
     /** Generate hashes based on module's relative path */
     new webpack.HashedModuleIdsPlugin(),
   )
+
+  if (dangerousRemovePropTypes) {
+    plugins.push(
+      /**
+       * Replace 'prop-types' with a empty module stub.
+       *
+       * We can do this because all @mamba/components wrap their propTypes
+       * with a if(process.env.NODE_ENV === 'production') which is removed when evaluated to false by the uglify process.
+       *
+       * If there's any other external module requesting PropTypes.properties, disable the 'dangerousRemovePropTypes'.
+       */
+      new webpack.NormalModuleReplacementPlugin(
+        /prop-?types$/i,
+        fromRoot('__mocks__', 'moduleStub.js'),
+      ),
+    )
+  }
+
+  if (dangerousReplacePreactCompat) {
+    plugins.push(
+      /**
+       * Replace 'preact-compat' with 'preact', generating smaller bundles.]
+       *
+       * We can do this because all @mamba/components were built to work with 'preact' only.
+       * If the app is using any method exclusive to 'preact-compat', disable the 'dangerousReplacePreactCompat'.
+       */
+      new webpack.NormalModuleReplacementPlugin(/^preact-compat$/i, 'preact'),
+    )
+  }
 }
 
 /** Build optimizations */

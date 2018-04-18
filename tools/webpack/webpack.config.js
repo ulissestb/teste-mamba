@@ -5,7 +5,7 @@ const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 
 const { fromRoot, fromModulesRoot } = require('../helpers/utils.js')
-const { IS_DEV, IS_PROD } = require('../helpers/consts.js')
+const { IS_DEV, IS_PROD } = require('../consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
 const mainLibs = ['preact', 'preact-compat', 'prop-types', 'classnames']

@@ -1,10 +1,5 @@
-const {
-  IS_PROD,
-  IS_DEV,
-  IS_TEST,
-  PRAGMA_HANDLE,
-  PRAGMA_MODULE,
-} = require('./tools/helpers/consts.js')
+const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/consts.js')
+const { pragma } = require('./tools/config.js')
 const EnforcePreactCompatPlugin = require('./tools/helpers/EnforcePreactCompatPlugin.js')
 
 const presets = [
@@ -21,7 +16,7 @@ const presets = [
     },
   ],
   ['@babel/preset-stage-0', { loose: true }],
-  ['@babel/preset-react', { development: IS_DEV, pragma: PRAGMA_HANDLE }],
+  ['@babel/preset-react', { development: IS_DEV, pragma: pragma.handle }],
 ]
 
 const plugins = [
@@ -29,9 +24,9 @@ const plugins = [
   [
     'babel-plugin-jsx-pragmatic',
     {
-      module: PRAGMA_MODULE,
-      export: PRAGMA_HANDLE,
-      import: PRAGMA_HANDLE,
+      module: pragma.module,
+      export: pragma.handle,
+      import: pragma.handle,
     },
   ],
   /** Scope hoisting for constant components (ex: <span>sample text</span>) */

@@ -1,4 +1,5 @@
-const { IS_PROD, PRAGMA_HANDLE } = require('./tools/helpers/consts.js')
+const { IS_PROD } = require('./tools/consts.js')
+const { pragma } = require('./tools/config.js')
 
 module.exports = {
   extends: [
@@ -28,7 +29,7 @@ module.exports = {
   },
   settings: {
     react: {
-      pragma: PRAGMA_HANDLE,
+      pragma: pragma.handle,
     },
   },
   rules: {
