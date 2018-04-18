@@ -13,6 +13,8 @@ const webpackResolve = {
   /** Do not resolve symlinks */
   symlinks: false,
   extensions: ['.js', '.jsx', '.json', '.scss', '.sass', '.css'],
+  /** Make webpack also resolve modules from './src' */
+  modules: [fromRoot('src'), fromModulesRoot()],
   alias: {
     react: 'preact-compat',
     'react-dom': 'preact-compat',

@@ -6,18 +6,17 @@ import './style.scss'
 export default class Header extends Component {
   render () {
     return (
-      <div>
-        <header className="header">
-          <h1>Preact App</h1>
-        </header>
+      <header className="header">
+        <h1>Mamba App</h1>
         <nav>
-          <Link href="/">Home</Link>
-          <Link href="/page1">Page 1</Link>
-          <Link href="/page2">Page 2</Link>
-          <Link href="/page3">Page 3</Link>
-          <Link href="/page4">Page 4</Link>
+          <Link activeClassName="active" href="/">
+            Home
+          </Link>
+          <Link activeClassName="active" href="/example">
+            Example page
+          </Link>
         </nav>
-      </div>
+      </header>
     )
   }
 }

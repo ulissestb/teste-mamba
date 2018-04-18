@@ -1,4 +1,3 @@
-// import 'babel-polyfill'
 import { render } from 'preact-compat'
 import App from './components/App'
 

@@ -34,7 +34,10 @@ export default () => {
       <br />
       <section>
         <Tabs onChange={handleTabChange}>
-          <Tab label="First Tab">
+          <Tab
+            label="First Tab"
+            onClick={() => console.log('clicou no 1')} /* eslint-disable-line */
+          >
             <div>
               <h2 style={styles.headline}>Headline first tab</h2>
               <p>This is an example tab.</p>
