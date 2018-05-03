@@ -2,24 +2,30 @@ const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
-const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 
-const { fromRoot, fromModulesRoot } = require('../helpers/utils.js')
+const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
+const { fromWorkspace, fromModulesRoot } = require('../helpers/utils.js')
 const { IS_DEV, IS_PROD } = require('../consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
-const mainLibs = ['preact', 'preact-compat', 'prop-types', 'classnames']
+const mainLibs = ['svelte', 'classnames']
 const webpackResolve = {
   /** Do not resolve symlinks */
   symlinks: false,
-  extensions: ['.js', '.jsx', '.json', '.scss', '.sass', '.css'],
+  mainFields: ['svelte', 'browser', 'module', 'main'],
+  extensions: [
+    '.js',
+    '.jsx',
+    '.json',
+    '.scss',
+    '.css',
+    '.html',
+    '.svelte',
+    '.sve',
+  ],
   /** Make webpack also resolve modules from './src' */
-  modules: [fromRoot('src'), fromModulesRoot()],
+  modules: [fromWorkspace('src'), fromModulesRoot()],
   alias: {
-    react: 'preact-compat',
-    'react-dom': 'preact-compat',
-    'create-react-class': 'preact-compat/lib/create-react-class',
-    'react-addons-css-transition-group': 'preact-css-transition-group',
     /**
      * Ensure we're always importing the main packages from this project's root.
      * Fixes linked components using their own dependencies.
@@ -61,32 +67,66 @@ const optimization = {
 
 const rules = [
   {
+    test: /\.(html|svelte)$/,
+    exclude: /node_modules\/(?!svelte)/,
+    use: [
+      {
+        loader: 'inspect-loader',
+        options: {
+          callback (inspect) {
+            console.log(inspect.arguments)
+          },
+        },
+      },
+      {
+        loader: 'babel-loader',
+        options: {
+          compact: false,
+          cacheDirectory: IS_DEV,
+        },
+      },
+      {
+        loader: 'svelte-loader',
+        options: {
+          emitCss: true,
+          hotReload: IS_DEV,
+        },
+      },
+      {
+        loader: 'eslint-loader',
+        options: { emitWarning: IS_DEV },
+      },
+    ],
+  },
+  {
     test: /\.jsx?$/,
-    exclude: /node_modules/,
+    exclude: /node_modules\/(?!svelte)/,
     use: [
       {
         loader: 'babel-loader',
         options: {
           compact: false,
-          cacheDirectory: true,
+          cacheDirectory: IS_DEV,
         },
       },
       {
         loader: 'eslint-loader',
-        options: {
-          emitWarning: IS_DEV,
-        },
+        options: { emitWarning: IS_DEV },
       },
     ],
   },
   {
-    test: /\.(css|less|s[ac]ss|styl)$/,
+    test: /\.(css|s[ac]ss)$/,
     resolve: {
       /** When importing from a style file, let's use package.json's 'style' field before the actual 'main' one */
       mainFields: ['style', 'main'],
     },
     use: [
-      MiniCssExtractPlugin.loader,
+      /**
+       * MiniCssExtractPlugin doesn't support HMR.
+       * For developing, use 'style-loader' instead.
+       * */
+      IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
       {
         loader: 'css-loader',
         options: { sourceMap: IS_DEV },
@@ -120,7 +160,7 @@ const rules = [
     ],
   },
   {
-    test: /\.(xml|html|txt|md)$/,
+    test: /\.(txt)$/,
     use: 'raw-loader',
   },
   {
@@ -164,7 +204,7 @@ module.exports = {
   mode: IS_PROD ? 'production' : 'development',
   cache: true,
   target: 'web',
-  context: fromRoot('src'),
+  context: fromWorkspace('src'),
   entry: {
     app: [
       /** External scss/css */
@@ -174,7 +214,7 @@ module.exports = {
     ],
   },
   output: {
-    path: fromRoot('dist'),
+    path: fromWorkspace('dist'),
     publicPath: './',
     filename: '[name].js',
   },
@@ -184,16 +224,6 @@ module.exports = {
     chunks: false,
     colors: true,
     children: false,
-  },
-  /** Polyfill only the 'process' node global (needed for preact-compat) */
-  node: {
-    console: false,
-    global: false,
-    process: true,
-    __filename: false,
-    __dirname: false,
-    Buffer: false,
-    setImmediate: false,
   },
   resolve: webpackResolve,
   optimization,

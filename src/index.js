@@ -1,16 +1,15 @@
-import { render } from 'preact-compat'
+import { createHashHistory } from 'svelte-routing'
 import App from './components/App'
 
-let root
-function init () {
-  root = render(<App />, document.getElementById('root'), root)
-}
+createHashHistory()
 
-if (process.env.NODE_ENV === 'development') {
-  require('preact/debug')
-  if (module.hot) {
-    module.hot.accept('./components/App', init)
-  }
-}
+const app = new App({
+  target: document.getElementById('root'),
+  data: {
+    name: 'world',
+  },
+})
 
-init()
+window.app = app
+
+export default app

@@ -1,17 +1,16 @@
 const { IS_PROD } = require('./tools/consts.js')
-const { pragma } = require('./tools/config.js')
 
 module.exports = {
   extends: [
     'standard',
-    'standard-preact',
     'prettier',
-    'prettier/react',
     'prettier/standard',
-    'plugin:react/recommended',
     'plugin:jest/recommended',
   ],
-  plugins: ['react', 'standard', 'prettier', 'jest'],
+  plugins: ['standard', 'prettier', 'jest', 'html'],
+  settings: {
+    'html/html-extensions': ['.html', '.svelte'],
+  },
   env: {
     browser: true,
     node: true,
@@ -20,31 +19,16 @@ module.exports = {
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: false,
       modules: true,
-    },
-  },
-  globals: {
-    sleep: true,
-  },
-  settings: {
-    react: {
-      pragma: pragma.handle,
     },
   },
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
-    'no-console': IS_PROD ? 2 : 0,
-    'space-before-function-paren': 2,
-    'jsx-quotes': ['error', 'prefer-double'],
-    'react/react-in-jsx-scope': 0, // Babel automatically imports the pragma
-    'react/display-name': 0, // Allow anonymous stateless components
-    'react/prop-types': [
-      2,
-      {
-        ignore: ['children'],
-      },
-    ],
+    'no-console': IS_PROD ? ['error', { allow: ['warn', 'error'] }] : 'off',
+    'space-before-function-paren': 'error',
+    'no-var': 'error',
+    'comma-dangle': ['error', 'always-multiline'],
   },
   overrides: [
     {
