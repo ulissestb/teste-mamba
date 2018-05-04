@@ -9,7 +9,7 @@ const presets = [
       loose: true,
       /** Only parse modules if testing. If not, let webpack handle it */
       modules: IS_TEST ? 'commonjs' : false,
-      debug: true,
+      debug: false,
       forceAllTransforms: true,
     },
   ],
