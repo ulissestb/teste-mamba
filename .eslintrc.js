@@ -26,7 +26,6 @@ module.exports = {
   rules: {
     indent: ['error', 2, { SwitchCase: 1 }],
     'no-console': IS_PROD ? ['error', { allow: ['warn', 'error'] }] : 'off',
-    'space-before-function-paren': 'error',
     'no-var': 'error',
     'comma-dangle': ['error', 'always-multiline'],
   },
