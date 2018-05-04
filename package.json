@@ -21,8 +21,8 @@
     "lint:js": "eslint *.js '{src,test,webpack}/**/*.{js,jsx,html,svelte}'",
     "lint:css": "stylelint 'src/**/*.{css,sass,scss,sss,less}'",
     "format": "npm run format:css; npm run format:js",
-    "format:js": "prettier --write *.js '{src,test,webpack}/**/*.{js,jsx,html,svelte}' && eslint --fix *.js '{src,test,webpack}/**/*.{js,jsx,html,svelte}'",
-    "format:css": "prettier --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint --fix 'src/**/*.{css,sass,scss,sss,less}'"
+    "format:js": "prettier --loglevel silent --write *.js '{src,test,webpack}/**/*.{js,jsx}' && eslint --fix *.js '{src,test,webpack}/**/*.{js,jsx,html,svelte}'",
+    "format:css": "prettier --loglevel silent --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint --fix 'src/**/*.{css,sass,scss,sss,less}'"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
