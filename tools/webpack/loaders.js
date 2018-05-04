@@ -1,7 +1,7 @@
-/**  */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const sass = require('node-sass')
 
-const { fromWorkspace } = require('../helpers/utils.js')
+const { fromWorkspace, fromModulesRoot } = require('../helpers/utils.js')
 const { IS_DEV, IS_PROD } = require('../consts.js')
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
@@ -21,7 +21,39 @@ module.exports = {
   },
   svelte: {
     loader: 'svelte-loader',
-    options: { emitCss: true, hotReload: IS_DEV },
+    options: {
+      emitCss: true,
+      hotReload: IS_DEV,
+      preprocess: {
+        style: ({ content, attributes, filename }) => {
+          const type = (attributes.type || attributes.lang || 'css').replace(
+            /text\/(.+)/,
+            '$1',
+          )
+
+          if (type === 'scss') {
+            return new Promise((resolve, reject) => {
+              sass.render(
+                {
+                  data: content,
+                  includePaths: [fromWorkspace('src'), fromModulesRoot()],
+                  sourceMap: true,
+                  outFile: filename + '.css', // Needed node-sass property
+                },
+                (err, result) => {
+                  if (err) return reject(err)
+
+                  resolve({
+                    code: result.css.toString(),
+                    map: result.map.toString(),
+                  })
+                },
+              )
+            })
+          }
+        },
+      },
+    },
   },
   eslint: {
     loader: 'eslint-loader',

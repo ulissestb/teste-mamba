@@ -24,3 +24,12 @@
   }
 
 </script>
+
+<style lang="scss">
+  $color: 'red';
+
+  nav {
+    background-color: $color;
+  }
+
+</style>
