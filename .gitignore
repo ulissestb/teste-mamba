@@ -6,7 +6,6 @@ bundle.stats.json
 # Workspace files
 /coverage/
 .idea/
-.vscode/
 
 # Garbage
 .DS_Store
