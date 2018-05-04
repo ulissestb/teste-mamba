@@ -1,5 +1,7 @@
+const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
@@ -12,7 +14,20 @@ const plugins = [
     root: fromWorkspace(),
     verbose: false,
   }),
+
+  new CopyWebpackPlugin([
+    { from: './assets/', to: fromDist('assets') },
+    { from: fromWorkspace('manifest.xml'), to: fromDist() },
+  ]),
 ]
+
+/** If building for production... */
+if (IS_PROD) {
+  plugins.push(
+    /** Generate hashes based on module's relative path */
+    new webpack.HashedModuleIdsPlugin(),
+  )
+}
 
 /** Build optimizations */
 const optimization = {
