@@ -5,7 +5,7 @@ const { fromDist } = require('../helpers/utils.js')
 
 /** Webpack configuration used for development */
 module.exports = merge(require('./config.base.js'), {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   plugins: [new webpack.HotModuleReplacementPlugin()],
 

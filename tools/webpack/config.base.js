@@ -5,10 +5,16 @@ const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
 const { fromWorkspace, fromModulesRoot } = require('../helpers/utils.js')
-const { IS_DEV, IS_PROD } = require('../consts.js')
+const { IS_DEV, IS_PROD, PKG } = require('../consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 
-const mainLibs = ['svelte', 'classnames']
+/** Read the project's .babelrc.js to enforce it in 'babel-loader' */
+const babelrc = require(fromWorkspace('.babelrc.js'))
+/** 'babel-loader' already appends 'sourceMap: true'. Cannot have both. */
+delete babelrc.sourceMaps
+
+/** Main libraries */
+const mainLibs = Object.keys(PKG.dependencies)
 const webpackResolve = {
   /** Do not resolve symlinks */
   symlinks: false,
@@ -52,6 +58,7 @@ const optimization = {
         chunks: 'initial',
         minSize: 0,
         minChunks: 1,
+        priority: 0,
       },
       /** Chunk that contains used polyfills */
       polyfills: {
@@ -60,6 +67,7 @@ const optimization = {
         chunks: 'all',
         minSize: 0,
         minChunks: 1,
+        priority: 1,
       },
     },
   },
@@ -70,21 +78,6 @@ const rules = [
     test: /\.(html|svelte)$/,
     exclude: /node_modules\/(?!svelte)/,
     use: [
-      {
-        loader: 'inspect-loader',
-        options: {
-          callback (inspect) {
-            console.log(inspect.arguments)
-          },
-        },
-      },
-      {
-        loader: 'babel-loader',
-        options: {
-          compact: false,
-          cacheDirectory: IS_DEV,
-        },
-      },
       {
         loader: 'svelte-loader',
         options: {
@@ -100,13 +93,15 @@ const rules = [
   },
   {
     test: /\.jsx?$/,
-    exclude: /node_modules\/(?!svelte)/,
+    exclude: /node_modules\/(?!svelte\/)/,
     use: [
       {
         loader: 'babel-loader',
         options: {
           compact: false,
           cacheDirectory: IS_DEV,
+          babelrc: false,
+          ...babelrc,
         },
       },
       {
