@@ -8,9 +8,6 @@ module.exports = {
     'plugin:jest/recommended',
   ],
   plugins: ['standard', 'prettier', 'jest', 'html'],
-  settings: {
-    'html/html-extensions': ['.html', '.svelte'],
-  },
   env: {
     browser: true,
     node: true,
@@ -23,8 +20,13 @@ module.exports = {
       modules: true,
     },
   },
+  settings: {
+    'html/html-extensions': ['.html', '.svelte'],
+    'html/indent': '+2',
+    'html/report-bad-indent': 'warn',
+  },
   rules: {
-    indent: ['error', 2, { SwitchCase: 1 }],
+    indent: ['warn', 2, { SwitchCase: 1 }],
     'no-console': IS_PROD ? ['error', { allow: ['warn', 'error'] }] : 'off',
     'no-var': 'error',
     'comma-dangle': ['error', 'always-multiline'],
