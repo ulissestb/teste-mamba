@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sass = require('node-sass')
 
 const { fromProject, fromModulesRoot } = require('../helpers/utils.js')
-const { IS_DEV, IS_PROD } = require('../consts.js')
+const { IS_DEV, IS_WATCHING } = require('../consts.js')
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
 const babelrc = require(fromProject('.babelrc.js'))
@@ -29,7 +29,7 @@ module.exports = {
    * MiniCssExtractPlugin doesn't support HMR.
    * For developing, use 'style-loader' instead.
    * */
-  extractCss: IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
+  extractCss: IS_WATCHING ? MiniCssExtractPlugin.loader : 'style-loader',
   css: {
     loader: 'css-loader',
     options: { sourceMap: IS_DEV },
