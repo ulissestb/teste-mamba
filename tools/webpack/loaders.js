@@ -1,3 +1,5 @@
+const { readFileSync } = require('fs')
+const { dirname, resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sass = require('node-sass')
 
@@ -17,42 +19,6 @@ module.exports = {
       cacheDirectory: IS_DEV,
       babelrc: false,
       ...babelrc,
-    },
-  },
-  svelte: {
-    loader: 'svelte-loader',
-    options: {
-      emitCss: true,
-      hotReload: IS_DEV,
-      preprocess: {
-        style: ({ content, attributes, filename }) => {
-          const type = (attributes.type || attributes.lang || 'css').replace(
-            /text\/(.+)/,
-            '$1',
-          )
-
-          if (type === 'scss') {
-            return new Promise((resolve, reject) => {
-              sass.render(
-                {
-                  data: content,
-                  includePaths: [fromWorkspace('src'), fromModulesRoot()],
-                  sourceMap: true,
-                  outFile: filename + '.css', // Needed node-sass property
-                },
-                (err, result) => {
-                  if (err) return reject(err)
-
-                  resolve({
-                    code: result.css.toString(),
-                    map: result.map.toString(),
-                  })
-                },
-              )
-            })
-          }
-        },
-      },
     },
   },
   eslint: {
@@ -105,6 +71,58 @@ module.exports = {
       limit: 1,
       outputPath: 'assets/',
       name: './images/[name].[ext]',
+    },
+  },
+  svelte: {
+    loader: 'svelte-loader',
+    options: {
+      emitCss: true,
+      hotReload: IS_DEV,
+      preprocess: {
+        /** Support <script src=""></script> */
+        script: ({ content = '', attributes, filename }) => {
+          if (attributes.src) {
+            const styleFilename = resolve(dirname(filename), attributes.src)
+            content = readFileSync(styleFilename).toString()
+          }
+
+          return { code: content }
+        },
+        /** Support <style src=""></style> and SCSS */
+        style: ({ content = '', attributes, filename }) => {
+          if (attributes.src) {
+            const styleFilename = resolve(dirname(filename), attributes.src)
+            content = readFileSync(styleFilename).toString()
+          }
+
+          const type = (
+            attributes.type ||
+            attributes.lang ||
+            'text/css'
+          ).replace('text/', '')
+
+          if (type === 'scss') {
+            return new Promise((resolve, reject) => {
+              sass.render(
+                {
+                  data: content,
+                  includePaths: [fromWorkspace('src'), fromModulesRoot()],
+                  sourceMap: true,
+                  outFile: filename + '.css', // Needed node-sass property
+                },
+                (err, result) => {
+                  if (err) return reject(err)
+
+                  resolve({
+                    code: result.css.toString(),
+                    map: result.map.toString(),
+                  })
+                },
+              )
+            })
+          }
+        },
+      },
     },
   },
 }
