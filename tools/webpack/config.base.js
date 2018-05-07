@@ -102,8 +102,8 @@ module.exports = {
         use: [
           loaders.extractCss,
           loaders.css,
-          loaders.postcss,
           loaders.resolveUrl,
+          loaders.postcss,
           loaders.sass,
         ],
       },

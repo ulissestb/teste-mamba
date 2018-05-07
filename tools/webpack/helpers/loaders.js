@@ -29,7 +29,7 @@ module.exports = {
    * MiniCssExtractPlugin doesn't support HMR.
    * For developing, use 'style-loader' instead.
    * */
-  extractCss: IS_WATCHING ? MiniCssExtractPlugin.loader : 'style-loader',
+  extractCss: IS_WATCHING ? 'style-loader' : MiniCssExtractPlugin.loader,
   css: {
     loader: 'css-loader',
     options: { sourceMap: IS_DEV },
@@ -37,8 +37,8 @@ module.exports = {
   postcss: {
     loader: 'postcss-loader',
     options: {
-      plugins: [require('postcss-import')(), require('autoprefixer')()],
-      sourceMap: IS_DEV,
+      plugins: [require('autoprefixer')()],
+      sourceMap: true, // 'resolve-url-loader' requires this to be always true
     },
   },
   sass: {
