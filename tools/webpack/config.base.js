@@ -1,13 +1,12 @@
 /**
  * Common webpack configuration
  */
-const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 
 const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
-const { fromProject, fromModulesRoot } = require('../helpers/utils.js')
+const { fromProject, fromModulesRoot } = require('../helpers/paths.js')
 const { IS_PROD, PKG } = require('../consts.js')
 const htmlTemplate = require('../helpers/htmlTemplate.js')
 const loaders = require('./loaders.js')
@@ -124,9 +123,6 @@ module.exports = {
       chunkFilename: '[name].css',
     }),
     new StyleLintPlugin(),
-    new SimpleProgressPlugin({
-      messageTemplate: [':bar', ':percent', ':elapseds', ':msg'].join(' '),
-    }),
     new MiniHtmlWebpackPlugin({
       context: { title: 'Mamba Application' },
       template: htmlTemplate,

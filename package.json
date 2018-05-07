@@ -75,17 +75,16 @@
     "stylelint-scss": "^3.1.0",
     "stylelint-webpack-plugin": "^0.10.4",
     "svelte-loader": "^2.9.0",
-    "svelte-routing": "^0.4.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.7.0",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.4",
-    "webpack-merge": "^4.1.2",
-    "webpack-simple-progress-plugin": "^0.0.4"
+    "webpack-merge": "^4.1.2"
   },
   "dependencies": {
     "phantomjs-function-bind-polyfill": "^1.0.0",
-    "svelte": "^2.4.4"
+    "svelte": "^2.4.4",
+    "svelte-routing": "^0.4.0"
   }
 }
