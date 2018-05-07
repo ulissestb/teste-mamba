@@ -1,3 +1,6 @@
+/**
+ * Common webpack configuration
+ */
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
@@ -85,7 +88,7 @@ module.exports = {
     rules: [
       {
         test: /\.(html|svelte)$/,
-        exclude: /node_modules\/(?!svelte)/,
+        exclude: /node_modules\/(?!svelte|@mamba)/,
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
       {

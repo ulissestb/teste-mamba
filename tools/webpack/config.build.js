@@ -1,3 +1,6 @@
+/**
+ * Webpack configuration for building bundles
+ */
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -7,6 +10,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const { fromProject, fromDist } = require('../helpers/utils.js')
 const { IS_PROD } = require('../consts.js')
+
+const baseConfig = require('./config.base.js')
 
 /** Webpack plugins to be used while building */
 const plugins = [
@@ -75,10 +80,8 @@ const optimization = {
   ],
 }
 
-/** Webpack configuration for building */
-module.exports = merge(require('./config.base.js'), {
-  devtool: 'source-map',
-  /** Don't mock any node related lib */
+module.exports = merge(baseConfig, {
+  devtool: false,
   node: false,
   plugins,
   optimization,
