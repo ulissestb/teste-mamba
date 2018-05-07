@@ -3,11 +3,11 @@ const { dirname, resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sass = require('node-sass')
 
-const { fromWorkspace, fromModulesRoot } = require('../helpers/utils.js')
+const { fromProject, fromModulesRoot } = require('../helpers/utils.js')
 const { IS_DEV, IS_PROD } = require('../consts.js')
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
-const babelrc = require(fromWorkspace('.babelrc.js'))
+const babelrc = require(fromProject('.babelrc.js'))
 /** 'babel-loader' already appends 'sourceMap: true'. Cannot have both. */
 delete babelrc.sourceMaps
 
@@ -106,7 +106,7 @@ module.exports = {
               sass.render(
                 {
                   data: content,
-                  includePaths: [fromWorkspace('src'), fromModulesRoot()],
+                  includePaths: [fromProject('src'), fromModulesRoot()],
                   sourceMap: true,
                   outFile: filename + '.css', // Needed node-sass property
                 },

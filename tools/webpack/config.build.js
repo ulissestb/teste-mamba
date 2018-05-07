@@ -5,19 +5,19 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const { fromWorkspace, fromDist } = require('../helpers/utils.js')
+const { fromProject, fromDist } = require('../helpers/utils.js')
 const { IS_PROD } = require('../consts.js')
 
 /** Webpack plugins to be used while building */
 const plugins = [
   new CleanWebpackPlugin([fromDist()], {
-    root: fromWorkspace(),
+    root: fromProject(),
     verbose: false,
   }),
 
   new CopyWebpackPlugin([
     { from: './assets/', to: fromDist('assets') },
-    { from: fromWorkspace('manifest.xml'), to: fromDist() },
+    { from: fromProject('manifest.xml'), to: fromDist() },
   ]),
 ]
 

@@ -4,7 +4,7 @@ const rootPath = resolve(__dirname, '..', '..')
 const resolveFromRoot = (...args) => resolve(rootPath, ...args)
 
 /** Current project working directory */
-exports.fromWorkspace = resolveFromRoot
+exports.fromProject = resolveFromRoot
 
 /** Modules path */
 exports.fromModulesRoot = (...args) => resolveFromRoot('node_modules', ...args)
