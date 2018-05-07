@@ -5,11 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 
-const RuntimeBindPolyfillPlugin = require('../helpers/RuntimeBindPolyfillPlugin.js')
-const { fromProject, fromModulesRoot } = require('../helpers/paths.js')
 const { IS_PROD, PKG } = require('../consts.js')
-const htmlTemplate = require('../helpers/htmlTemplate.js')
-const loaders = require('./loaders.js')
+const { fromProject, fromModulesRoot } = require('../utils/paths.js')
+const htmlTemplate = require('../utils/htmlTemplate.js')
+const loaders = require('./helpers/loaders.js')
+const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
 
 module.exports = {
   mode: IS_PROD ? 'production' : 'development',

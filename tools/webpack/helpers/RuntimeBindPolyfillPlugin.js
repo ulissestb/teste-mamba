@@ -1,6 +1,6 @@
 const ConcatSource = require('webpack-sources/lib/ConcatSource')
 const { readFileSync } = require('fs')
-const { fromModulesRoot } = require('./utils.js')
+const { fromModulesRoot } = require('../../utils/paths.js')
 
 /** Get the Function.prototype.bind polyfill from 'phantomjs-function-bind-polyfill' package */
 const BIND_POLYFILL_CODE = readFileSync(
@@ -14,7 +14,7 @@ const PLUGIN_NAME = 'runtime-bind-polyfill-plugin'
  * Custom webpack plugin to prepend the 'Function.prototype.bind' polyfill before the webpack's runtime code.
  * */
 module.exports = class RuntimeBindPolyfillPlugin {
-  apply (compiler) {
+  apply(compiler) {
     compiler.hooks.thisCompilation.tap(PLUGIN_NAME, compilation => {
       const runtimeChunkConf = compilation.options.optimization.runtimeChunk
 

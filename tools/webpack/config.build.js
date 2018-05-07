@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const { fromProject, fromDist } = require('../helpers/paths.js')
+const { fromProject, fromDist } = require('../utils/paths.js')
 const { IS_PROD } = require('../consts.js')
 
 const baseConfig = require('./config.base.js')
