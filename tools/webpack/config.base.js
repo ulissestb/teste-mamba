@@ -65,7 +65,7 @@ module.exports = {
         vendor: false,
         /** Chunk that contains every external dependency that doesn't begin with '@mamba' */
         libraries: {
-          test: /node_modules(?!\/@mamba)/i,
+          test: /node_modules[\\/](?!@mamba)/i,
           name: 'lib',
           chunks: 'initial',
           minSize: 0,
@@ -88,12 +88,12 @@ module.exports = {
     rules: [
       {
         test: /\.(html|svelte)$/,
-        exclude: /node_modules\/(?!svelte|@mamba)/,
+        exclude: /node_modules[\\/](?!svelte|@mamba)/,
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
       {
         test: /\.jsx?$/,
-        exclude: /node_modules\/(?!svelte)/,
+        exclude: /node_modules[\\/](?!svelte)/,
         use: [loaders.babel, loaders.eslint],
       },
       {
