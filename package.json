@@ -19,10 +19,10 @@
     "test:watch": "npm run -s test -- --watch",
     "lint": "npm run lint:css; npm run lint:js",
     "lint:js": "eslint *.js '{src,test,tools}/**/*.{js,html,svelte}'",
-    "lint:css": "stylelint 'src/**/*.{css,sass,scss,sss,less}'",
+    "lint:css": "stylelint 'src/**/*.{css,scss,svelte,html}'",
     "format": "npm run format:css; npm run format:js",
     "format:js": "prettier --loglevel silent --write *.js '{src,test,tools}/**/*.js' && eslint --fix *.js '{src,test,tools}/**/*.{js,html,svelte}'",
-    "format:css": "prettier --loglevel silent --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint --fix 'src/**/*.{css,sass,scss,sss,less}'"
+    "format:css": "prettier --loglevel silent --write 'src/**/*.{css,scss,svelte,html}' && stylelint --fix 'src/**/*.{css,scss,svelte,html}'"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
@@ -31,6 +31,7 @@
     "@babel/plugin-proposal-decorators": "^7.0.0-beta.46",
     "@babel/preset-env": "^7.0.0-beta.46",
     "@babel/preset-stage-3": "^7.0.0-beta.46",
+    "@mapbox/stylelint-processor-arbitrary-tags": "^0.2.0",
     "autoprefixer": "^8.4.1",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.4.3",
