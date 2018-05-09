@@ -91,9 +91,15 @@ module.exports = {
         exclude: /node_modules[\\/](?!svelte|@mamba)/,
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
+      /** Make 'svelte' related javascript code run through babel without linting */
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules[\\/](?!svelte)/,
+        test: /\.js?$/,
+        include: /node_modules[\\/]svelte/,
+        use: [loaders.babel],
+      },
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
         use: [loaders.babel, loaders.eslint],
       },
       {
