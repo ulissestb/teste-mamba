@@ -3,7 +3,7 @@ const { dirname, resolve } = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const sass = require('node-sass')
 
-const { fromProject, fromModulesRoot } = require('../../utils/paths.js')
+const { fromProject } = require('../../utils/paths.js')
 const { IS_DEV, IS_WATCHING } = require('../../consts.js')
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
@@ -106,7 +106,10 @@ module.exports = {
               sass.render(
                 {
                   data: content,
-                  includePaths: [fromProject('src'), fromModulesRoot()],
+                  includePaths: [
+                    fromProject('src'),
+                    fromProject('node_modules'),
+                  ],
                   sourceMap: true,
                   outFile: filename + '.css', // Needed node-sass property
                 },

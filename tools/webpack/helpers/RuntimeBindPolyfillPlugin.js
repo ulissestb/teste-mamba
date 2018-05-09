@@ -1,10 +1,10 @@
 const ConcatSource = require('webpack-sources/lib/ConcatSource')
 const { readFileSync } = require('fs')
-const { fromModulesRoot } = require('../../utils/paths.js')
+const { fromProject } = require('../../utils/paths.js')
 
 /** Get the Function.prototype.bind polyfill from 'phantomjs-function-bind-polyfill' package */
 const BIND_POLYFILL_CODE = readFileSync(
-  fromModulesRoot('phantomjs-function-bind-polyfill', 'index.js'),
+  fromProject('node_modules', 'phantomjs-function-bind-polyfill', 'index.js'),
   'utf8',
 )
 

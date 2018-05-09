@@ -6,7 +6,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 
 const { IS_PROD, PKG } = require('../consts.js')
-const { fromProject, fromModulesRoot } = require('../utils/paths.js')
+const { fromProject } = require('../utils/paths.js')
 const htmlTemplate = require('../utils/htmlTemplate.js')
 const loaders = require('./helpers/loaders.js')
 const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
@@ -49,7 +49,7 @@ module.exports = {
        * Fixes linked components using their own dependencies.
        */
       ...Object.keys(PKG.dependencies).reduce((acc, libName) => {
-        acc[libName] = fromModulesRoot(libName)
+        acc[libName] = fromProject('node_modules', libName)
         return acc
       }, {}),
     },
