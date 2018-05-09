@@ -18,10 +18,10 @@
     "test": "jest --coverage",
     "test:watch": "npm run -s test -- --watch",
     "lint": "npm run lint:css; npm run lint:js",
-    "lint:js": "eslint *.js '{src,test,webpack}/**/*.{js,html,svelte}'",
+    "lint:js": "eslint *.js '{src,test,tools}/**/*.{js,html,svelte}'",
     "lint:css": "stylelint 'src/**/*.{css,sass,scss,sss,less}'",
     "format": "npm run format:css; npm run format:js",
-    "format:js": "prettier --loglevel silent --write *.js '{src,test,webpack}/**/*.js' && eslint --fix *.js '{src,test,webpack}/**/*.{js,html,svelte}'",
+    "format:js": "prettier --loglevel silent --write *.js '{src,test,tools}/**/*.js' && eslint --fix *.js '{src,test,tools}/**/*.{js,html,svelte}'",
     "format:css": "prettier --loglevel silent --write 'src/**/*.{css,sass,scss,sss,less}' && stylelint --fix 'src/**/*.{css,sass,scss,sss,less}'"
   },
   "devDependencies": {
@@ -79,7 +79,8 @@
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.1.2",
     "webpack-dev-server": "^3.1.4",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "webpack-simple-progress-plugin": "^0.0.4"
   },
   "dependencies": {
     "phantomjs-function-bind-polyfill": "^1.0.0",

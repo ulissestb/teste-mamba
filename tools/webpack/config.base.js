@@ -4,6 +4,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 
 const { IS_PROD, PKG } = require('../consts.js')
 const { fromProject } = require('../utils/paths.js')
@@ -118,6 +119,7 @@ module.exports = {
   plugins: [
     /** Prepend the Function.prototype.bind() polyfill webpack's runtime code */
     new RuntimeBindPolyfillPlugin(),
+    new SimpleProgressPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
       chunkFilename: '[name].css',
