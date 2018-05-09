@@ -86,20 +86,26 @@ module.exports = {
   },
   module: {
     rules: [
+      /** Run svelte component related loaders on  */
       {
         test: /\.(html|svelte)$/,
-        exclude: /node_modules[\\/](?!svelte|@mamba)/,
+        include: [
+          fromProject('src'),
+          /node_modules[\\/]svelte/,
+          /node_modules[\\/]@mamba/,
+        ],
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
       /** Make 'svelte' related javascript code run through babel without linting */
       {
         test: /\.js?$/,
-        include: /node_modules[\\/]svelte/,
+        include: [/node_modules[\\/]svelte/],
         use: [loaders.babel],
       },
+      /** Run babel and eslint on projects src files only */
       {
         test: /\.js?$/,
-        exclude: /node_modules/,
+        include: [fromProject('src')],
         use: [loaders.babel, loaders.eslint],
       },
       {
