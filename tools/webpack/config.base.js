@@ -103,8 +103,8 @@ module.exports = {
         use: [
           loaders.extractCss,
           loaders.css,
-          loaders.resolveUrl,
           loaders.postcss,
+          loaders.resolveUrl,
           loaders.sass,
         ],
       },
