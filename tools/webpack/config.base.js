@@ -42,7 +42,7 @@ module.exports = {
     mainFields: ['svelte', 'browser', 'module', 'main'],
     extensions: ['.js', '.json', '.scss', '.css', '.html', '.svelte'],
     /** Make webpack also resolve modules from './src' */
-    modules: [fromProject('src'), fromModulesRoot()],
+    modules: [fromProject('src'), 'node_modules'],
     alias: {
       /**
        * Ensure we're always importing the main packages from this project's root.
