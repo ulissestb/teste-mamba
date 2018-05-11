@@ -46,6 +46,7 @@ const optimization = {
       cssProcessorOptions: {
         core: IS_PROD,
         discardComments: IS_PROD,
+        autoprefixer: false,
       },
     }),
     /** Minify the bundle's js */
