@@ -30,7 +30,11 @@ module.exports = {
   extractCss: IS_WATCHING ? 'style-loader' : MiniCssExtractPlugin.loader,
   css: {
     loader: 'css-loader',
-    options: { sourceMap: IS_DEV },
+    options: {
+      sourceMap: IS_DEV,
+      /** Apply the two last loaders (resolve-url, postcss) to @imported url() css files */
+      importLoaders: 2,
+    },
   },
   postcss: {
     loader: 'postcss-loader',
