@@ -3,13 +3,24 @@ import App from './components/App'
 
 createHashHistory()
 
-const app = new App({
-  target: document.getElementById('root'),
-  data: {
-    wrapWithPOS: process.env.NODE_ENV !== 'production',
-  },
-})
+const root = document.getElementById('root')
+const bootstrapAppInto = target => new App({ target })
+let app
 
-window.app = app
+/** If developing, wrap the app with a <POS></POS> */
+if (process.env.NODE_ENV === 'production') {
+  app = bootstrapAppInto(root)
+} else {
+  const POS = require('@mamba/pos').default
+  const appContainer = document.createElement('DIV')
+  bootstrapAppInto(appContainer)
+
+  app = new POS({
+    target: root,
+    slots: {
+      default: appContainer,
+    },
+  })
+}
 
 export default app
