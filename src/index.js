@@ -6,7 +6,7 @@ createHashHistory()
 const app = new App({
   target: document.getElementById('root'),
   data: {
-    name: 'world',
+    wrapWithPOS: process.env.NODE_ENV !== 'production',
   },
 })
 
