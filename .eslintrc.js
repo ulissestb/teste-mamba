@@ -7,6 +7,7 @@ module.exports = {
     'prettier/standard',
     'plugin:jest/recommended',
   ],
+  parser: 'babel-eslint',
   plugins: ['standard', 'prettier', 'jest', 'html'],
   env: {
     browser: true,
