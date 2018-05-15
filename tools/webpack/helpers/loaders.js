@@ -1,5 +1,4 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const magicalPreprocess = require('svelte-preprocess')
 
 const { fromProject } = require('../../utils/paths.js')
 const { IS_DEV, IS_WATCHING } = require('../../consts.js')
@@ -80,7 +79,7 @@ module.exports = {
     options: {
       emitCss: true,
       hotReload: IS_DEV,
-      preprocess: magicalPreprocess(),
+      ...require(fromProject('svelte.config.js')),
     },
   },
 }
