@@ -1,4 +1,4 @@
-const { IS_PROD } = require('./tools/consts.js')
+const { IS_PROD } = require('quickenv')
 
 module.exports = {
   extends: [

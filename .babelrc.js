@@ -1,4 +1,4 @@
-const { IS_PROD, IS_DEV, IS_TEST } = require('./tools/consts.js')
+const { IS_TEST } = require('quickenv')
 
 const presets = [
   [

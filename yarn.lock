@@ -7675,6 +7675,10 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
+quickenv@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/quickenv/-/quickenv-0.0.3.tgz#467fffc1f33e4d5ee2cd792b5290c2f84c55c137"
+
 ramda@^0.25.0:
   version "0.25.0"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.25.0.tgz#8fdf68231cffa90bc2f9460390a0cb74a29b29a9"
@@ -9016,9 +9020,9 @@ svelte-loader@^2.9.0:
     loader-utils "^1.1.0"
     svelte-dev-helper "^1.1.7"
 
-svelte-preprocess@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-1.1.3.tgz#9267f5fd82f4d677ab6a2c385a0ddaa801b9839f"
+svelte-preprocess@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/svelte-preprocess/-/svelte-preprocess-2.0.3.tgz#00811ce7a8f512d2a126710a08c91019cf010d87"
   dependencies:
     strip-indent "^2.0.0"
 

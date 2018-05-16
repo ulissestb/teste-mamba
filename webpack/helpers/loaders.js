@@ -1,10 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
-const { fromProject } = require('../../utils/paths.js')
-const { IS_DEV, IS_WATCHING } = require('../../consts.js')
+const { fromCwd, IS_DEV, IS_WATCHING } = require('quickenv')
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
-const babelrc = require(fromProject('.babelrc.js'))
+const babelrc = require(fromCwd('.babelrc.js'))
 /** 'babel-loader' already appends 'sourceMap: true'. Cannot have both. */
 delete babelrc.sourceMaps
 
@@ -79,7 +77,7 @@ module.exports = {
     options: {
       emitCss: true,
       hotReload: IS_DEV,
-      ...require(fromProject('svelte.config.js')),
+      ...require(fromCwd('svelte.config.js')),
     },
   },
 }
