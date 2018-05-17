@@ -1,7 +1,9 @@
-<nav>
-  <NavLink exact to="/">Home</NavLink>
-  <NavLink to="/about">About</NavLink>
-</nav>
+<div use:links>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about"><Icon symbol="account"/></a>
+  </nav>
+</div>
 
 <Route exact path="/">
   <Home/>
@@ -12,12 +14,17 @@
 </Route>
 
 <script>
+  import links from "svelte-routing/links";
+
   export default {
     components: {
-      NavLink: 'svelte-routing/NavLink',
+      Icon: '@mamba/icon',
       Route: 'svelte-routing/Route',
       About: '../../routes/About',
       Home: '../../routes/Home',
+    },
+    actions: {
+      links,
     },
   }
 
