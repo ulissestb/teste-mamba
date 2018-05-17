@@ -17,7 +17,7 @@ module.exports = ({ css, js, title, publicPath }) => {
           </body>
         </html>`
 
-  return IS_PROD
+  return IS_PROD()
     ? htmlMinifier(htmlTemplate, {
       collapseWhitespace: true,
       conservativeCollapse: true,

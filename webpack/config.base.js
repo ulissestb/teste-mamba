@@ -6,13 +6,15 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 
-const { IS_PROD, PKG, fromCwd } = require('quickenv')
+const { IS_PROD, getPkg, fromCwd } = require('quickenv')
 const htmlTemplate = require('./helpers/htmlTemplate.js')
 const loaders = require('./helpers/loaders.js')
 const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
 
+const PKG = getPkg()
+
 module.exports = {
-  mode: IS_PROD ? 'production' : 'development',
+  mode: IS_PROD() ? 'production' : 'development',
   cache: true,
   target: 'web',
   context: fromCwd('src'),

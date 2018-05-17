@@ -25,6 +25,27 @@
     "format:css": "prettier --loglevel silent --write 'src/**/*.{css,scss,svelte,html}' && stylelint --fix 'src/**/*.{css,scss,svelte,html}'",
     "postinstall": "yarn link @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{html,svelte}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{scss,css}": [
+      "prettier --write",
+      "stylelint --fix",
+      "git add"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.47",
     "@babel/core": "^7.0.0-beta.47",
@@ -68,12 +89,12 @@
     "postcss-loader": "^2.1.5",
     "postcss-scss": "^1.0.5",
     "prettier": "^1.12.1",
-    "quickenv": "^0.0.3",
+    "quickenv": "^0.0.4",
     "raw-loader": "^0.5.1",
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
-    "stylelint": "^9.2.1",
+    "stylelint": "^8.0.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-scss": "^3.1.0",
     "stylelint-webpack-plugin": "^0.10.4",

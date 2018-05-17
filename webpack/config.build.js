@@ -23,19 +23,19 @@ module.exports = merge(require('./config.base.js'), {
       { from: fromCwd('manifest.xml'), to: fromCwd('dist') },
     ]),
     /** Generate hashes based on module's relative path */
-    IS_PROD && new webpack.HashedModuleIdsPlugin(),
+    IS_PROD() && new webpack.HashedModuleIdsPlugin(),
   ].filter(Boolean),
   optimization: {
     /** If analyzing bundle, don't concatenate modules */
-    minimize: IS_PROD,
+    minimize: IS_PROD(),
     minimizer: [
       /** Minify the bundle's css */
       new OptimizeCSSAssetsPlugin({
         /** Default css processor is 'cssnano' */
         cssProcessor: require('cssnano'),
         cssProcessorOptions: {
-          core: IS_PROD,
-          discardComments: IS_PROD,
+          core: IS_PROD(),
+          discardComments: IS_PROD(),
           autoprefixer: false,
         },
       }),
