@@ -1,23 +1,49 @@
-<h1>Home</h1>
-<p>Welcome to my website</p>
+<Collection title="Rede">
+  <CollectionRow label="1. Configurar" href="/network/configure"/>
+</Collection>
 
-<button on:click="openDialog('defaultDialog')">
-  Open Default Dialog
-</button>
+<Collection title="Dispositivo">
+  <CollectionRow label="2. Som do Teclado">
+    <div slot="controller">
+      <Icon symbol="account"/>
+    </div>
+  </CollectionRow>
+  <CollectionRow label="3. Luz do Teclado">
+    <div slot="controller">
+      <Icon symbol="account"/>
+    </div>
+  </CollectionRow>
+  <CollectionRow label="4. Energia" href="/device/energy"/>
+</Collection>
 
-<Dialog ref:defaultDialog on:close="console.log(event)">
-  OLHA O COMPONENT FUNFANDO
-</Dialog>
+<Collection title="Senha">
+  <CollectionRow label="5. Alterar senha" href="/password/change"/>
+  <CollectionRow label="6. Esqueci minha senha" href="/password/forgot"/>
+</Collection>
+
+<Collection title="Lojista">
+  <CollectionRow label="7. Recibos" href="/store/receipts"/>
+  <CollectionRow label="8. ID do Pedido">
+    <div slot="controller">
+      <Icon symbol="account"/>
+    </div>
+  </CollectionRow>
+  <CollectionRow label="9. Parcelado Emissor">
+    <div slot="controller">
+      <Icon symbol="account"/>
+    </div>
+  </CollectionRow>
+  <CollectionRow label="10. Restaurar dados" href="/store/restore"/>
+</Collection>
 
 <script>
+  import { Collection, CollectionRow } from '@mamba/collection'
+
   export default {
     components: {
-      Dialog: '@mamba/dialog',
-    },
-    methods: {
-      openDialog(ref) {
-        this.refs[ref].open()
-      },
+      Icon: '@mamba/icon',
+      Collection,
+      CollectionRow,
     },
   }
 
