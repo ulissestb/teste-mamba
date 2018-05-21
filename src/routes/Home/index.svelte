@@ -5,12 +5,12 @@
 <Collection title="Dispositivo">
   <CollectionRow label="2. Som do Teclado">
     <div slot="controller">
-      <Icon symbol="account"/>
+      <Switch checked on:change="beep()"/>
     </div>
   </CollectionRow>
   <CollectionRow label="3. Luz do Teclado">
     <div slot="controller">
-      <Icon symbol="account"/>
+      <Switch />
     </div>
   </CollectionRow>
   <CollectionRow label="4. Energia" href="/device/energy"/>
@@ -25,12 +25,12 @@
   <CollectionRow label="7. Recibos" href="/store/receipts"/>
   <CollectionRow label="8. ID do Pedido">
     <div slot="controller">
-      <Icon symbol="account"/>
+      <Switch checked disabled />
     </div>
   </CollectionRow>
   <CollectionRow label="9. Parcelado Emissor">
     <div slot="controller">
-      <Icon symbol="account"/>
+      <Switch checked />
     </div>
   </CollectionRow>
   <CollectionRow label="10. Restaurar dados" href="/store/restore"/>
@@ -38,12 +38,19 @@
 
 <script>
   import { Collection, CollectionRow } from '@mamba/collection'
+  import System from '@mamba/native/system'
 
   export default {
     components: {
-      Icon: '@mamba/icon',
+      Switch: '@mamba/switch',
       Collection,
       CollectionRow,
+    },
+    methods: {
+      beep() {
+        console.log('BEEP') // eslint-disable-line
+        System.beep()
+      },
     },
   }
 
