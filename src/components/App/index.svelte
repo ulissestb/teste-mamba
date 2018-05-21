@@ -1,30 +1,27 @@
-<div use:links>
+<App>
+  <AppBar title="Mamba"/>
   <nav>
     <a href="/">Home</a>
-    <a href="/about"><Icon symbol="account"/></a>
+    <a href="/about">About</a>
   </nav>
-</div>
 
-<Route exact path="/">
-  <Home/>
-</Route>
+  <Route exact path="/">
+    <Home/>
+  </Route>
 
-<Route path="/about">
-  <About/>
-</Route>
+  <Route path="/about">
+    <About/>
+  </Route>
 
+</App>
 <script>
-  import links from "svelte-routing/links";
-
   export default {
     components: {
-      Icon: '@mamba/icon',
+      App: '@mamba/app',
+      AppBar: '@mamba/appbar',
       Route: 'svelte-routing/Route',
       About: '../../routes/About',
       Home: '../../routes/Home',
-    },
-    actions: {
-      links,
     },
   }
 
