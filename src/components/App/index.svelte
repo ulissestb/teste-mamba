@@ -1,4 +1,4 @@
-<div use:links>
+<App>
   <AppBar title="Ajustes"/>
   <Route exact path="/">
     <Home/>
@@ -6,20 +6,16 @@
   <Route exact path="/network/configure">
     <NetworkConfigure/>
   </Route>
-</div>
+</App>
 
 <script>
-  import links from "svelte-routing/links";
-
   export default {
     components: {
+      App: '@mamba/app',
       AppBar: '@mamba/appbar',
       Route: 'svelte-routing/Route',
       Home: '../../routes/Home',
       NetworkConfigure: '../../routes/Network/Configure',
-    },
-    actions: {
-      links,
     },
   }
 

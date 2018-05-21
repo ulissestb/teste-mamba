@@ -37,8 +37,8 @@
 </Collection>
 
 <script>
-  import { Collection, CollectionRow } from '@mamba/collection'
   import System from '@mamba/native/system'
+  import { Collection, CollectionRow } from '@mamba/collection'
 
   export default {
     components: {

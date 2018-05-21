@@ -29,7 +29,7 @@ module.exports = {
   output: {
     path: fromCwd('dist'),
     publicPath: './',
-    filename: '[name].js',
+    filename: '[name].[hash:6].js',
   },
   /** Minimal useful output log */
   stats: {
