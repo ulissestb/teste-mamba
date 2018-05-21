@@ -23,7 +23,8 @@
     "format": "npm run format:css; npm run format:js",
     "format:js": "prettier --loglevel silent --write *.js '{src,test,webpack}/**/*.js' && eslint --fix *.js '{src,test,webpack}/**/*.{js,html,svelte}'",
     "format:css": "prettier --loglevel silent --write 'src/**/*.{css,scss,svelte,html}' && stylelint --fix 'src/**/*.{css,scss,svelte,html}'",
-    "postinstall": "yarn link @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon"
+    "postinstall": "yarn link @mamba/cli @mamba/app @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon",
+    "dev:deploy": "npm run build && ./node_modules/@mamba/cli/src/cli.js deploy"
   },
   "husky": {
     "hooks": {
