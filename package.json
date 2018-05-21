@@ -88,7 +88,6 @@
     "node-sass": "^4.9.0",
     "optimize-css-assets-webpack-plugin": "^4.0.1",
     "postcss-loader": "^2.1.5",
-    "postcss-scss": "^1.0.5",
     "prettier": "^1.12.1",
     "quickenv": "^0.0.4",
     "raw-loader": "^0.5.1",
