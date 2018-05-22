@@ -1214,7 +1214,7 @@ babel-core@^6.0.0, babel-core@^6.26.0:
     slash "^1.0.0"
     source-map "^0.5.7"
 
-babel-core@^7.0.0-0:
+babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
 
@@ -2354,10 +2354,6 @@ class-utils@^0.3.5:
     define-property "^0.2.5"
     isobject "^3.0.0"
     static-extend "^0.1.1"
-
-classnames@^2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
 clean-css@4.1.x:
   version "4.1.11"
@@ -7690,9 +7686,9 @@ quick-lru@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/quick-lru/-/quick-lru-1.1.0.tgz#4360b17c61136ad38078397ff11416e186dcfbb8"
 
-quickenv@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/quickenv/-/quickenv-0.0.4.tgz#d70d25d8d092ff661acf0d4e48eeec01142552a2"
+quickenv@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/quickenv/-/quickenv-0.0.5.tgz#78d1dcfe48b556819bfa7f6aab601c8589d1d4eb"
 
 ramda@^0.25.0:
   version "0.25.0"
