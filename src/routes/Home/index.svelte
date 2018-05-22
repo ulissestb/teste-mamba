@@ -5,7 +5,7 @@
 <Collection title="Dispositivo">
   <CollectionRow label="2. Som do Teclado">
     <div slot="controller">
-      <Switch on:change="beep()"/>
+      <Switch bind:checked="isKeyboardSoundEnabled" on:change="toggleKeyboardSound()"/>
     </div>
   </CollectionRow>
   <CollectionRow label="3. Luz do Teclado">
@@ -49,6 +49,7 @@
     data() {
       return {
         isKeyboardLightEnabled: System.KeyboardLight.isEnabled(),
+        isKeyboardSoundEnabled: System.Sound.isEnabled(),
       }
     },
     methods: {
@@ -61,9 +62,15 @@
           System.KeyboardLight.disable()
         }
       },
-      beep() {
-        console.log('BEEP') // eslint-disable-line
-        System.beep()
+      toggleKeyboardSound() {
+        const { isKeyboardSoundEnabled } = this.get()
+
+        if(isKeyboardSoundEnabled) {
+          System.Sound.enable()
+          System.beep()
+        } else {
+          System.Sound.disable()
+        }
       },
     },
   }
