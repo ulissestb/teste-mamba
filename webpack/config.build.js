@@ -17,10 +17,13 @@ module.exports = merge(require('./config.base.js'), {
       root: fromCwd(),
       verbose: false,
     }),
-
     new CopyWebpackPlugin([
       { from: './assets/', to: fromCwd('dist', 'assets') },
-      { from: fromCwd('manifest.xml'), to: fromCwd('dist') },
+      {
+        from: fromCwd('{manifest.xml,*.so}'),
+        to: fromCwd('dist'),
+        flatten: true,
+      },
     ]),
     /** Generate hashes based on module's relative path */
     IS_PROD() && new webpack.HashedModuleIdsPlugin(),
