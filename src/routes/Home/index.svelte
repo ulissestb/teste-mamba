@@ -5,12 +5,12 @@
 <Collection title="Dispositivo">
   <CollectionRow label="2. Som do Teclado">
     <div slot="controller">
-      <Switch checked on:change="beep()"/>
+      <Switch on:change="beep()"/>
     </div>
   </CollectionRow>
   <CollectionRow label="3. Luz do Teclado">
     <div slot="controller">
-      <Switch />
+      <Switch bind:checked="isKeyboardLightEnabled" on:change="toggleKeyboardLight()"/>
     </div>
   </CollectionRow>
   <CollectionRow label="4. Energia" href="/device/energy"/>
@@ -46,7 +46,21 @@
       Collection,
       CollectionRow,
     },
+    data() {
+      return {
+        isKeyboardLightEnabled: System.KeyboardLight.isEnabled(),
+      }
+    },
     methods: {
+      toggleKeyboardLight() {
+        const { isKeyboardLightEnabled } = this.get()
+
+        if(isKeyboardLightEnabled) {
+          System.KeyboardLight.enable()
+        } else {
+          System.KeyboardLight.disable()
+        }
+      },
       beep() {
         console.log('BEEP') // eslint-disable-line
         System.beep()
