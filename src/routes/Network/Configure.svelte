@@ -1,16 +1,5 @@
-<Collection title="Lojista">
-  <Row label="7. Recibos" href="/store/receipts"/>
-  <Row label="8. ID do Pedido">
-    <div slot="controller">
-      <Switch checked disabled />
-    </div>
-  </Row>
-  <Row label="9. Parcelado Emissor">
-    <div slot="controller">
-      <Switch checked />
-    </div>
-  </Row>
-  <Row label="10. Restaurar dados" href="/store/restore"/>
+<Collection>
+  <Row label="1. Configurar Wi-Fi" href="/network/configure/wifi"/>
 </Collection>
 
 <script>
@@ -18,7 +7,6 @@
 
   export default {
     components: {
-      Switch: '@mamba/switch',
       Collection,
       Row,
     },

@@ -6,6 +6,9 @@
   <Route exact path="/network/configure">
     <NetworkConfigure/>
   </Route>
+  <Route exact path="/network/configure/wifi">
+    <ConfigureWifi/>
+  </Route>
 </App>
 
 <script>
@@ -16,6 +19,7 @@
       Route: 'svelte-routing/Route',
       Home: '../../routes/Home',
       NetworkConfigure: '../../routes/Network/Configure',
+      ConfigureWifi: '../../routes/Network/Wifi',
     },
   }
 
