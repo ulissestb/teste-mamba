@@ -20,7 +20,7 @@ module.exports = merge(require('./config.base.js'), {
     new CopyWebpackPlugin([
       { from: './assets/', to: fromCwd('dist', 'assets') },
       {
-        from: fromCwd('{manifest.xml,*.so}'),
+        from: fromCwd('.mamba/{manifest.xml,*.so}'),
         to: fromCwd('dist'),
         flatten: true,
       },
