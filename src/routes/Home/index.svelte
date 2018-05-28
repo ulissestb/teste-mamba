@@ -1,5 +1,5 @@
 <Collection title="Rede">
-  <Row label="1. Configurar" href="/network/configure"/>
+  <Row label="1. Configurar" href="/network"/>
 </Collection>
 
 <Collection title="Dispositivo">

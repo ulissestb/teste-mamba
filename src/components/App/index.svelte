@@ -1,25 +1,30 @@
 <App>
   <AppBar title="Ajustes"/>
-  <Route exact path="/">
-    <Home/>
-  </Route>
-  <Route exact path="/network/configure">
-    <NetworkConfigure/>
-  </Route>
-  <Route exact path="/network/configure/wifi">
-    <ConfigureWifi/>
-  </Route>
+  <Route exact path="/" component={Home}/>
+  <Route exact path="/network" component={NetworkConfigure}/>
+  <Route exact path="/network/wifi" component={WifiMain}/>
+  <Route path="/network/wifi/:bssid" component={WifiItem}/>
 </App>
 
 <script>
+  import Home from '../../routes/Home'
+  import NetworkConfigure from '../../routes/Network/Configure'
+  import WifiMain from '../../routes/Network/Wifi'
+  import WifiItem from '../../routes/Network/WifiItem'
+
   export default {
     components: {
       App: '@mamba/app',
       AppBar: '@mamba/appbar',
       Route: 'svelte-routing/Route',
-      Home: '../../routes/Home',
-      NetworkConfigure: '../../routes/Network/Configure',
-      ConfigureWifi: '../../routes/Network/Wifi',
+    },
+    data() {
+      return {
+        Home,
+        NetworkConfigure,
+        WifiMain,
+        WifiItem,
+      }
     },
   }
 

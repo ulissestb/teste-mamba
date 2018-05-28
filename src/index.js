@@ -1,4 +1,5 @@
 import App from './components/App'
+import store from './store'
 
 /**
  * Bootstrap the application.
@@ -9,11 +10,12 @@ import App from './components/App'
  * even in a production environment build.
  * */
 const root = document.getElementById('root')
-const bootstrapAppFrom = target => new App({ target })
+const bootstrapAppFrom = target => new App({ target, store })
 
 if (process.env.NODE_ENV === 'production') {
   window.app = bootstrapAppFrom(root)
 } else {
+  window.store = store
   /** If developing, wrap the app with a <POS></POS> if running on a web server */
   if (window.location.protocol === 'file:') {
     window.app = bootstrapAppFrom(root)

@@ -1,35 +1,30 @@
 <Collection>
   <Row label="Wi-Fi ativado">
     <div slot="controller">
-      <Switch bind:checked="isWifiEnabled" on:change="toggleWifi()"/>
+      <Switch bind:checked="$isWifiEnabled" on:change="toggleWifi()"/>
     </div>
   </Row>
-  {#if wifiList}
-    {#await wifiList}
-      <Row label="Procurando redes Wi-Fi..." />
-    {:then wifis}
-      {#each wifis as wifi}
-        <Row label={wifi.ssid}>
-          <div slot="controller">
-            <Icon symbol="wifi" level={wifi.strength}/>
-          </div>
-          <p slot="description">{
-            wifi.connected
-              ? 'Conectado'
-              : wifi.saved
-                ? 'Salvo'
-                : ''
-          }</p>
-        </Row>
-      {/each}
-    {:catch error}
-      <Row label="Erros ao procurar Wi-Fi..." />
-    {/await}
-  {/if}
+  {#await $wifis}
+    <Row label="Procurando redes Wi-Fi..." />
+  {:then wifis}
+    {#each wifis as wifi}
+      <Row
+        label={wifi.ssid}
+        description={wifi.connected ? 'Conectado' : wifi.saved ? 'Salvo' : undefined}
+        href="/network/wifi/{wifi.bssid}"
+      >
+        <div slot="controller">
+          <Icon symbol="wifi" level={wifi.strength}/>
+        </div>
+      </Row>
+    {/each}
+  {:catch error}
+    <Row label="Erros ao procurar Wi-Fi..." />
+  {/await}
 </Collection>
 
 <script>
-  import Network from '@mamba/native/network'
+  import Network from '../../native/network'
   import { Collection, Row } from '@mamba/collection'
 
   export default {
@@ -39,44 +34,28 @@
       Switch: '@mamba/switch',
       Icon: '@mamba/icon',
     },
-    data() {
-      return {
-        isWifiEnabled: Network.isWifiEnabled(),
-        wifis: [],
+    oncreate() {
+      const { isWifiEnabled, wifis } = this.store.get()
+      if(isWifiEnabled && wifis.length === 0) {
+        this.getWifiList()
       }
     },
-    computed: {
-      wifiList({ isWifiEnabled }) {
-        console.log(isWifiEnabled) // eslint-disable-line
-        if(!isWifiEnabled) {
-          return []
-        }
-
-        return new Promise((resolve, reject) => {
-          Network.getWifiList((err, data) => {
-            if(err) {
-              console.error(err)
-              return
-            }
-            data.sort((a, b) => {
-              if (a.connected || a.strength > b.strength) return -1;
-              if (b.connected || a.strength < b.strength) return 1;
-
-              return 0;
-            });
-            resolve(data)
-          })
+    methods: {
+      getWifiList() {
+        /** Set the wifis to a promise and, when its resolved, to the wifi list */
+        this.store.setPromise({
+          wifis: Network.getWifiList(),
         })
       },
-    },
-    methods: {
       toggleWifi() {
-        const { isWifiEnabled } = this.get()
+        const { isWifiEnabled } = this.store.get()
 
         if(isWifiEnabled) {
           Network.enableWifi()
+          this.getWifiList()
         } else {
           Network.disableWifi()
+          this.store.set({ wifis: [] })
         }
       },
     },
