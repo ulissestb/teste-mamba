@@ -23,7 +23,7 @@
     "format": "npm run format:css; npm run format:js",
     "format:js": "prettier --write *.js '{src,test,webpack}/**/*.js' && eslint --fix *.js '{src,test,webpack}/**/*.{js,html,svelte}'",
     "format:css": "prettier --write 'src/**/*.{css,scss,svelte,html}' && stylelint --fix 'src/**/*.{css,scss,svelte,html}'",
-    "postinstall": "yarn link @mamba/cli @mamba/app @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon @mamba/collection @mamba/switch @mamba/native"
+    "postinstall": "yarn link @mamba/cli @mamba/app @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon @mamba/collection @mamba/switch @mamba/native @mamba/progress"
   },
   "husky": {
     "hooks": {
@@ -98,6 +98,7 @@
     "stylelint-webpack-plugin": "^0.10.4",
     "svelte-loader": "^2.9.0",
     "svelte-preprocess": "^2.0.3",
+    "svelte-transitions-slide": "^1.0.0",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.3",
     "webpack-bundle-analyzer": "^2.12.0",

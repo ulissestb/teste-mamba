@@ -1,8 +1,6 @@
-import Network from './native/network'
 import { Store } from 'svelte/store'
 
 const defaultData = {
-  isWifiEnabled: Network.isWifiEnabled(),
   wifis: [],
 }
 

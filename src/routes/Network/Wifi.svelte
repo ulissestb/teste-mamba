@@ -1,10 +1,11 @@
 <Collection>
   <Row label="Wi-Fi ativado">
     <div slot="controller">
-      <Switch bind:checked="$isWifiEnabled" on:change="toggleWifi()"/>
+      <Switch bind:checked="isWifiEnabled" on:change="toggleWifi()"/>
     </div>
   </Row>
   {#await $wifis}
+    <ProgressBar />
     <Row label="Procurando redes Wi-Fi..." />
   {:then wifis}
     {#each wifis as wifi}
@@ -33,9 +34,16 @@
       Row,
       Switch: '@mamba/switch',
       Icon: '@mamba/icon',
+      ProgressBar: '@mamba/progress',
+    },
+    data() {
+      return {
+        isWifiEnabled: Network.isWifiEnabled(),
+      }
     },
     oncreate() {
-      const { isWifiEnabled, wifis } = this.store.get()
+      const { wifis } = this.store.get()
+      const { isWifiEnabled } = this.get()
       if(isWifiEnabled && wifis.length === 0) {
         this.getWifiList()
       }
@@ -45,10 +53,17 @@
         /** Set the wifis to a promise and, when its resolved, to the wifi list */
         this.store.setPromise({
           wifis: Network.getWifiList(),
+        }, {
+          wifis(data) {
+            if(this.get().isWifiEnabled) {
+              return data
+            }
+            return []
+          },
         })
       },
       toggleWifi() {
-        const { isWifiEnabled } = this.store.get()
+        const { isWifiEnabled } = this.get()
 
         if(isWifiEnabled) {
           Network.enableWifi()
