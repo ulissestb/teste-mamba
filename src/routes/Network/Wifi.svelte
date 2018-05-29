@@ -8,17 +8,19 @@
     <ProgressBar />
     <Row label="Procurando redes Wi-Fi..." />
   {:then wifis}
-    {#each wifis as wifi}
-      <Row
-        label={wifi.ssid}
-        description={wifi.connected ? 'Conectado' : wifi.saved ? 'Salvo' : undefined}
-        href="/network/wifi/{wifi.bssid}"
-      >
-        <div slot="controller">
-          <Icon symbol="wifi" level={wifi.strength}/>
-        </div>
-      </Row>
-    {/each}
+    {#if isWifiEnabled}
+      {#each wifis as wifi}
+        <Row
+          label={wifi.ssid}
+          description={wifi.connected ? 'Conectado' : wifi.saved ? 'Salvo' : undefined}
+          href="/network/wifi/{wifi.bssid}"
+        >
+          <div slot="controller">
+            <Icon symbol="wifi" level={wifi.strength}/>
+          </div>
+        </Row>
+      {/each}
+    {/if}
   {:catch error}
     <Row label="Erros ao procurar Wi-Fi..." />
   {/await}
@@ -44,28 +46,27 @@
     oncreate() {
       const { wifis } = this.store.get()
       const { isWifiEnabled } = this.get()
-      if(isWifiEnabled && wifis.length === 0) {
+      if (isWifiEnabled && wifis.length === 0) {
         this.getWifiList()
       }
     },
     methods: {
       getWifiList() {
         /** Set the wifis to a promise and, when its resolved, to the wifi list */
-        this.store.setPromise({
-          wifis: Network.getWifiList(),
-        }, {
-          wifis(data) {
-            if(this.get().isWifiEnabled) {
-              return data
-            }
-            return []
+        this.store.setPromise(
+          {
+            wifis: Network.getWifiList(),
           },
-        })
+          /** Transform the 'wifis' when promise fulfilled */
+          {
+            wifis: data => (this.get().isWifiEnabled ? data : []),
+          },
+        )
       },
       toggleWifi() {
         const { isWifiEnabled } = this.get()
 
-        if(isWifiEnabled) {
+        if (isWifiEnabled) {
           Network.enableWifi()
           this.getWifiList()
         } else {
@@ -75,5 +76,4 @@
       },
     },
   }
-
 </script>
