@@ -16,7 +16,7 @@ module.exports = merge(require('./config.base.js'), {
   },
 
   devServer: {
-    contentBase: fromCwd('dist'),
+    contentBase: [fromCwd('src')],
     compress: true,
     headers: {
       'X-Content-Type-Options': 'nosniff',
