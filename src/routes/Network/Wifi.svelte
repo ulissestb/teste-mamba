@@ -8,7 +8,7 @@
     <ProgressBar />
     <Row label="Procurando redes Wi-Fi..." />
   {:then wifis}
-    {#if isWifiEnabled}
+    {#if isWifiEnabled && wifis}
       {#each wifis as wifi}
         <Row
           label={wifi.ssid}
@@ -27,7 +27,7 @@
 </Collection>
 
 <script>
-  import Network from '../../native/network'
+  import Network from '@mamba/native/network'
   import { Collection, Row } from '@mamba/collection'
 
   export default {
@@ -46,7 +46,7 @@
     oncreate() {
       const { wifis } = this.store.get()
       const { isWifiEnabled } = this.get()
-      if (isWifiEnabled && wifis.length === 0) {
+      if (isWifiEnabled && (!wifis || wifis.length === 0)) {
         this.getWifiList()
       }
     },

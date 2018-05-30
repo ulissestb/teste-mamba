@@ -38,6 +38,7 @@
 
 <script>
   import System from '@mamba/native/system'
+  import Keyboard from '@mamba/native/keyboard'
   import { Collection, Row } from '@mamba/collection'
 
   export default {
@@ -48,8 +49,8 @@
     },
     data() {
       return {
-        isKeyboardLightEnabled: System.KeyboardLight.isEnabled(),
-        isKeyboardSoundEnabled: System.Sound.isEnabled(),
+        isKeyboardLightEnabled: Keyboard.Light.isEnabled(),
+        isKeyboardSoundEnabled: Keyboard.Sound.isEnabled(),
       }
     },
     methods: {
@@ -57,19 +58,19 @@
         const { isKeyboardLightEnabled } = this.get()
 
         if(isKeyboardLightEnabled) {
-          System.KeyboardLight.enable()
+          Keyboard.Light.enable()
         } else {
-          System.KeyboardLight.disable()
+          Keyboard.Light.disable()
         }
       },
       toggleKeyboardSound() {
         const { isKeyboardSoundEnabled } = this.get()
 
         if(isKeyboardSoundEnabled) {
-          System.Sound.enable()
+          Keyboard.Sound.enable()
           System.beep()
         } else {
-          System.Sound.disable()
+          Keyboard.Sound.disable()
         }
       },
     },
