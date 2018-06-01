@@ -4,35 +4,52 @@
 </div>
 
 <div class="action">
-  {#if wifi.saved}
-    CONECTAR SALVO
-  {:elseif wifi.connected}
-    ESQUECER
-  {:else}
+  {#if wifi.saved || wifi.connected }
+    <Row label="Esquecer" on:click="forgetWifi(wifi)">
+      <div slot="controller">
+        <Icon symbol="chevron-right"/>
+      </div>
+    </Row>
+  {/if}
+
+  {#if !wifi.connected}
     {#if currentState !== 'INSERT_PASSWORD'}
-      <Row label="Conectar" on:click="changeState('INSERT_PASSWORD')">
+      <Row label="Conectar" on:click="connectWifi(wifi)">
         <div slot="controller">
           <Icon symbol="chevron-right"/>
         </div>
       </Row>
     {:else}
       <Input type="password" bind:value="passwordValue" label="Senha" alphanumeric autofocus/>
+
+      <Button width="100%" bottom
+        on:click="connectWifi(wifi, passwordValue)"
+        disabled={passwordValue !== '' && passwordValue.length < 4}
+      >
+        CONECTAR
+      </Button>
     {/if}
-
-    <Button width="100%" bottom on:click="handleConnect()" disabled={passwordValue.length < 4}>
-      CONECTAR
-    </Button>
-
-    <Dialog isOpen={connecting}>
-      {#await connecting}
-        Verificando<br>conexão
-      {:then data}
-        Conexão efetuada com sucesso
-      {:catch e}
-        Erro ao conectar ao WI-Fi
-      {/await}
-    </Dialog>
   {/if}
+
+  <!-- Forget wifi dialog -->
+  <Dialog isOpen={forgetting}>
+    <img src="assets/images/success.png" alt="Sucesso"/>
+    <div>Wi-Fi esquecido com sucesso!</div>
+  </Dialog>
+
+  <!-- Connect wifi dialog -->
+  <Dialog isOpen={connecting}>
+    {#await connecting}
+      <Sprite src="assets/images/loading-sprite.png" width="70px"/>
+      <div>Carregando...</div>
+    {:then d}
+      <img src="assets/images/success.png" alt="Sucesso"/>
+      <div>Conexão efetuada com sucesso!</div>
+    {:catch e}
+      <img src="assets/images/error.png" alt="Erro"/>
+      <div>Algo deu errado :(</div>
+    {/await}
+  </Dialog>
 </div>
 
 <script>
@@ -51,6 +68,7 @@
     },
     data() {
       return {
+        forgetting: false,
         connecting: false,
         currentState: null,
         passwordValue: '',
@@ -62,21 +80,54 @@
       },
     },
     methods: {
-      handleConnect() {
-        const { passwordValue, wifi } = this.get()
-        wifi.password = passwordValue
+      forgetWifi(wifi) {
         this.set({
-          connecting: Network.connect(wifi)
-            .then(() => {
-              this.set({ connecting: null })
+          forgetting: Network.forgetWifi(wifi).then(() => {
+            let { wifis } = this.store.get()
+            wifis = wifis.map(item => {
+              if (item.bssid === wifi.bssid) {
+                return {
+                  ...wifi,
+                  connected: false,
+                  saved: false,
+                  password: undefined,
+                }
+              }
+
+              return { ...item }
             })
-            .catch(() => {
-              this.set({ connecting: null })
-            }),
+            this.store.set({ wifis })
+          }),
         })
       },
-      changeState(fieldState) {
-        this.set({ currentState: fieldState })
+      connectWifi(wifi, passwordValue) {
+        /** Trying to connect a wifi that's not saved? */
+        if (!wifi.saved && !passwordValue) {
+          this.set({ currentState: 'INSERT_PASSWORD' })
+          return
+        }
+
+        wifi = !passwordValue ? wifi : { ...wifi, password: passwordValue }
+
+        this.set({
+          connecting: Network.connect(wifi).then(() => {
+            let { wifis } = this.store.get()
+            wifis = wifis.map(item => {
+              if (item.bssid === wifi.bssid) {
+                return {
+                  ...wifi,
+                  connected: true,
+                }
+              }
+
+              return {
+                ...item,
+                connected: false,
+              }
+            })
+            this.store.set({ wifis })
+          }),
+        })
       },
     },
   }
