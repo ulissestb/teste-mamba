@@ -1,14 +1,14 @@
 <Collection title="Rede">
-  <Row label="1. Configurar" href="/network"/>
+  <Row label="1. Configurar" href="/network" shortcut="1"/>
 </Collection>
 
 <Collection title="Dispositivo">
-  <Row label="2. Som do Teclado">
+  <Row label="2. Som do Teclado" shortcut="2">
     <div slot="controller">
       <Switch bind:checked="isKeyboardSoundEnabled" on:change="toggleKeyboardSound()"/>
     </div>
   </Row>
-  <Row label="3. Luz do Teclado">
+  <Row label="3. Luz do Teclado" shortcut="3">
     <div slot="controller">
       <Switch bind:checked="isKeyboardLightEnabled" on:change="toggleKeyboardLight()"/>
     </div>

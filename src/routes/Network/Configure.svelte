@@ -1,5 +1,5 @@
 <Collection>
-  <Row label="1. Configurar Wi-Fi" href="/network/wifi"/>
+  <Row label="1. Configurar Wi-Fi" href="/network/wifi" shortcut="1"/>
 </Collection>
 
 <script>

@@ -2,15 +2,15 @@
   <AppBar title="Ajustes"/>
   <Route exact path="/" component={Home}/>
   <Route exact path="/network" component={NetworkConfigure}/>
-  <Route exact path="/network/wifi" component={WifiMain}/>
-  <Route path="/network/wifi/:bssid" component={WifiItem}/>
+  <Route exact path="/network/wifi" component={Wifis}/>
+  <Route path="/network/wifi/:bssid" component={Wifi}/>
 </App>
 
 <script>
   import Home from '../../routes/Home'
   import NetworkConfigure from '../../routes/Network/Configure'
-  import WifiMain from '../../routes/Network/Wifi'
-  import WifiItem from '../../routes/Network/WifiItem'
+  import Wifis from '../../routes/Network/Wifis'
+  import Wifi from '../../routes/Network/Wifi'
 
   export default {
     components: {
@@ -22,8 +22,8 @@
       return {
         Home,
         NetworkConfigure,
-        WifiMain,
-        WifiItem,
+        Wifis,
+        Wifi,
       }
     },
   }
