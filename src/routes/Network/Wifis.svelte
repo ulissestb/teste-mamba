@@ -43,6 +43,10 @@
         isWifiEnabled: Network.isWifiEnabled(),
       }
     },
+    ondestroy() {
+      console.log('DESTROY')
+      // Network.SignalHandler.destroy()
+    },
     oncreate() {
       const { wifis } = this.store.get()
       const { isWifiEnabled } = this.get()

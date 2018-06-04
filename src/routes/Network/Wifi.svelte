@@ -5,7 +5,7 @@
 
 <div class="action">
   {#if wifi.saved || wifi.connected }
-    <Row label="Esquecer" on:click="forgetWifi(wifi)">
+    <Row label="1. Esquecer" on:click="forgetWifi(wifi)" shortcut="1">
       <div slot="controller">
         <Icon symbol="chevron-right"/>
       </div>
@@ -14,7 +14,11 @@
 
   {#if !wifi.connected}
     {#if currentState !== 'INSERT_PASSWORD'}
-      <Row label="Conectar" on:click="connectWifi(wifi)">
+      <Row
+        label="{wifi.saved ? '2' : '1'}. Conectar"
+        on:click="connectWifi(wifi)"
+        shortcut="{wifi.saved ? '2' : '1'}"
+      >
         <div slot="controller">
           <Icon symbol="chevron-right"/>
         </div>

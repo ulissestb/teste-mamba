@@ -31,5 +31,8 @@ module.exports = merge(require('./config.base.js'), {
     port: 8080,
     publicPath: 'http://localhost:8080/',
     hot: true,
+    watchOptions: {
+      ignored: null,
+    },
   },
 })
