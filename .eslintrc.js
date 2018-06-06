@@ -30,6 +30,7 @@ module.exports = {
     'no-console': IS_PROD() ? ['off', { allow: ['warn', 'error'] }] : 'off',
     'no-var': 'error',
     'comma-dangle': ['error', 'always-multiline'],
+    'no-new': 'off',
   },
   overrides: [
     {
