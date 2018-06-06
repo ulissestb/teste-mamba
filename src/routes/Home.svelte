@@ -13,7 +13,7 @@
       <Switch bind:checked="isKeyboardLightEnabled" on:change="toggleKeyboardLight()"/>
     </div>
   </Row>
-  <Row label="4. Energia" href="/device/energy"/>
+  <Row label="4. Energia" href="/energy" shortcut="4"/>
 </Collection>
 
 <Collection title="Senha">

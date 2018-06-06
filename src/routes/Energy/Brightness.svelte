@@ -1,0 +1,49 @@
+<div class="container">
+  <Range
+    ref:range
+    icon="assets/images/icons/brightness.png"
+    bind:value="brightness"
+    min={10}
+    on:increment="increaseBrightness()"
+    on:decrement="decreaseBrightness()"
+  />
+
+  <div style="margin-top: 25px;">
+    <Row label="1. Diminuir brilho" on:click="refs.range.decrement()" shortcut="1"/>
+    <Row label="2. Aumentar brilho" on:click="refs.range.increment()" shortcut="2"/>
+  </div>
+</div>
+
+<style>
+  .container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+</style>
+
+<script>
+  import Screen from '@mamba/native/screen'
+  import { Row } from '@mamba/collection'
+
+  export default {
+    components: {
+      Range: '@mamba/range',
+      Row,
+    },
+    data() {
+      return {
+        brightness: Screen.brightness.get() * 10,
+      }
+    },
+    methods: {
+      increaseBrightness() {
+        Screen.brightness.increase()
+      },
+      decreaseBrightness() {
+        Screen.brightness.decrease()
+      },
+    },
+  }
+</script>

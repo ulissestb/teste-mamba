@@ -1,11 +1,11 @@
 <Collection>
   <Row label="1. Configurar Wi-Fi" href="/network/wifi" shortcut="1"/>
   <Row label="2. Trocar para {otherAdapterName}" on:click="switchNetworkAdapter()" shortcut="2"/>
-
-  <Dialog ref:changedDialog duration="1000">
-    Rede alterada<br>para '<strong>{adapterName}</strong>'
-  </Dialog>
 </Collection>
+
+<Dialog ref:changedDialog duration="1000">
+  Rede alterada<br>para '<strong>{adapterName}</strong>'
+</Dialog>
 
 <script>
   import Dialog from '@mamba/dialog'
