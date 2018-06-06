@@ -10,22 +10,29 @@ import store from './store'
  * even in a production environment build.
  * */
 const root = document.getElementById('root')
-const bootstrapAppFrom = target => new App({ target, store })
+const bootstrapAppFrom = target =>
+  new App({
+    target,
+    store,
+  })
 
 if (process.env.NODE_ENV === 'production') {
-  window.app = bootstrapAppFrom(root)
-} else {
-  window.store = store
+  window.MambaApp = bootstrapAppFrom(root)
+}
+
+if (process.env.NODE_ENV !== 'production') {
+  window.MambaStore = store
   /** If developing, wrap the app with a <POS></POS> if running on a web server */
   if (window.location.protocol === 'file:') {
-    window.app = bootstrapAppFrom(root)
+    window.MambaApp = bootstrapAppFrom(root)
   } else {
     import('@mamba/pos').then(({ default: POS }) => {
       const appContainer = document.createElement('DIV')
-      bootstrapAppFrom(appContainer)
+      window.MambaApp = bootstrapAppFrom(appContainer)
 
-      window.app = new POS({
+      new POS({
         target: root,
+        store,
         slots: {
           default: appContainer,
         },
