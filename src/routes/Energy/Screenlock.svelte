@@ -1,29 +1,26 @@
-  <Row label="1. Ultra economia" shortcut="1">
-    <div slot="controller">
-      <Switch bind:checked="isSleepEnabled" on:change="toggleSleep()"/>
-    </div>
-    <div slot="extra">
-      {#if isSleepEnabled}
-        <div class="range-container" style="margin-top: 15px;">
-          <Range
-            ref:range
-            bind:value="sleepDelay"
-            min={0}
-            max={10}
-            step={1}
-            unit=" min"
-            on:increment="increaseDelay()"
-            on:decrement="decreaseDelay()"
-            style="padding-left: 0; padding-right: 0;"
-          />
-          <div style="margin-top: 25px;">
-            <Row label="2. Remover minuto" on:click="refs.range.decrement()" shortcut="2"/>
-            <Row label="3. Adicionar minuto" on:click="refs.range.increment()" shortcut="3"/>
-          </div>
-        </div>
-      {/if}
-    </div>
-  </Row>
+<Row label="1. Ultra economia" shortcut="1">
+  <div slot="controller">
+    <Switch bind:checked="isSleepEnabled" on:change="toggleSleep()"/>
+  </div>
+  <div slot="extra">
+    {#if isSleepEnabled}
+      <Range
+        ref:range
+        bind:value="sleepDelay"
+        min={0}
+        max={10}
+        step={1}
+        unit=" min"
+        on:increment="increaseDelay()"
+        on:decrement="decreaseDelay()"
+      />
+      <div style="margin-top: 25px;">
+        <Row label="2. Remover minuto" on:click="refs.range.decrement()" shortcut="2"/>
+        <Row label="3. Adicionar minuto" on:click="refs.range.increment()" shortcut="3"/>
+      </div>
+    {/if}
+  </div>
+</Row>
 
 <script>
   import System from '@mamba/native/system'

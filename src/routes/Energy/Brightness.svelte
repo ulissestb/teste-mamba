@@ -40,9 +40,23 @@
     methods: {
       increaseBrightness() {
         Screen.brightness.increase()
+
+        /** If developing, show the brightness change on the POS Mockup */
+        if (process.env.NODE_ENV !== 'production') {
+          this.store.fire('change:brightness', {
+            brightnessLevel: Screen.brightness.get(),
+          })
+        }
       },
       decreaseBrightness() {
         Screen.brightness.decrease()
+
+        /** If developing, show the brightness change on the POS Mockup */
+        if (process.env.NODE_ENV !== 'production') {
+          this.store.fire('change:brightness', {
+            brightnessLevel: Screen.brightness.get(),
+          })
+        }
       },
     },
   }
