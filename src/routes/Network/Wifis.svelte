@@ -1,5 +1,5 @@
 <Collection>
-  <Row label="Wi-Fi ativado">
+  <Row label="1. Ativar Wi-Fi" shortcut="1">
     <div slot="controller">
       <Switch bind:checked="isWifiEnabled" on:change="toggleWifi()"/>
     </div>
@@ -42,10 +42,6 @@
       return {
         isWifiEnabled: Network.isWifiEnabled(),
       }
-    },
-    ondestroy() {
-      console.log('DESTROY')
-      // Network.SignalHandler.destroy()
     },
     oncreate() {
       const { wifis } = this.store.get()

@@ -24,7 +24,7 @@
         </div>
       </Row>
     {:else}
-      <Input type="password" bind:value="passwordValue" label="Senha" alphanumeric autofocus/>
+      <Input type="password" readable bind:value="passwordValue" label="Senha" alphanumeric autofocus />
 
       <Button width="100%" bottom
         on:click="connectWifi(wifi, passwordValue)"
