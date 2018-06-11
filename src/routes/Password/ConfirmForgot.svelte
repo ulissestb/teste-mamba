@@ -2,13 +2,11 @@
 
   <div class="row">
     <Input
-      ref:inputCurrent
-      type="password"
-      bind:value="currentPassword"
-      label="Senha atual"
-      validate={validateCurrentPassword}
+      ref:inputMatchCode
+      label="Número Fornecido"
+      validate={validateRecoveryCode}
       on:valid="gotoNextStep('inputNew')"
-      maxlength="4"
+      maxlength="8"
       autofocus
     />
   </div>
@@ -74,15 +72,18 @@
       return {
         step: 0,
         validatePassword: value => Password.validatePassword(value),
-        validateCurrentPassword(value) {
-          return {
-            valid: Password.matchesPassword(value),
-            msg: 'Senha Incorreta',
-          }
-        },
       }
     },
     computed: {
+      validateRecoveryCode({ match }) {
+        const { recoveryNumber } = match.params
+        return matchCodeValue => {
+          return {
+            valid: Password.verifyMatchCode(recoveryNumber, matchCodeValue),
+            msg: 'Número incorreto',
+          }
+        }
+      },
       /** This must be a computed property because it depends on the 'newPassword' */
       validateConfirmPassword({ validatePassword, newPassword }) {
         return value => {
@@ -110,7 +111,7 @@
       changePassword() {
         const { currentPassword, newPassword, confirmPassword } = this.get()
         const validInputs =
-          this.refs.inputCurrent.validate() &&
+          this.refs.inputMatchCode.validate() &&
           this.refs.inputNew.validate() &&
           this.refs.inputConfirmation.validate()
 
