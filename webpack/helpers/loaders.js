@@ -52,7 +52,7 @@ module.exports = {
       sourceMap: IS_DEV(),
       keepQuery: true,
       fail: true,
-      debug: IS_DEV(),
+      debug: false, // IS_DEV(),
     },
   },
   fonts: {
