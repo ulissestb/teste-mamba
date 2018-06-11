@@ -1,5 +1,5 @@
-import App from './components/App'
-import store from './store'
+import App from './components/App.svelte'
+import store from './store.js'
 
 /**
  * Bootstrap the application.
@@ -28,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
   } else {
     import('@mamba/pos').then(({ default: POS }) => {
       const appContainer = document.createElement('DIV')
+      appContainer.style.height = '100%'
       window.MambaApp = bootstrapAppFrom(appContainer)
       new POS({
         target: root,

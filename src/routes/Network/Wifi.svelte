@@ -57,8 +57,10 @@
       <Sprite src="assets/images/loading-sprite.png" width="70px"/>
       <div>Conectando a '{wifi.ssid}'</div>
     {:then d}
-      <img src="assets/images/success.png" alt="Sucesso"/>
-      <div>Conexão efetuada com sucesso!</div>
+      <RoundIcon symbol="check" size="giant"/>
+      <div style="margin-top: 15px;">
+        Conexão efetuada<br>com sucesso!
+      </div>
     {:catch e}
       <img src="assets/images/error.png" alt="Erro"/>
       <div>Algo deu errado :(</div>
@@ -70,13 +72,15 @@
   import Network from '@mamba/native/network'
   import { Row } from '@mamba/collection'
   import { Dialog } from '@mamba/dialog'
+  import { Icon, RoundIcon } from '@mamba/icon'
 
   export default {
     components: {
       Dialog,
       Row,
+      Icon,
+      RoundIcon,
       Button: '@mamba/button',
-      Icon: '@mamba/icon',
       Input: '@mamba/input',
       Sprite: '@mamba/sprite',
     },
