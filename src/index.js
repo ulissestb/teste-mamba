@@ -29,7 +29,6 @@ if (process.env.NODE_ENV !== 'production') {
     import('@mamba/pos').then(({ default: POS }) => {
       const appContainer = document.createElement('DIV')
       window.MambaApp = bootstrapAppFrom(appContainer)
-
       new POS({
         target: root,
         store,

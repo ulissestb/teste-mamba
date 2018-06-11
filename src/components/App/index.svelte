@@ -1,22 +1,34 @@
 <App>
   <AppBar title="Ajustes"/>
   <Route exact path="/" component={Home}/>
+
   <Route exact path="/network" component={NetworkConfigure}/>
   <Route exact path="/network/wifi" component={Wifis}/>
   <Route path="/network/wifi/:bssid" component={Wifi}/>
+
   <Route exact path="/energy" component={EnergyConfigure}/>
   <Route exact path="/energy/brightness" component={EnergyBrightness}/>
   <Route exact path="/energy/screenlock" component={EnergyScreenlock}/>
+
+  <Route exact path="/password/change" component={ChangePassword}/>
+  <Route exact path="/password/forgot" component={ForgotPassword}/>
+
+  <Route exact path="/store/receipts" component={Receipts}/>
+  <Route exact path="/store/restore" component={Restore}/>
 </App>
 
 <script>
-  import NetworkConfigure from '../../routes/Network/Configure'
-  import Wifis from '../../routes/Network/Wifis'
-  import Wifi from '../../routes/Network/Wifi'
-  import Home from '../../routes/Home'
-  import EnergyConfigure from '../../routes/Energy/Configure'
-  import EnergyBrightness from '../../routes/Energy/Brightness'
-  import EnergyScreenlock from '../../routes/Energy/Screenlock'
+  import NetworkConfigure from '../../routes/Network/Configure.svelte'
+  import Wifis from '../../routes/Network/Wifis.svelte'
+  import Wifi from '../../routes/Network/Wifi.svelte'
+  import Home from '../../routes/Home.svelte'
+  import EnergyConfigure from '../../routes/Energy/Configure.svelte'
+  import EnergyBrightness from '../../routes/Energy/Brightness.svelte'
+  import EnergyScreenlock from '../../routes/Energy/Screenlock.svelte'
+  import ChangePassword from '../../routes/Password/Change.svelte'
+  import ForgotPassword from '../../routes/Password/Forgot.svelte'
+  import Receipts from '../../routes/Store/Receipts.svelte'
+  import Restore from '../../routes/Store/Restore.svelte'
 
   export default {
     components: {
@@ -33,6 +45,10 @@
         EnergyConfigure,
         EnergyBrightness,
         EnergyScreenlock,
+        ChangePassword,
+        ForgotPassword,
+        Receipts,
+        Restore,
       }
     },
   }

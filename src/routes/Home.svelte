@@ -17,8 +17,8 @@
 </Collection>
 
 <Collection title="Senha">
-  <Row label="5. Alterar senha" href="/password/change"/>
-  <Row label="6. Esqueci minha senha" href="/password/forgot"/>
+  <Row label="5. Alterar senha" href="/password/change" shortcut="5"/>
+  <Row label="6. Esqueci minha senha" href="/password/forgot" shortcut="6"/>
 </Collection>
 
 <Collection title="Lojista">

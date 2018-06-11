@@ -24,9 +24,18 @@
         </div>
       </Row>
     {:else}
-      <Input type="password" readable bind:value="passwordValue" label="Senha" alphanumeric autofocus />
+      <Input
+        type="password"
+        readable
+        bind:value="passwordValue"
+        label="Senha"
+        alphanumeric
+        autofocus
+        on:submit="refs.connectButton.fire('click')"
+      />
 
       <Button width="100%" bottom
+        ref:connectButton
         on:click="connectWifi(wifi, passwordValue)"
         disabled={passwordValue !== '' && passwordValue.length < 4}
         shortcut="enter"
