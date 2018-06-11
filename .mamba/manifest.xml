@@ -1,20 +1,16 @@
 <MambaClass Type="Manifest" Version="1.0">
-  <Member Name="id">82</Member>
-  <Member Name="appName">Svelte - Ajustes</Member>
-  <Member Name="defaultName">config.stone</Member>
-  <Member Name="displayedName">Svelte - Ajustes</Member>
+  <Member Name="id">99</Member>
+  <Member Name="appName">Mamba App</Member>
+  <Member Name="defaultName">Mamba App</Member>
+  <Member Name="displayedName">Mamba App</Member>
+  <Member Name="appDescription">Mamba App</Member>
   <Member Name="iconPath">assets/logo.svg</Member>
-  <Member Name="appVersion">1.3.2</Member>
-  <Member Name="soName">libConfigApp.so</Member>
-  <Member Name="runOnUserSelection">entryPoint</Member>
-  <Member Name="keepInBackground">false</Member>
+  <Member Name="appVersion">1.0.0</Member>
+  <Member Name="runOnUserSelection">index.html</Member>
   <Member Name="listInMainMenu">true</Member>
-  <Member Name="appTechnology">0</Member>
-  <Member Name="appType">4</Member>
-  <Member Name="appDescription">Aplicativo de Configuração do Sistema</Member>
-  <Member Name="appCreationDate">2017-02-14T22:02:00</Member>
-  <Member Name="appLastModificationDate">2017-07-05T14:29:00</Member>
+  <Member Name="appTechnology">1</Member>
+  <Member Name="appType">0</Member>
+  <Member Name="appCreationDate">2017-07-17T13:32:00</Member>
+  <Member Name="appLastModificationDate">2017-07-17T13:33:00</Member>
   <Member Name="appPasswordProtectionLevel">0</Member>
-  <Member Name="stoneApp">true</Member>
-  <Member Name="defaultApp">true</Member>
 </MambaClass>
