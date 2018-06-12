@@ -22,15 +22,15 @@
 </Collection>
 
 <Collection title="Lojista">
-  <Row label="7. Recibos" href="/store/receipts"/>
-  <Row label="8. ID do Pedido">
+  <Row label="7. Recibos" href="/store/receipts" shortcut="7"/>
+  <Row label="8. ID do Pedido" shortcut="8">
     <div slot="controller">
-      <Switch checked disabled />
+      <Switch bind:checked="isOrderIDEnabled" on:change="toggleOrderID()"/>
     </div>
   </Row>
-  <Row label="9. Parcelado Emissor">
+  <Row label="9. Parcelado Emissor" shortcut="9">
     <div slot="controller">
-      <Switch checked />
+      <Switch bind:checked="isIssuerInstallment" on:change="toggleIssuerInstallment()"/>
     </div>
   </Row>
   <Row label="10. Restaurar dados" href="/store/restore"/>
@@ -39,6 +39,7 @@
 <script>
   import System from '@mamba/native/system'
   import Keyboard from '@mamba/native/keyboard'
+  import Transactions from '@mamba/native/transactions'
   import { Collection, Row } from '@mamba/collection'
 
   export default {
@@ -51,13 +52,33 @@
       return {
         isKeyboardLightEnabled: Keyboard.Light.isEnabled(),
         isKeyboardSoundEnabled: Keyboard.Sound.isEnabled(),
+        isOrderIDEnabled: Transactions.isOrderIdEnabled(),
+        isIssuerInstallment: Transactions.isIssuerInstallmentsEnabled(),
       }
     },
     methods: {
+      toggleIssuerInstallment() {
+        const { isIssuerInstallment } = this.get()
+
+        if (isIssuerInstallment) {
+          Transactions.enableIssuerInstallments()
+        } else {
+          Transactions.disableIssuerInstallments()
+        }
+      },
+      toggleOrderID() {
+        const { isOrderIDEnabled } = this.get()
+
+        if (isOrderIDEnabled) {
+          Transactions.enableOrderId()
+        } else {
+          Transactions.disableOrderId()
+        }
+      },
       toggleKeyboardLight() {
         const { isKeyboardLightEnabled } = this.get()
 
-        if(isKeyboardLightEnabled) {
+        if (isKeyboardLightEnabled) {
           Keyboard.Light.enable()
         } else {
           Keyboard.Light.disable()
@@ -66,7 +87,7 @@
       toggleKeyboardSound() {
         const { isKeyboardSoundEnabled } = this.get()
 
-        if(isKeyboardSoundEnabled) {
+        if (isKeyboardSoundEnabled) {
           Keyboard.Sound.enable()
           System.beep()
         } else {
@@ -75,5 +96,4 @@
       },
     },
   }
-
 </script>
