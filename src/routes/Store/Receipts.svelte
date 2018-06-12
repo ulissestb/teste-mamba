@@ -9,22 +9,22 @@
       <Switch bind:checked="isHideMerchantAddressEnabled" on:change="toggleHideAddress()"/>
     </div>
   </Row>
-  <Row label="3. Frase no Recibo" shortcut="3">
+  <Row label="3. Frase no Recibo" shortcut="3" showExtra={isReceiptPhraseEnabled}>
     <div slot="controller">
       <Switch bind:checked="isReceiptPhraseEnabled" on:change="toggleReceiptPhrase()"/>
     </div>
     <div slot="extra">
-      {#if isReceiptPhraseEnabled}
-        <Input
-          label="Frase"
-          alphanumeric
-          autofocus
-          bind:value="receiptPhrase"
-          on:keydown="set({ changedPhrase: true })"
-          on:submit="changePhrase()"/>
-        {#if changedPhrase}
-          <Button size="small" width="100%" on:click="changePhrase()">Alterar frase</Button>
-        {/if}
+      <Input
+        ref:phraseInput
+        label="Frase"
+        alphanumeric
+        bind:value="receiptPhrase"
+        on:keydown="set({ phraseInputChanged: true })"
+        on:submit="changePhrase()"
+      />
+
+      {#if phraseInputChanged}
+        <Button size="small" width="100%" on:click="changePhrase()">Alterar frase</Button>
       {/if}
     </div>
   </Row>
@@ -35,14 +35,12 @@
   </Row>
 </Collection>
 
-
 <Dialog ref:changedDialog duration="2000" bgColor="#4ebf1a" textColor="#fff">
   <RoundIcon symbol="check" size="giant" color="#4ebf1a" bgColor="#fff"/>
   <div style="margin-top: 15px;">
     Frase alterada<br>com sucesso
   </div>
 </Dialog>
-
 
 <script>
   import Receipts from '@mamba/native/receipts'
@@ -73,14 +71,15 @@
         const { receiptPhrase }= this.get()
         Receipts.setReceiptPhrase(receiptPhrase);
         this.refs.changedDialog.open()
-        this.set({ changedPhrase: false })
+        this.set({ phraseInputChanged: false })
       },
       toggleReceiptPhrase() {
         const { isReceiptPhraseEnabled } = this.get()
 
         if (isReceiptPhraseEnabled) {
           Receipts.enableReceiptPhrase()
-          this.set({ changedPhrase: false })
+          this.set({ phraseInputChanged: false })
+          this.refs.phraseInput.focus()
         } else {
           Receipts.disableReceiptPhrase()
         }

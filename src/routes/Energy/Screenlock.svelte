@@ -1,4 +1,4 @@
-<Row label="1. Ultra economia" shortcut="1">
+<Row label="1. Ultra economia" shortcut="1" showExtra={isSleepEnabled}>
   <div slot="controller">
     <Switch bind:checked="isSleepEnabled" on:change="toggleSleep()"/>
   </div>
