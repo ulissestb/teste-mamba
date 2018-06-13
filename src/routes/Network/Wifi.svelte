@@ -46,13 +46,15 @@
   {/if}
 
   <!-- Forget wifi dialog -->
-  <Dialog promise={forgetting}>
-    <img src="assets/images/success.png" alt="Sucesso"/>
-    <div>'{wifi.ssid}' esquecido com sucesso!</div>
-  </Dialog>
+  <PromisedDialog promise={forgetting}>
+    <RoundIcon symbol="check" size="giant"/>
+    <div style="margin-top: 15px;">
+      '{wifi.ssid}' esquecido com sucesso!
+    </div>
+  </PromisedDialog>
 
   <!-- Connect wifi dialog -->
-  <Dialog promise={connecting}>
+  <PromisedDialog promise={connecting}>
     {#await connecting}
       <Sprite src="assets/images/loading-sprite.png" width="70px"/>
       <div>Conectando a '{wifi.ssid}'</div>
@@ -65,21 +67,21 @@
       <img src="assets/images/error.png" alt="Erro"/>
       <div>Algo deu errado :(</div>
     {/await}
-  </Dialog>
+  </PromisedDialog>
 </div>
 
 <script>
   import Network from '@mamba/native/network'
   import { Row } from '@mamba/collection'
-  import { Dialog } from '@mamba/dialog'
   import { Icon, RoundIcon } from '@mamba/icon'
+  import { PromisedDialog } from '@mamba/dialog'
 
   export default {
     components: {
-      Dialog,
       Row,
       Icon,
       RoundIcon,
+      PromisedDialog,
       Button: '@mamba/button',
       Input: '@mamba/input',
       Sprite: '@mamba/sprite',

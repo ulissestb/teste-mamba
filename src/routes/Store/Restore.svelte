@@ -1,45 +1,40 @@
-<div class="instructions">
-  <p>Essa ação apagará todos os dados dessa máquina, incluindo</p>
+{#if !resetting}
+  <div class="instructions">
+    <p>Essa ação apagará todos os dados dessa máquina, incluindo</p>
 
-  <ul>
-    <li>histório de transações</li>
-    <li>redes armazenadas</li>
-    <li>dados do usuário</li>
-  </ul>
+    <ul>
+      <li>histório de transações</li>
+      <li>redes armazenadas</li>
+      <li>dados do usuário</li>
+    </ul>
 
-  <p>Após essa ação, será necessária a reativação dessa máquina.</p>
-</div>
-
-<Input
-  label="Digite {randomCode} para confirmar"
-  validate={validateNumber}
-  on:valid="refs.resetDialog.open()"
-/>
-
-<Dialog
-  ref:resetDialog
-  actions={[{
-    label: 'Cancelar',
-    event: 'cancel',
-    props: {
-      bgColor: 'white',
-      textColor: 'black',
-      borderColor: '#4ebf1a'
-    }
-  },
-  {
-    label: 'Ok',
-    event: 'ok'
-  }]}
-  on:ok="resetPOS()"
->
-  <div style="margin-top: 15px;">
-    Tem certeza que deseja restaurar a máquina?
+    <p>Após essa ação, será necessária a reativação dessa máquina.</p>
   </div>
-</Dialog>
+
+  <Input
+    label="Digite {randomCode} para confirmar"
+    validate={validateNumber}
+    on:valid="refs.resetDialog.open()"
+    autofocus
+  />
+
+  <ConfirmationDialog
+    ref:resetDialog
+    title="RESTAURAÇÃO"
+    on:positive="resetPOS()"
+    on:negative="goHome()"
+  >
+    Tem certeza que deseja restaurar a máquina?
+  </ConfirmationDialog>
+{:else}
+  <div class="restoring">
+    Restaurando a máquina...
+  </div>
+{/if}
 
 <script>
   import General from '@mamba/native/general'
+  import { ConfirmationDialog } from '@mamba/dialog'
 
   const CODE_LENGTH = 6
   const generateRandomCode = length => {
@@ -53,7 +48,7 @@
   export default {
     components: {
       Input: '@mamba/input',
-      Dialog: '@mamba/dialog',
+      ConfirmationDialog,
     },
     data() {
       return {
@@ -71,8 +66,13 @@
       },
     },
     methods: {
-      resetPOS(){
-        General.factoryReset();
+      async goHome() {
+        const { getHistory } = await import('svelte-routing')
+        getHistory().push('/')
+      },
+      resetPOS() {
+        General.factoryReset()
+        this.set({ resetting: true })
       },
     },
   }
@@ -80,7 +80,7 @@
 
 <style>
   .instructions {
-    padding: 15px;
+    padding: 10px 15px 5px;
   }
 
   p,
@@ -89,12 +89,26 @@
     margin-bottom: 15px;
   }
 
+  p:last-child {
+    margin-bottom: 0;
+  }
+
   ul {
     margin-left: 1.2em;
   }
 
   .number {
     font-size: 20px;
+    text-align: center;
+  }
+
+  .restoring {
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
     text-align: center;
   }
 </style>

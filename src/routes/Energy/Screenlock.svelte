@@ -1,4 +1,4 @@
-<Row label="1. Ultra economia" shortcut="1" showExtra={isSleepEnabled}>
+<Row label="1. Ultra economia" shortcut="1" showExtra={isSleepEnabled} description="Faz a máquina desligar após um intervalo de tempo">
   <div slot="controller">
     <Switch bind:checked="isSleepEnabled" on:change="toggleSleep()"/>
   </div>
@@ -51,12 +51,3 @@
     },
   }
 </script>
-
-<style>
-  /* .range-container {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  } */
-</style>

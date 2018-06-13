@@ -49,7 +49,7 @@
         </Button>
       </div>
 
-      <Dialog ref:changedDialog duration="2000" on:close="goHome()">
+      <Dialog ref:changedDialog on:close="goHome()">
         <RoundIcon symbol="check" size="giant"/>
         <div style="margin-top: 15px;">
           Senha alterada<br>com sucesso
@@ -116,7 +116,7 @@
 
         if (validInputs) {
           Password.changePassword(currentPassword, newPassword, confirmPassword)
-          this.refs.changedDialog.open()
+          this.refs.changedDialog.open(2000)
         }
       },
     },

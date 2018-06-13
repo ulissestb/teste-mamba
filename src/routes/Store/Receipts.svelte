@@ -19,7 +19,7 @@
         label="Frase"
         alphanumeric
         bind:value="receiptPhrase"
-        on:keydown="set({ phraseInputChanged: true })"
+        on:keyup="set({ phraseInputChanged: true })"
         on:submit="changePhrase()"
       />
 
@@ -35,7 +35,7 @@
   </Row>
 </Collection>
 
-<Dialog ref:changedDialog duration="2000" bgColor="#4ebf1a" textColor="#fff">
+<Dialog ref:changedDialog bgColor="#4ebf1a" textColor="#fff">
   <RoundIcon symbol="check" size="giant" color="#4ebf1a" bgColor="#fff"/>
   <div style="margin-top: 15px;">
     Frase alterada<br>com sucesso
@@ -70,7 +70,7 @@
       changePhrase() {
         const { receiptPhrase }= this.get()
         Receipts.setReceiptPhrase(receiptPhrase);
-        this.refs.changedDialog.open()
+        this.refs.changedDialog.open(2000)
         this.set({ phraseInputChanged: false })
       },
       toggleReceiptPhrase() {

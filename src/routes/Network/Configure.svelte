@@ -3,7 +3,7 @@
   <Row label="2. Trocar para {otherAdapterName}" on:click="switchNetworkAdapter()" shortcut="2"/>
 </Collection>
 
-<Dialog ref:changedDialog duration="1000">
+<Dialog ref:changedDialog>
   Rede alterada<br>para '<strong>{adapterName}</strong>'
 </Dialog>
 
@@ -35,7 +35,7 @@
         this.set({
           networkAdapter: Network.getCurrentNetworkAdapter(),
         })
-        this.refs.changedDialog.open()
+        this.refs.changedDialog.open(1000)
       },
     },
   }
