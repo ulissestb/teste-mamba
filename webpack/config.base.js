@@ -50,6 +50,7 @@ module.exports = {
        * Ensure we're always importing the main packages from this project's root.
        * Fixes linked components using their own dependencies.
        */
+      '@mamba': fromCwd('node_modules', '@mamba'),
       ...Object.keys(PKG.dependencies).reduce((acc, libName) => {
         acc[libName] = fromCwd('node_modules', libName)
         return acc
