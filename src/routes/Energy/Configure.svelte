@@ -1,3 +1,5 @@
+<Title label="Energia"/>
+
 <Collection>
   <Row label="1. Brilho da tela" href="/energy/brightness" shortcut="1"/>
   <Row label="2. Bloqueio da tela" href="/energy/screenlock" shortcut="2"/>
@@ -5,11 +7,13 @@
 
 <script>
   import { Collection, Row } from '@mamba/collection'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       Collection,
       Row,
+      Title,
     },
   }
 </script>

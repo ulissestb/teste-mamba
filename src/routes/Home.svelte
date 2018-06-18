@@ -1,3 +1,5 @@
+<Title label="Ajustes"/>
+
 <Collection title="Rede">
   <Row label="1. Configurar" href="/network" shortcut="1"/>
 </Collection>
@@ -41,12 +43,14 @@
   import Keyboard from '@mamba/native/keyboard'
   import Transactions from '@mamba/native/transactions'
   import { Collection, Row } from '@mamba/collection'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       Switch: '@mamba/switch',
       Collection,
       Row,
+      Title,
     },
     data() {
       return {

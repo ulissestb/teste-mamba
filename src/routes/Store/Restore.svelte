@@ -1,40 +1,38 @@
-{#if !resetting}
-  <div class="instructions">
-    <p>Essa ação apagará todos os dados dessa máquina, incluindo</p>
+<Title label="Restaurar dados" />
 
-    <ul>
-      <li>histório de transações</li>
-      <li>redes armazenadas</li>
-      <li>dados do usuário</li>
-    </ul>
+<div class="instructions">
+  <p>Essa ação apagará todos os dados dessa máquina, incluindo</p>
 
-    <p>Após essa ação, será necessária a reativação dessa máquina.</p>
-  </div>
+  <ul>
+    <li>histório de transações</li>
+    <li>redes armazenadas</li>
+    <li>dados do usuário</li>
+  </ul>
 
-  <Input
-    label="Digite {randomCode} para confirmar"
-    validate={validateNumber}
-    on:valid="refs.resetDialog.open()"
-    autofocus
-  />
+  <p>Após essa ação, será necessária a reativação dessa máquina.</p>
+</div>
 
-  <ConfirmationDialog
-    ref:resetDialog
-    title="RESTAURAÇÃO"
-    on:positive="resetPOS()"
-    on:negative="goHome()"
-  >
-    Tem certeza que deseja restaurar a máquina?
-  </ConfirmationDialog>
-{:else}
-  <div class="restoring">
-    Restaurando a máquina...
-  </div>
-{/if}
+<Input
+  label="Digite {randomCode} para confirmar"
+  validate={validateNumber}
+  on:valid="refs.resetDialog.open()"
+  autofocus
+/>
+
+<ConfirmationDialog
+  ref:resetDialog
+  title="RESTAURAÇÃO"
+  on:positive="resetPOS()"
+  on:negative="goHome()"
+>
+  Tem certeza que deseja restaurar a máquina?
+</ConfirmationDialog>
+
 
 <script>
   import General from '@mamba/native/general'
   import { ConfirmationDialog } from '@mamba/dialog'
+  import { Title } from '@mamba/appbar'
 
   const CODE_LENGTH = 6
   const generateRandomCode = length => {
@@ -49,6 +47,7 @@
     components: {
       Input: '@mamba/input',
       ConfirmationDialog,
+      Title,
     },
     data() {
       return {
@@ -72,7 +71,6 @@
       },
       resetPOS() {
         General.factoryReset()
-        this.set({ resetting: true })
       },
     },
   }
@@ -95,20 +93,5 @@
 
   ul {
     margin-left: 1.2em;
-  }
-
-  .number {
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .restoring {
-    width: 90%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 22px;
-    text-align: center;
   }
 </style>

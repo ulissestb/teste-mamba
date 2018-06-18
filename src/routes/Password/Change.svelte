@@ -1,3 +1,5 @@
+<Title label="Alterar senha" />
+
 <div class="container">
 
   <div class="row">
@@ -62,10 +64,12 @@
 <script>
   import Password from '@mamba/native/password'
   import { RoundIcon } from '@mamba/icon'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       RoundIcon,
+      Title,
       Input: '@mamba/input',
       Button: '@mamba/button',
       Dialog: '@mamba/dialog',

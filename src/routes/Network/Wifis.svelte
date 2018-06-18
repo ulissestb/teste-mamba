@@ -1,3 +1,5 @@
+<Title label="Wi-fis"/>
+
 <Collection>
   <Row label="1. Ativar Wi-Fi" shortcut="1">
     <div slot="controller">
@@ -29,11 +31,13 @@
 <script>
   import Network from '@mamba/native/network'
   import { Collection, Row } from '@mamba/collection'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       Collection,
       Row,
+      Title,
       Switch: '@mamba/switch',
       Icon: '@mamba/icon',
       ProgressBar: '@mamba/progress',

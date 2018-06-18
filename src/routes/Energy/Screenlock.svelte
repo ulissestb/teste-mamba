@@ -1,3 +1,5 @@
+<Title label="Bloqueio de tela"/>
+
 <Row label="1. Ultra economia" shortcut="1" showExtra={isSleepEnabled} description="Faz a máquina desligar após um intervalo de tempo">
   <div slot="controller">
     <Switch bind:checked="isSleepEnabled" on:change="toggleSleep()"/>
@@ -25,12 +27,14 @@
 <script>
   import System from '@mamba/native/system'
   import { Row } from '@mamba/collection'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       Range: '@mamba/range',
       Switch: '@mamba/switch',
       Row,
+      Title,
     },
     data() {
       return {

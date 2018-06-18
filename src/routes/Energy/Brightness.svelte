@@ -1,3 +1,5 @@
+<Title label="Brilho da tela"/>
+
 <div class="container">
   <Range
     ref:range
@@ -26,11 +28,13 @@
 <script>
   import Screen from '@mamba/native/screen'
   import { Row } from '@mamba/collection'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
       Range: '@mamba/range',
       Row,
+      Title,
     },
     data() {
       return {

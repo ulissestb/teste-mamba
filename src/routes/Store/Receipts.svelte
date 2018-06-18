@@ -1,3 +1,5 @@
+<Title label="Recibos" />
+
 <Collection title="Recibos">
   <Row label="1. Via Estabelecimento" shortcut="1">
     <div slot="controller">
@@ -46,6 +48,7 @@
   import Receipts from '@mamba/native/receipts'
   import { Collection, Row } from '@mamba/collection'
   import { RoundIcon } from '@mamba/icon'
+  import { Title } from '@mamba/appbar'
 
   export default {
     components: {
@@ -56,6 +59,7 @@
       RoundIcon,
       Collection,
       Row,
+      Title,
     },
     data() {
       return {
