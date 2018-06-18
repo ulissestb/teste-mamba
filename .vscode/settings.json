@@ -16,5 +16,7 @@
     "javascriptreact",
     { "language": "html", "autoFix": true },
     { "language": "svelte", "autoFix": true }
-  ]
+  ],
+
+  "debug.allowBreakpointsEverywhere": true
 }
