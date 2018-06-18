@@ -9,7 +9,7 @@ const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 const { IS_PROD, getPkg, fromCwd } = require('quickenv')
 const htmlTemplate = require('./helpers/htmlTemplate.js')
 const loaders = require('./helpers/loaders.js')
-const RuntimeBindPolyfillPlugin = require('./helpers/RuntimeBindPolyfillPlugin.js')
+const MambaFixesPlugin = require('./helpers/MambaFixesPlugin.js')
 
 const PKG = getPkg()
 
@@ -29,7 +29,8 @@ module.exports = {
   output: {
     path: fromCwd('dist'),
     publicPath: './',
-    filename: '[name].[hash:6].js',
+    filename: '[name].[hash:3].js',
+    chunkFilename: '[name].[hash:3].js',
   },
   /** Minimal useful output log */
   stats: {
@@ -61,10 +62,10 @@ module.exports = {
     /** Create a separate chunk for webpack runtime */
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
         /** Default chunk groups */
         default: {
-          name: 'app',
           priority: -20,
           reuseExistingChunk: true,
         },
@@ -81,7 +82,7 @@ module.exports = {
         polyfills: {
           test: /core-js/,
           name: 'polyfills',
-          chunks: 'all',
+          chunks: 'initial',
           minSize: 0,
           minChunks: 1,
           priority: 1,
@@ -135,7 +136,7 @@ module.exports = {
   },
   plugins: [
     /** Prepend the Function.prototype.bind() polyfill webpack's runtime code */
-    new RuntimeBindPolyfillPlugin(),
+    new MambaFixesPlugin(),
     new SimpleProgressPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
