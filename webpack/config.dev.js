@@ -22,6 +22,7 @@ module.exports = merge(require('./config.base.js'), {
       'X-Content-Type-Options': 'nosniff',
       'X-Frame-Options': 'DENY',
     },
+    host: '0.0.0.0',
     open: false,
     overlay: {
       warnings: true,
