@@ -23,7 +23,7 @@
     "format": "npm run format:css; npm run format:js",
     "format:js": "prettier --write *.js '{src,test,webpack}/**/*.js' && eslint --fix *.js '{src,test,webpack}/**/*.{js,html,svelte}'",
     "format:css": "prettier --write 'src/**/*.{css,scss,svelte,html}' && stylelint --fix 'src/**/*.{css,scss,svelte,html}'",
-    "postinstall": "yarn link @mamba/cli @mamba/store @mamba/app @mamba/core-styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon @mamba/collection @mamba/switch @mamba/native @mamba/progress @mamba/input  @mamba/button @mamba/sprite @mamba/dialog @mamba/range"
+    "postinstall": "yarn link @mamba/cli @mamba/store @mamba/app @mamba/styles @mamba/styles-utils @mamba/pos @mamba/dialog @mamba/appbar @mamba/icon @mamba/collection @mamba/switch @mamba/native @mamba/progress @mamba/input  @mamba/button @mamba/sprite @mamba/dialog @mamba/range"
   },
   "husky": {
     "hooks": {

@@ -20,8 +20,8 @@ module.exports = {
   context: fromCwd('src'),
   entry: {
     app: [
-      /** External scss/css */
-      './external.scss',
+      /** Mamba style resetter/normalizer */
+      '@mamba/styles/dist/pos.css',
       /** App entry point */
       './index.js',
     ],
