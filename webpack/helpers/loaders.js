@@ -33,19 +33,19 @@ module.exports = {
       importLoaders: 2,
     },
   },
+  /** Use postcss loader in case of extraneous css files */
   postcss: {
     loader: 'postcss-loader',
     options: {
-      plugins: [require('autoprefixer')()],
       sourceMap: true, // 'resolve-url-loader' requires this to be always true
     },
   },
-  sass: {
-    loader: 'sass-loader',
-    options: {
-      sourceMap: true, // 'resolve-url-loader' requires this to be always true
-    },
-  },
+  // sass: {
+  //   loader: 'sass-loader',
+  //   options: {
+  //     sourceMap: true, // 'resolve-url-loader' requires this to be always true
+  //   },
+  // },
   resolveUrl: {
     loader: 'resolve-url-loader',
     options: {
