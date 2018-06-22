@@ -47,7 +47,7 @@
 
         /** If developing, show the brightness change on the POS Mockup */
         if (process.env.NODE_ENV !== 'production') {
-          this.store.fire('change:brightness', {
+          this.store.fire('pos:brightness', {
             brightnessLevel: Screen.brightness.get(),
           })
         }
@@ -57,7 +57,7 @@
 
         /** If developing, show the brightness change on the POS Mockup */
         if (process.env.NODE_ENV !== 'production') {
-          this.store.fire('change:brightness', {
+          this.store.fire('pos:brightness', {
             brightnessLevel: Screen.brightness.get(),
           })
         }
