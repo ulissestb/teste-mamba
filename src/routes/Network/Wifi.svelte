@@ -158,12 +158,11 @@
 
 <style>
   .wifi {
-    display: block;
+    display: flex;
     padding: 10px 20px;
     margin: 0;
     line-height: 1.5rem;
     background-color: #fff;
-    display: flex;
     align-items: center;
   }
 

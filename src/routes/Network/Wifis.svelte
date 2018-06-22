@@ -6,12 +6,12 @@
       <Switch bind:checked="isWifiEnabled" on:change="toggleWifi()"/>
     </div>
   </Row>
-  {#await $wifis}
+  {#await gettingWifisPromise}
     <ProgressBar />
     <Row label="Procurando redes Wi-Fi..." />
-  {:then wifis}
-    {#if isWifiEnabled && wifis}
-      {#each wifis as wifi}
+  {:then wifiList}
+    {#if isWifiEnabled && wifiList}
+      {#each wifiList as wifi}
         <Row
           label={wifi.ssid}
           description={wifi.connected ? 'Conectado' : wifi.saved ? 'Salvo' : undefined}
@@ -44,28 +44,30 @@
     },
     data() {
       return {
+        /** Wifi enabled flag */
         isWifiEnabled: Network.isWifiEnabled(),
+        /** Promise that loads the wifi list onto the store */
+        gettingWifisPromise: null,
       }
     },
     oncreate() {
-      const { wifis } = this.store.get()
       const { isWifiEnabled } = this.get()
-      if (isWifiEnabled && (!wifis || wifis.length === 0)) {
-        this.getWifiList()
+      if (isWifiEnabled) {
+        const { wifis } = this.store.get()
+        const useSaved = wifis && wifis.length > 0
+        this.getWifiList(useSaved)
       }
     },
     methods: {
-      getWifiList() {
-        /** Set the wifis to a promise and, when its resolved, to the wifi list */
-        this.store.setPromise(
-          {
-            wifis: Network.getWifiList(),
-          },
-          /** Transform the 'wifis' when promise fulfilled */
-          {
-            wifis: data => (this.get().isWifiEnabled ? data : []),
-          },
-        )
+      getWifiList(useSaved = false) {
+        const gettingWifisPromise = useSaved
+          ? Promise.resolve(this.store.get().wifis)
+          : Network.getWifiList().then(wifis => {
+            /** Update the store wifi list */
+            this.store.set({ wifis })
+            return wifis
+          })
+        this.set({ gettingWifisPromise })
       },
       toggleWifi() {
         const { isWifiEnabled } = this.get()
@@ -74,8 +76,9 @@
           Network.enableWifi()
           this.getWifiList()
         } else {
+          /** Invalidate the wifi list promise */
           Network.disableWifi()
-          this.store.set({ wifis: [] })
+          this.set({ gettingWifisPromise: null })
         }
       },
     },
