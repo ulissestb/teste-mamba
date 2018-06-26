@@ -1,4 +1,4 @@
-<Title label="Rede"/>
+<AppBarTitle label="Rede"/>
 
 <Collection>
   <Row label="1. Configurar Wi-Fi" href="/network/wifi" shortcut="1"/>
@@ -13,14 +13,14 @@
   import Dialog from '@mamba/dialog'
   import Network from '@mamba/native/network'
   import { Collection, Row } from '@mamba/collection'
-  import { Title } from '@mamba/appbar'
+  import { AppBarTitle } from '@mamba/appbar'
 
   export default {
     components: {
       Dialog,
       Collection,
       Row,
-      Title,
+      AppBarTitle,
     },
     data() {
       return {

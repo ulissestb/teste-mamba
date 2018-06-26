@@ -1,4 +1,4 @@
-<Title label="Esqueci minha senha" />
+<AppBarTitle label="Esqueci minha senha" />
 
 <div class="instructions">
   Ligue para <strong>3004-9680</strong> e informe o número:
@@ -17,13 +17,13 @@
 
 
 <script>
-  import { Title } from '@mamba/appbar'
+  import { AppBarTitle } from '@mamba/appbar'
   import Password from '@mamba/native/password'
 
   export default {
     components: {
       Button: '@mamba/button',
-      Title,
+      AppBarTitle,
     },
     data() {
       return {

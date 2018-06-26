@@ -1,4 +1,4 @@
-<Title label="Restaurar dados" />
+<AppBarTitle label="Restaurar dados" />
 
 <div class="instructions">
   <p>Essa ação apagará todos os dados dessa máquina, incluindo</p>
@@ -16,6 +16,7 @@
   label="Digite {randomCode} para confirmar"
   validate={validateNumber}
   on:valid="refs.resetDialog.open()"
+  value={randomCode}
   autofocus
 />
 
@@ -32,7 +33,7 @@
 <script>
   import General from '@mamba/native/general'
   import { ConfirmationDialog } from '@mamba/dialog'
-  import { Title } from '@mamba/appbar'
+  import { AppBarTitle } from '@mamba/appbar'
 
   const CODE_LENGTH = 6
   const generateRandomCode = length => {
@@ -47,7 +48,7 @@
     components: {
       Input: '@mamba/input',
       ConfirmationDialog,
-      Title,
+      AppBarTitle,
     },
     data() {
       return {

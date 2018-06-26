@@ -1,4 +1,4 @@
-<Title label="Wi-fi"/>
+<AppBarTitle label="Wi-fi"/>
 
 <div class="wifi">
   <Icon symbol="wifi" size="large" level={wifi.strength} />
@@ -77,7 +77,7 @@
   import { Row } from '@mamba/collection'
   import { Icon, RoundIcon } from '@mamba/icon'
   import { PromisedDialog } from '@mamba/dialog'
-  import { Title } from '@mamba/appbar'
+  import { AppBarTitle } from '@mamba/appbar'
 
   export default {
     components: {
@@ -85,7 +85,7 @@
       Icon,
       RoundIcon,
       PromisedDialog,
-      Title,
+      AppBarTitle,
       Button: '@mamba/button',
       Input: '@mamba/input',
       Sprite: '@mamba/sprite',

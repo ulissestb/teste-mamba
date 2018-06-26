@@ -1,4 +1,4 @@
-<Title label="Energia"/>
+<AppBarTitle label="Energia"/>
 
 <Collection>
   <Row label="1. Brilho da tela" href="/energy/brightness" shortcut="1"/>
@@ -7,13 +7,13 @@
 
 <script>
   import { Collection, Row } from '@mamba/collection'
-  import { Title } from '@mamba/appbar'
+  import { AppBarTitle } from '@mamba/appbar'
 
   export default {
     components: {
       Collection,
       Row,
-      Title,
+      AppBarTitle,
     },
   }
 </script>
