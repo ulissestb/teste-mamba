@@ -1,5 +1,5 @@
-import App from './components/App'
-import store from './store'
+import App from './App.svelte'
+import store from './store.js'
 
 /**
  * Bootstrap the application.
@@ -22,20 +22,17 @@ if (process.env.NODE_ENV === 'production') {
 
 if (process.env.NODE_ENV !== 'production') {
   window.MambaStore = store
-  /** If developing, wrap the app with a <POS></POS> if running on a web server */
-  if (window.location.protocol === 'file:') {
-    window.MambaApp = bootstrapAppFrom(root)
-  } else {
-    import('@mamba/pos').then(({ default: POS }) => {
-      const appContainer = document.createElement('DIV')
-      window.MambaApp = bootstrapAppFrom(appContainer)
-      new POS({
-        target: root,
-        store,
-        slots: {
-          default: appContainer,
-        },
-      })
+  /** If developing, wrap the app with a <POS></POS> */
+  import('@mamba/pos').then(({ default: POS }) => {
+    const appContainer = document.createElement('DIV')
+    appContainer.style.height = '100%'
+    window.MambaApp = bootstrapAppFrom(appContainer)
+    new POS({
+      target: root,
+      store,
+      slots: {
+        default: appContainer,
+      },
     })
-  }
+  })
 }

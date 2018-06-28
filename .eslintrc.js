@@ -9,25 +9,21 @@ module.exports = {
   ],
   parser: 'babel-eslint',
   plugins: ['standard', 'prettier', 'jest', 'html'],
+  settings: {
+    'html/html-extensions': ['.html', '.svelte'],
+  },
   env: {
     browser: true,
     node: true,
     es6: true,
   },
   parserOptions: {
-    ecmaFeatures: {
-      jsx: false,
-      modules: true,
-    },
-  },
-  settings: {
-    'html/html-extensions': ['.html', '.svelte'],
-    'html/indent': '+2',
-    'html/report-bad-indent': 'warn',
+    ecmaVersion: 2018,
   },
   rules: {
-    indent: ['warn', 2, { SwitchCase: 1 }],
-    'no-console': IS_PROD() ? ['off', { allow: ['warn', 'error'] }] : 'off',
+    indent: ['error', 2, { SwitchCase: 1 }],
+    camelcase: 'off',
+    'no-console': IS_PROD() ? ['error', { allow: ['warn', 'error'] }] : 'off',
     'no-var': 'error',
     'comma-dangle': ['error', 'always-multiline'],
     'no-new': 'off',
