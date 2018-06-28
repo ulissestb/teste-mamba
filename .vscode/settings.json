@@ -1,14 +1,11 @@
 {
-  "editor.trimAutoWhitespace": true,
+  "debug.allowBreakpointsEverywhere": true,
 
+  "editor.trimAutoWhitespace": true,
   "files.trimTrailingWhitespace": true,
 
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
-
-  "javascript.validate.enable": false,
-  "html.validate.scripts": false,
-  "html.validate.styles": true,
 
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
@@ -18,5 +15,7 @@
     { "language": "svelte", "autoFix": true }
   ],
 
-  "debug.allowBreakpointsEverywhere": true
+  "typescript.validate.enable": false,
+  "html.validate.scripts": false,
+  "html.validate.styles": true,
 }
