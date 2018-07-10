@@ -2,7 +2,6 @@
  * Common webpack configuration
  */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const StyleLintPlugin = require('stylelint-webpack-plugin')
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
 const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
 
@@ -101,7 +100,6 @@ module.exports = {
       filename: 'style.css',
       chunkFilename: '[name].css',
     }),
-    new StyleLintPlugin(),
     new MiniHtmlWebpackPlugin({
       context: { title: 'Mamba Application' },
       template: htmlTemplate,

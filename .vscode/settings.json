@@ -7,6 +7,14 @@
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
 
+  "javascript.validate.enable": false,
+  "typescript.validate.enable": false,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "html.validate.scripts": false,
+  "html.validate.styles": false,
+
   "eslint.autoFixOnSave": true,
   "eslint.validate": [
     "javascript",
@@ -14,6 +22,11 @@
     { "language": "html", "autoFix": true },
     { "language": "svelte", "autoFix": true }
   ],
+
+  "stylelint.configOverrides": {
+    "customSyntax": "postcss-html",
+    "fix": true
+  },
 
   "files.associations": {
     "*.css": "postcss"
@@ -24,10 +37,5 @@
   },
   "emmet.syntaxProfiles": {
     "postcss": "css"
-  },
-
-  "typescript.validate.enable": false,
-  "html.validate.scripts": false,
-  "html.validate.styles": false,
-  "css.validate": false
+  }
 }
