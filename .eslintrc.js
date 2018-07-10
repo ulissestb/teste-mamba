@@ -7,7 +7,6 @@ module.exports = {
     'prettier/standard',
     'plugin:jest/recommended',
   ],
-  parser: 'babel-eslint',
   plugins: ['standard', 'prettier', 'jest', 'html'],
   settings: {
     'html/html-extensions': ['.html', '.svelte'],
@@ -17,6 +16,7 @@ module.exports = {
     node: true,
     es6: true,
   },
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
   },

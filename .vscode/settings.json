@@ -15,7 +15,19 @@
     { "language": "svelte", "autoFix": true }
   ],
 
+  "files.associations": {
+    "*.css": "postcss"
+  },
+
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  },
+
   "typescript.validate.enable": false,
   "html.validate.scripts": false,
-  "html.validate.styles": true,
+  "html.validate.styles": false,
+  "css.validate": false
 }
