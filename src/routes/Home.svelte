@@ -1,4 +1,4 @@
-<AppBarTitle label="Home"/>
+<AppBarTitle ref:teste label="Home"/>
 
 
 <script>
@@ -14,3 +14,15 @@
     methods: {},
   }
 </script>
+
+<style>
+  .teste {
+    p {
+      color: 1;
+    }
+  }
+
+  ref:teste {
+    background: 'red';
+  }
+</style>
