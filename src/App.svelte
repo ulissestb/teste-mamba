@@ -4,7 +4,7 @@
 </App>
 
 <script>
-  import Home from 'routes/Home.svelte'
+  import Home from './routes/Home.svelte'
 
   export default {
     components: {
