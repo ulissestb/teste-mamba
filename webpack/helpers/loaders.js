@@ -1,10 +1,13 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { fromCwd, IS_DEV, IS_WATCHING } = require('quickenv')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { IS_DEV, IS_WATCHING } = require('quickenv');
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
-const babelrc = require(fromCwd('.babelrc.js'))
+const babelrc = require('../../.babelrc.js');
 /** 'babel-loader' already appends 'sourceMap: true'. Cannot have both. */
-delete babelrc.sourceMaps
+delete babelrc.sourceMaps;
+
+/** Read the svelte config file from the project */
+const svelteConfig = require('../../svelte.config.js');
 
 module.exports = {
   babel: {
@@ -77,7 +80,7 @@ module.exports = {
     options: {
       emitCss: true,
       hotReload: IS_DEV(),
-      ...require(fromCwd('svelte.config.js')),
+      ...svelteConfig,
     },
   },
-}
+};

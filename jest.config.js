@@ -11,4 +11,4 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
   },
   testMatch: ['<rootDir>/src/**/__tests__/**/*.js'],
-}
+};

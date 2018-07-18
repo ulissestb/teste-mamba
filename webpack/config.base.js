@@ -1,16 +1,16 @@
 /**
  * Common webpack configuration
  */
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
-const SimpleProgressPlugin = require('webpack-simple-progress-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin');
+const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
 
-const { IS_PROD, getPkg, fromCwd } = require('quickenv')
-const htmlTemplate = require('./helpers/htmlTemplate.js')
-const loaders = require('./helpers/loaders.js')
-const MambaFixesPlugin = require('./helpers/MambaFixesPlugin.js')
+const { IS_PROD, getPkg, fromCwd } = require('quickenv');
+const htmlTemplate = require('./helpers/htmlTemplate.js');
+const loaders = require('./helpers/loaders.js');
+const MambaFixesPlugin = require('./helpers/MambaFixesPlugin.js');
 
-const PKG = getPkg()
+const PKG = getPkg();
 
 module.exports = {
   mode: IS_PROD() ? 'production' : 'development',
@@ -45,8 +45,8 @@ module.exports = {
        */
       '@mamba': fromCwd('node_modules', '@mamba'),
       ...Object.keys(PKG.dependencies).reduce((acc, libName) => {
-        acc[libName] = fromCwd('node_modules', libName)
-        return acc
+        acc[libName] = fromCwd('node_modules', libName);
+        return acc;
       }, {}),
     },
   },
@@ -55,11 +55,7 @@ module.exports = {
       /** Run svelte component related loaders on  */
       {
         test: /\.(html|svelte)$/,
-        include: [
-          fromCwd('src'),
-          /node_modules[\\/]svelte/,
-          /node_modules[\\/]@mamba/,
-        ],
+        include: [fromCwd('src'), /node_modules[\\/]svelte/, /node_modules[\\/]@mamba/],
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
       /** Make 'svelte' related javascript code run through babel without linting */
@@ -76,7 +72,10 @@ module.exports = {
       },
       {
         test: /\.(css|s[ac]ss)$/,
-        /** When importing from a style file, let's use package.json's 'style' field before the actual 'main' one */
+        /** When importing from a style file, let's
+         * use package.json's 'style' field before
+         * the actual 'main' one
+         * */
         resolve: { mainFields: ['style', 'main'] },
         use: [
           loaders.extractCss,
@@ -144,4 +143,4 @@ module.exports = {
       },
     },
   },
-}
+};

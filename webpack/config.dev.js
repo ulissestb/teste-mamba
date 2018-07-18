@@ -1,9 +1,9 @@
 /**
  * Webpack configuration for active development
  */
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const { fromCwd } = require('quickenv')
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const { fromCwd } = require('quickenv');
 
 module.exports = merge(require('./config.base.js'), {
   devtool: 'inline-source-map',
@@ -33,4 +33,4 @@ module.exports = merge(require('./config.base.js'), {
     publicPath: 'http://localhost:8080/',
     hot: true,
   },
-})
+});

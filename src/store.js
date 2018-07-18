@@ -1,3 +1,3 @@
-import MambaStore from '@mamba/store'
+import MambaStore from '@mamba/store';
 
-export default MambaStore({})
+export default MambaStore({});

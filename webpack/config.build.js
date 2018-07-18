@@ -1,13 +1,14 @@
 /**
  * Webpack configuration for building bundles
  */
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const { IS_PROD, fromCwd } = require('quickenv')
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const cssProcessor = require('cssnano');
+const { IS_PROD, fromCwd } = require('quickenv');
 
 module.exports = merge(require('./config.base.js'), {
   devtool: false,
@@ -35,7 +36,7 @@ module.exports = merge(require('./config.base.js'), {
       /** Minify the bundle's css */
       new OptimizeCSSAssetsPlugin({
         /** Default css processor is 'cssnano' */
-        cssProcessor: require('cssnano'),
+        cssProcessor,
         cssProcessorOptions: {
           core: IS_PROD(),
           discardComments: IS_PROD(),
@@ -73,4 +74,4 @@ module.exports = merge(require('./config.base.js'), {
       }),
     ],
   },
-})
+});

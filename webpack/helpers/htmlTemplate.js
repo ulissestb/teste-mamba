@@ -1,9 +1,12 @@
-const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin')
-const { minify: htmlMinifier } = require('html-minifier')
-const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin
-const { IS_PROD } = require('quickenv')
+const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin');
+const { minify: htmlMinifier } = require('html-minifier');
 
-module.exports = ({ css, js, title, publicPath }) => {
+const { generateCSSReferences, generateJSReferences } = MiniHtmlWebpackPlugin;
+const { IS_PROD } = require('quickenv');
+
+module.exports = ({
+  css, js, title, publicPath,
+}) => {
   const htmlTemplate = `<!DOCTYPE html>
         <html>
           <head>
@@ -15,7 +18,7 @@ module.exports = ({ css, js, title, publicPath }) => {
             <div id="root"></div>
             ${generateJSReferences(js, publicPath)}
           </body>
-        </html>`
+        </html>`;
 
   return IS_PROD()
     ? htmlMinifier(htmlTemplate, {
@@ -27,5 +30,5 @@ module.exports = ({ css, js, title, publicPath }) => {
       preserveLineBreaks: false,
       removeComments: true,
     })
-    : htmlTemplate
-}
+    : htmlTemplate;
+};
