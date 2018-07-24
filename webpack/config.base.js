@@ -28,8 +28,8 @@ module.exports = {
   output: {
     path: fromCwd('dist'),
     publicPath: './',
-    filename: '[name].[hash:3].js',
-    chunkFilename: '[name].[hash:3].js',
+    filename: '[name].[hash:5].js',
+    chunkFilename: '[name].[hash:5].js',
   },
   resolve: {
     /** Do not resolve symlinks */
@@ -97,7 +97,7 @@ module.exports = {
     new ProgressBarPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
-      chunkFilename: '[name].css',
+      chunkFilename: '[name].[hash:5].css',
     }),
     new MiniHtmlWebpackPlugin({
       context: { title: 'Mamba Application' },
@@ -116,29 +116,19 @@ module.exports = {
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
       chunks: 'all',
+      minSize: 0,
+      minChunks: 1,
       cacheGroups: {
-        /** Default chunk groups */
-        default: {
-          priority: -20,
-          reuseExistingChunk: true,
-        },
-        /** Chunk that contains every external dependency that doesn't begin with '@mamba' */
+        /** Chunk that contains all libraries used */
         vendor: {
-          test: /node_modules[\\/](?!@mamba)/i,
-          name: 'lib',
-          chunks: 'initial',
-          minSize: 0,
-          minChunks: 1,
-          priority: -10,
+          test: /node_modules/i,
+          name: 'libs',
         },
         /** Chunk that contains used polyfills */
         polyfills: {
           test: /core-js/,
           name: 'polyfills',
-          chunks: 'initial',
-          minSize: 0,
-          minChunks: 1,
-          priority: 1,
+          priority: 10,
         },
       },
     },
