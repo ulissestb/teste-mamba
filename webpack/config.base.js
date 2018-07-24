@@ -3,7 +3,7 @@
  */
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MiniHtmlWebpackPlugin = require('mini-html-webpack-plugin');
-const SimpleProgressPlugin = require('webpack-simple-progress-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 const { IS_PROD, getPkg, fromCwd } = require('quickenv');
 const htmlTemplate = require('./helpers/htmlTemplate.js');
@@ -94,7 +94,7 @@ module.exports = {
   plugins: [
     /** Prepend the Function.prototype.bind() polyfill webpack's runtime code */
     new MambaFixesPlugin(),
-    new SimpleProgressPlugin(),
+    new ProgressBarPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.css',
       chunkFilename: '[name].css',
