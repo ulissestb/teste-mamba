@@ -3,8 +3,6 @@ const { IS_DEV, IS_WATCHING } = require('quickenv');
 
 /** Read the project's .babelrc.js to enforce it in 'babel-loader' */
 const babelrc = require('../../.babelrc.js');
-/** 'babel-loader' already appends 'sourceMap: true'. Cannot have both. */
-delete babelrc.sourceMaps;
 
 /** Read the svelte config file from the project */
 const svelteConfig = require('../../svelte.config.js');
