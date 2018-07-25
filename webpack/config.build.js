@@ -3,9 +3,9 @@
  */
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const ArchivePlugin = require('@laomao800/webpack-archive-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const cssProcessor = require('cssnano');
 const { IS_PROD, fromCwd } = require('quickenv');
@@ -14,18 +14,24 @@ module.exports = merge(require('./config.base.js'), {
   devtool: false,
   node: false,
   plugins: [
-    new CleanWebpackPlugin([fromCwd('dist')], {
-      root: fromCwd(),
-      verbose: false,
-    }),
-    new CopyWebpackPlugin([
-      { from: './assets/', to: fromCwd('dist', 'assets') },
-      {
-        from: fromCwd('.mamba/{manifest.xml,*.so}'),
-        to: fromCwd('dist'),
-        flatten: true,
+    new FileManagerPlugin({
+      onStart: {
+        delete: ['./bundle', './bundle.tar.gz'],
       },
-    ]),
+      onEnd: {
+        copy: [
+          { source: './src/assets', destination: './bundle/assets' },
+          { source: '.mamba/{manifest.xml,*.so}', destination: './bundle/' },
+        ],
+      },
+    }),
+    IS_PROD()
+      && new ArchivePlugin({
+        output: fromCwd(),
+        filename: 'bundle',
+        format: 'tar',
+        pathPrefix: './',
+      }),
     /** Generate hashes based on module's relative path */
     IS_PROD() && new webpack.HashedModuleIdsPlugin(),
   ].filter(Boolean),
