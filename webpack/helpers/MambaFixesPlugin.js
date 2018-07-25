@@ -43,7 +43,10 @@ module.exports = class MambaFixesPlugin {
           /** Replaces the document.createELement('link') with the fix function */
           const runtimeCode = compilation.assets[runtimeFile]
             .source()
-            .replace(/document\.createElement\(('|")link('|")\)/, 'createLink()');
+            .replace(
+              /document\.createElement\(('|")link('|")\)/,
+              'createLink()',
+            );
 
           compilation.assets[runtimeFile] = new ConcatSource(
             ';(function(){\n',

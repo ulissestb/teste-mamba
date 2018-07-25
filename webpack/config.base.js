@@ -55,7 +55,11 @@ module.exports = {
       /** Run svelte component related loaders on  */
       {
         test: /\.(html|svelte)$/,
-        include: [fromCwd('src'), /node_modules[\\/]svelte/, /node_modules[\\/]@mamba/],
+        include: [
+          fromCwd('src'),
+          /node_modules[\\/]svelte/,
+          /node_modules[\\/]@mamba/,
+        ],
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },
       /** Make 'svelte' related javascript code run through babel without linting */
@@ -112,6 +116,8 @@ module.exports = {
     children: false,
   },
   optimization: {
+    namedChunks: true,
+    namedModules: true,
     /** Create a separate chunk for webpack runtime */
     runtimeChunk: { name: 'runtime' },
     splitChunks: {
@@ -119,10 +125,10 @@ module.exports = {
       minSize: 0,
       minChunks: 1,
       cacheGroups: {
-        /** Chunk that contains all libraries used */
-        vendor: {
-          test: /node_modules/i,
-          name: 'libs',
+        vendors: false,
+        libs: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
         },
         /** Chunk that contains used polyfills */
         polyfills: {
