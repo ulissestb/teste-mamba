@@ -13,3 +13,4 @@ bundle.tar.gz
 yarn-error.log
 npm-debug.log
 debug.log
+.directory
