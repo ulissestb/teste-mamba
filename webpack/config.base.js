@@ -20,7 +20,7 @@ module.exports = {
   entry: {
     app: [
       /** Mamba style resetter/normalizer */
-      '@mamba/styles/dist/pos.css',
+      '@mambasdk/styles/dist/pos.css',
       /** App entry point */
       './index.js',
     ],
@@ -43,7 +43,7 @@ module.exports = {
        * Ensure we're always importing the main packages from this project's root.
        * Fixes linked components using their own dependencies.
        */
-      '@mamba': fromCwd('node_modules', '@mamba'),
+      '@mambasdk': fromCwd('node_modules', '@mambasdk'),
       ...Object.keys(PKG.dependencies).reduce((acc, libName) => {
         acc[libName] = fromCwd('node_modules', libName);
         return acc;
@@ -58,7 +58,7 @@ module.exports = {
         include: [
           fromCwd('src'),
           /node_modules[\\/]svelte/,
-          /node_modules[\\/]@mamba/,
+          /node_modules[\\/]@mambasdk/,
         ],
         use: [loaders.babel, loaders.svelte, loaders.eslint],
       },

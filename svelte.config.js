@@ -1,1 +1,1 @@
-module.exports = require('@mamba/configs/svelte/index.js');
+module.exports = require('@mambasdk/configs/svelte/index.js');

@@ -1,3 +1,3 @@
 module.exports = {
-  extends: '@mamba/configs/babel/template.js',
+  extends: '@mambasdk/configs/babel/template.js',
 };

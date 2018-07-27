@@ -54,5 +54,5 @@ If developing with local dependencies only, you must `link` the local packages.
 **Example:**
 
 ```shell
-yarn link @mamba/styles @mamba/styles-utils @mamba/pos
+yarn link @mambasdk/styles @mambasdk/styles-utils @mambasdk/pos
 ```
