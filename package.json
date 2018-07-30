@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.54",
-    "@mambasdk/configs": "0.0.4",
-    "@mambasdk/webpack": "0.0.2",
+    "@mambasdk/configs": "^0.0.4",
+    "@mambasdk/webpack": "^0.0.3",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
     "cross-env": "^5.2.0",
@@ -72,6 +72,7 @@
     "@mambasdk/icon": "^0.0.1",
     "@mambasdk/native": "^0.0.1",
     "@mambasdk/pos": "^0.0.1",
+    "@mambasdk/printable": "^0.0.2",
     "@mambasdk/store": "^0.0.1",
     "@mambasdk/styles": "^0.0.1",
     "svelte": "^2.8.1",
