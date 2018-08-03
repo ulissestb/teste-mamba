@@ -17,7 +17,6 @@
     "build": "cross-env NODE_ENV=production webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
     "build:dev": "webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
     "build:analyze": "cross-env NODE_ENV=production webpack --config ./node_modules/@mambasdk/webpack/config.analyzer.js",
-    "deploy:stone": "yarn build && rm -rf dist/ && mv bundle/ dist/ && mamba app deploy",
     "test": "jest --coverage",
     "test:watch": "yarn test --watch",
     "lint": "yarn lint:js; yarn lint:css;",
@@ -50,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.55",
+    "@mambasdk/cli": "^0.0.2",
     "@mambasdk/configs": "^0.0.5",
     "@mambasdk/webpack": "^0.0.4",
     "babel-core": "^7.0.0-bridge.0",
@@ -65,20 +65,20 @@
     "quickenv": "^0.0.5",
     "stylelint": "^9.4.0",
     "svelte-preprocess": "^2.2.3",
-    "webpack": "^4.16.3",
+    "webpack": "^4.16.4",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@mambasdk/app": "^0.0.3",
+    "@mambasdk/api": "^0.0.4",
+    "@mambasdk/app": "^0.0.5",
     "@mambasdk/appbar": "^0.0.1",
     "@mambasdk/dialog": "^0.0.2",
     "@mambasdk/icon": "^0.0.1",
-    "@mambasdk/api": "^0.0.1",
-    "@mambasdk/pos": "^0.0.2",
-    "@mambasdk/printable": "^0.0.5",
+    "@mambasdk/pos": "^0.0.4",
+    "@mambasdk/printable": "^0.0.7",
     "@mambasdk/store": "^0.0.1",
     "@mambasdk/styles": "^0.0.1",
-    "svelte": "^2.9.7",
+    "svelte": "^2.9.9",
     "svelte-routing": "^0.4.2"
   }
 }
