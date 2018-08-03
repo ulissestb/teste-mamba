@@ -11,15 +11,17 @@ import store from './store.js';
  * */
 const root = document.getElementById('root');
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.APP_ENV === 'pos') {
   new App({
     target: root,
     store,
   });
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  window.MambaStore = store;
+if (process.env.APP_ENV === 'browser') {
+  if (process.env.NODE_ENV === 'development') {
+    window.MambaStore = store;
+  }
   /** If developing, wrap the app with a <POS></POS> */
   import('@mambasdk/pos').then(({ default: POS }) => {
     const appFragment = document.createDocumentFragment();
