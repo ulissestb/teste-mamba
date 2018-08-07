@@ -79,7 +79,6 @@
     "@mambasdk/dialog": "^0.0.2",
     "@mambasdk/icon": "^0.0.1",
     "@mambasdk/pos": "^0.0.7",
-    "@mambasdk/printable": "^0.0.10",
     "@mambasdk/store": "^0.0.1",
     "@mambasdk/styles": "^0.0.1",
     "svelte": "^2.9.10",
