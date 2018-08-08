@@ -29,7 +29,8 @@
     "lint:css": "stylelint --custom-syntax \"postcss-html\" \"src/**/*.{html,svelte,css,pcss}\"",
     "format": "yarn format:css; yarn format:js",
     "format:js": "prettier --write *.js \"{src,test,webpack}/**/*.js\" && eslint --fix *.js \"{src,test,webpack}/**/*.{js,html,svelte}\"",
-    "format:css": "stylelint --fix --custom-syntax \"postcss-html\" \"src/**/*.{html,svelte,css,pcss}\""
+    "format:css": "stylelint --fix --custom-syntax \"postcss-html\" \"src/**/*.{html,svelte,css,pcss}\"",
+    "check-updates": "ncu"
   },
   "husky": {
     "hooks": {
@@ -55,8 +56,8 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.56",
     "@mambasdk/cli": "^0.0.2",
-    "@mambasdk/configs": "^0.0.6",
-    "@mambasdk/webpack": "^0.0.7",
+    "@mambasdk/configs": "^0.0.7",
+    "@mambasdk/webpack": "^0.0.8",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
     "cross-env": "^5.2.0",
@@ -65,8 +66,9 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.4.2",
     "lint-staged": "^7.2.0",
+    "npm-check-updates": "^2.14.2",
     "postcss": "^7.0.2",
-    "prettier": "^1.14.0",
+    "prettier": "^1.14.1",
     "quickenv": "^0.0.5",
     "stylelint": "^9.4.0",
     "svelte-preprocess": "^2.2.3",
@@ -74,14 +76,15 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@mambasdk/app": "^0.0.8",
+    "@mambasdk/app": "^0.0.10",
     "@mambasdk/appbar": "^0.0.1",
     "@mambasdk/dialog": "^0.0.2",
     "@mambasdk/icon": "^0.0.1",
-    "@mambasdk/pos": "^0.0.7",
+    "@mambasdk/pos": "^0.0.9",
+    "@mambasdk/printable": "^0.0.12",
     "@mambasdk/store": "^0.0.1",
     "@mambasdk/styles": "^0.0.1",
-    "svelte": "^2.9.10",
+    "svelte": "^2.9.11",
     "svelte-routing": "^0.4.2"
   }
 }
