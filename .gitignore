@@ -1,8 +1,7 @@
 # Dynamically created
 node_modules/
 dist/
-bundle/
-bundle.tar.gz
+/bundle*
 
 # Workspace files
 /coverage/
