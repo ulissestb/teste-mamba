@@ -36,26 +36,28 @@
     }
   },
   "lint-staged": {
-    "*.{html,svelte}": [
-      "eslint --fix",
-      "stylelint --fix --custom-syntax \"postcss-html\"",
-      "git add"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{pcss,css}": [
-      "stylelint --fix --custom-syntax \"postcss-html\"",
-      "git add"
-    ]
+    "linters": {
+      "*.{html,svelte}": [
+        "eslint --fix",
+        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "git add"
+      ],
+      "*.js": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{pcss,css}": [
+        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "git add"
+      ]
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "@mambasdk/cli": "^0.0.2",
-    "@mambasdk/configs": "^0.0.9",
-    "@mambasdk/webpack": "^0.0.11",
+    "@mambasdk/configs": "^0.0.10",
+    "@mambasdk/webpack": "^0.0.12",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.3.0",
@@ -80,6 +82,7 @@
     "@mambasdk/store": "^0.0.2",
     "@mambasdk/styles": "^0.0.1",
     "svelte": "^2.9.11",
-    "svelte-routing": "^0.4.2"
+    "svelte-routing": "^0.4.2",
+    "ti-queue": "^2.0.3"
   }
 }
