@@ -2,11 +2,23 @@
   "name": "mamba-app-template",
   "version": "1.0.0-alpha",
   "description": "Starter template for Mamba Applications.",
+  "mamba": {
+    "id": "99",
+    "appName": "Mamba App",
+    "iconPath": "assets/logo.svg",
+    "runOnUserSelection": "index.html",
+    "listInMainMenu": "true",
+    "appTechnology": "1",
+    "appType": "0",
+    "appCreationDate": "2017-07-17T13:32:00.000Z",
+    "appPasswordProtectionLevel": "0",
+    "appKey": "11-11-11-11"
+  },
+  "license": "Apache-2.0",
   "author": "Stone Payments - Mamba Team",
   "contributors": [
     "Christian Kaisermann <christian.kaisermann@stone.com.br>"
   ],
-  "license": "Apache-2.0",
   "engines": {
     "node": ">= 8.11",
     "npm": ">= 5",
@@ -58,7 +70,7 @@
     "@babel/core": "^7.0.0-rc.1",
     "@mambasdk/cli": "^0.0.2",
     "@mambasdk/configs": "^0.0.12",
-    "@mambasdk/webpack": "^0.0.16",
+    "@mambasdk/webpack": "^0.0.18",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.3.0",
