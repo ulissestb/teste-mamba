@@ -70,7 +70,7 @@
     "@babel/core": "^7.0.0-rc.1",
     "@mambasdk/cli": "^0.0.2",
     "@mambasdk/configs": "^0.0.12",
-    "@mambasdk/webpack": "^0.0.18",
+    "@mambasdk/webpack": "^0.0.20",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.3.0",
