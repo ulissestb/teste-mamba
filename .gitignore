@@ -1,7 +1,6 @@
 # Dynamically created
 node_modules/
 dist/
-/bundle*
 
 # Workspace files
 /coverage/

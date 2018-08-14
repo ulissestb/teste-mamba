@@ -2,13 +2,25 @@
   "name": "mamba-app-template",
   "version": "1.0.0-alpha",
   "description": "Starter template for Mamba Applications.",
+  "mamba": {
+    "id": "99",
+    "appName": "Mamba App",
+    "iconPath": "assets/logo.svg",
+    "runOnUserSelection": "index.html",
+    "listInMainMenu": "true",
+    "appTechnology": "1",
+    "appType": "0",
+    "appCreationDate": "2017-07-17T13:32:00.000Z",
+    "appPasswordProtectionLevel": "0",
+    "appKey": "11-11-11-11"
+  },
+  "license": "Apache-2.0",
   "author": "Stone Payments - Mamba Team",
   "contributors": [
     "Christian Kaisermann <christian.kaisermann@stone.com.br>"
   ],
-  "license": "Apache-2.0",
   "engines": {
-    "node": ">= 8",
+    "node": ">= 8.11",
     "npm": ">= 5",
     "yarn": ">= 1.7"
   },
@@ -16,10 +28,11 @@
     "start": "webpack-dev-server --config ./node_modules/@mambasdk/webpack/config.dev.js",
     "build": "yarn build-pos",
     "build:dev": "yarn build-pos:dev",
-    "build:analyze": "cross-env NODE_ENV=production APP_ENV=pos webpack --config ./node_modules/@mambasdk/webpack/config.analyzer.js",
+    "build:analyze": "yarn build-pos:analyze",
     "build-pos": "cross-env NODE_ENV=production APP_ENV=pos webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
     "build-pos:dev": "cross-env APP_ENV=pos webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
     "build-browser": "cross-env NODE_ENV=production webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
+    "build-pos:analyze": "cross-env NODE_ENV=production APP_ENV=pos webpack --config ./node_modules/@mambasdk/webpack/config.analyzer.js",
     "build-browser:dev": "webpack --config ./node_modules/@mambasdk/webpack/config.build.js",
     "build-browser:analyze": "cross-env NODE_ENV=production webpack --config ./node_modules/@mambasdk/webpack/config.analyzer.js",
     "lint": "yarn lint:js; yarn lint:css;",
@@ -36,31 +49,33 @@
     }
   },
   "lint-staged": {
-    "*.{html,svelte}": [
-      "eslint --fix",
-      "stylelint --fix --custom-syntax \"postcss-html\"",
-      "git add"
-    ],
-    "*.js": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{pcss,css}": [
-      "stylelint --fix --custom-syntax \"postcss-html\"",
-      "git add"
-    ]
+    "linters": {
+      "*.{html,svelte}": [
+        "eslint --fix",
+        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "git add"
+      ],
+      "*.js": [
+        "prettier --write",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{pcss,css}": [
+        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "git add"
+      ]
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-rc.1",
     "@mambasdk/cli": "^0.0.2",
-    "@mambasdk/configs": "^0.0.9",
-    "@mambasdk/webpack": "^0.0.11",
+    "@mambasdk/configs": "^0.0.12",
+    "@mambasdk/webpack": "^0.0.20",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.3.0",
     "husky": "^0.15.0-rc.13",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^7.2.2",
     "npm-check-updates": "^2.14.2",
     "postcss": "^7.0.2",
     "prettier": "^1.14.2",
@@ -71,15 +86,15 @@
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@mambasdk/app": "^0.0.11",
+    "@mambasdk/app": "^0.0.13",
     "@mambasdk/appbar": "^0.0.3",
     "@mambasdk/dialog": "^0.0.2",
-    "@mambasdk/icon": "^0.0.1",
-    "@mambasdk/pos": "^0.0.10",
-    "@mambasdk/printable": "^0.0.13",
+    "@mambasdk/icon": "^0.0.2",
+    "@mambasdk/pos": "^0.0.12",
+    "@mambasdk/printable": "^0.0.15",
     "@mambasdk/store": "^0.0.2",
     "@mambasdk/styles": "^0.0.1",
-    "svelte": "^2.9.11",
+    "svelte": "^2.10.1",
     "svelte-routing": "^0.4.2"
   }
 }
