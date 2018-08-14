@@ -5,7 +5,7 @@
 Make sure all dependencies have been installed before moving on:
 
 - [Node.js](http://nodejs.org/) >= v8.11.3
-- [Yarn](https://yarnpkg.com/en/docs/install)
+- [Yarn](https://yarnpkg.com/en/docs/install) >= v1.7
 
 ## Developing
 
