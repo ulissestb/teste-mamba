@@ -5,7 +5,7 @@
   "mamba": {
     "id": "99",
     "appName": "Mamba App",
-    "iconPath": "assets/logo.svg",
+    "iconPath": "assets/logo.bmp",
     "runOnUserSelection": "index.html",
     "listInMainMenu": "true",
     "appTechnology": "1",
