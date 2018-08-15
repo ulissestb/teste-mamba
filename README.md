@@ -10,7 +10,7 @@ Make sure all dependencies have been installed before moving on:
 
 ### Installing
 
-#### Mamba cli
+#### With `@mambasdk/cli`
 
 ```shell
 # Install the mamba cli globally
@@ -55,7 +55,7 @@ npm run start
 yarn build
 ```
 
-This will generate the `bundle` directory and a `bundle.tar.gz` file, which both contains your Mamba app.
+This will generate the `dist/bundle.pos` directory and a `dist/bundle.pos.tar.gz` file, which both contains your Mamba app.
 
 2. **TODO**
 
@@ -67,13 +67,3 @@ This will generate the `bundle` directory and a `bundle.tar.gz` file, which both
 - `yarn build:analyze` - Analyze the final bundle;
 - `yarn lint` - Lint all style and script files;
 - `yarn format` - Format all style and script files;
-
-### Local dependencies
-
-If developing with local dependencies only, you must `link` the local packages.
-
-**Example:**
-
-```shell
-yarn link @mambasdk/styles @mambasdk/styles-utils @mambasdk/pos
-```
