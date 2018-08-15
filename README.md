@@ -5,11 +5,32 @@
 Make sure all dependencies have been installed before moving on:
 
 - [Node.js](http://nodejs.org/) >= v8.11.3
-- [Yarn](https://yarnpkg.com/en/docs/install) >= v1.7
 
 ## Developing
 
 ### Installing
+
+#### Mamba cli
+
+```shell
+# Install the mamba cli globally
+npm i -g @mambasdk/cli
+
+# Create a new mamba app at 'my-mamba-app' directory
+mamba app new my-mamba-app
+
+? Name: My Mamba App
+? Version: 0.0.1
+? Description: My new Mamba app
+
+# Enter the app directory
+cd my-mamba-app
+
+# Start the development server
+mamba app start
+```
+
+#### Manually
 
 ```shell
 # Create and enter your new app directory
@@ -20,10 +41,10 @@ cd my-mamba-app
 npx degit stone-payments/pos-mamba-app-template
 
 # Install its dependencies with 'yarn'
-yarn
+npm i
 
 # Run the development server
-yarn start
+npm run start
 ```
 
 ### Building and deploying to the `POS`
