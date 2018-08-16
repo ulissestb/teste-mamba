@@ -3,11 +3,10 @@
   "version": "1.0.0-alpha",
   "description": "Starter template for Mamba Applications.",
   "mamba": {
-    "id": "99",
+    "id": 99,
     "appName": "Mamba App",
     "iconPath": "assets/logo.bmp",
-    "runOnUserSelection": "index.html",
-    "listInMainMenu": "true",
+    "listInMainMenu": true,
     "appTechnology": "1",
     "appType": "0",
     "appCreationDate": "2017-07-17T13:32:00.000Z",
