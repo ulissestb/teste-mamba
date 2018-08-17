@@ -1,1 +1,1 @@
-module.exports = require('@mambasdk/configs/prettier/index.js');
+module.exports = require('@mamba/configs/prettier/index.js');

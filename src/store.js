@@ -1,3 +1,3 @@
-import MambaStore from '@mambasdk/store';
+import MambaStore from '@mamba/store';
 
 export default MambaStore({});

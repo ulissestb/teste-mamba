@@ -1,1 +1,1 @@
-module.exports = require('@mambasdk/configs/postcss/index.js');
+module.exports = require('@mamba/configs/postcss/index.js');

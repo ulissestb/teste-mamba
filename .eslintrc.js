@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
-    './node_modules/@mambasdk/configs/eslint/index.js',
-    './node_modules/@mambasdk/configs/eslint/jest.js',
-    './node_modules/@mambasdk/configs/eslint/template.js',
+    './node_modules/@mamba/configs/eslint/index.js',
+    './node_modules/@mamba/configs/eslint/jest.js',
+    './node_modules/@mamba/configs/eslint/template.js',
   ],
 };

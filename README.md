@@ -10,11 +10,11 @@ Make sure all dependencies have been installed before moving on:
 
 ### Installing
 
-#### With `@mambasdk/cli`
+#### With `@mamba/cli`
 
 ```shell
 # Install the mamba cli globally
-npm i -g @mambasdk/cli
+npm i -g @mamba/cli
 
 # Create a new mamba app at 'my-mamba-app' directory
 mamba app new my-mamba-app
