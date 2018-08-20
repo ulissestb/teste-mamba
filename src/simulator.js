@@ -3,9 +3,10 @@
  * * Usually, there's no need to modify this file.
  */
 import * as Simulator from '@mamba/pos/simulator/index.js';
+import POS from '@mamba/pos/simulator/view/POS.html';
 import store from './store.js';
 
 /** Initialize the Simulator View */
-new Simulator.POS({ target: document.body, store });
+new POS({ target: document.body, store });
 
 export default Simulator;
