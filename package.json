@@ -9,7 +9,7 @@
     "listInMainMenu": true,
     "appTechnology": "1",
     "appType": "0",
-    "appCreationDate": "2017-07-17T13:32:00.000Z",
+    "appCreationDate": "2017-07-17T13:32:00",
     "appPasswordProtectionLevel": "0",
     "appKey": "11-11-11-11"
   },
@@ -63,10 +63,10 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.1",
-    "@mamba/cli": "^0.0.2-alpha.2",
-    "@mamba/configs": "^0.0.2-alpha.2",
-    "@mamba/webpack": "^0.0.2-alpha.2",
+    "@babel/core": "^7.0.0-rc.2",
+    "@mamba/cli": "^0.0.2-alpha.3",
+    "@mamba/configs": "^0.0.2-alpha.3",
+    "@mamba/webpack": "^0.0.2-alpha.3",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.4.0",
@@ -78,19 +78,19 @@
     "prettier": "^1.14.2",
     "quickenv": "^0.0.6",
     "stylelint": "^9.5.0",
-    "svelte-preprocess": "^2.2.3",
-    "webpack": "^4.16.5",
+    "svelte-preprocess": "^2.2.4",
+    "webpack": "^4.17.0",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@mamba/app": "^0.0.2-alpha.2",
-    "@mamba/appbar": "^0.0.2-alpha.2",
-    "@mamba/dialog": "^0.0.2-alpha.2",
-    "@mamba/icon": "^0.0.2-alpha.2",
-    "@mamba/pos": "^0.0.2-alpha.2",
-    "@mamba/printable": "^0.0.2-alpha.2",
-    "@mamba/store": "^0.0.2-alpha.2",
-    "@mamba/styles": "^0.0.2-alpha.2",
+    "@mamba/app": "^0.0.2-alpha.3",
+    "@mamba/appbar": "^0.0.2-alpha.3",
+    "@mamba/dialog": "^0.0.2-alpha.3",
+    "@mamba/icon": "^0.0.2-alpha.3",
+    "@mamba/pos": "^0.0.2-alpha.3",
+    "@mamba/printable": "^0.0.2-alpha.3",
+    "@mamba/store": "^0.0.2-alpha.3",
+    "@mamba/styles": "^0.0.2-alpha.3",
     "svelte": "2.11.0",
     "svelte-routing": "^0.4.2"
   }
