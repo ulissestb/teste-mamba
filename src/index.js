@@ -5,7 +5,11 @@
 import App from './App.html';
 import store from './store.js';
 
-new App({
+if (__DEV__) {
+  window.MambaStore = store;
+}
+
+export default new App({
   target: document.getElementById('app-root'),
   store,
 });

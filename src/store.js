@@ -1,3 +1,5 @@
 import MambaStore from '@mamba/store';
 
-export default MambaStore({});
+const initialData = {};
+
+export default MambaStore(initialData);

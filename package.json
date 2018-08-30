@@ -63,10 +63,10 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-rc.2",
-    "@mamba/cli": "^0.0.2-alpha.3",
-    "@mamba/configs": "^0.0.2-alpha.3",
-    "@mamba/webpack": "^0.0.2-alpha.3",
+    "@babel/core": "^7.0.0",
+    "@mamba/cli": "^0.0.2-alpha.7",
+    "@mamba/configs": "^0.0.2-alpha.7",
+    "@mamba/webpack": "^0.0.2-alpha.7",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.4.0",
@@ -79,19 +79,19 @@
     "quickenv": "^0.0.6",
     "stylelint": "^9.5.0",
     "svelte-preprocess": "^2.2.4",
-    "webpack": "^4.17.0",
+    "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"
   },
   "dependencies": {
-    "@mamba/app": "^0.0.2-alpha.3",
-    "@mamba/appbar": "^0.0.2-alpha.3",
-    "@mamba/dialog": "^0.0.2-alpha.3",
-    "@mamba/icon": "^0.0.2-alpha.3",
-    "@mamba/pos": "^0.0.2-alpha.3",
-    "@mamba/printable": "^0.0.2-alpha.3",
-    "@mamba/store": "^0.0.2-alpha.3",
-    "@mamba/styles": "^0.0.2-alpha.3",
-    "svelte": "2.11.0",
-    "svelte-routing": "^0.4.2"
+    "@kaisermann/svelte-router": "0.0.4",
+    "@mamba/app": "^0.0.2-alpha.7",
+    "@mamba/appbar": "^0.0.2-alpha.7",
+    "@mamba/dialog": "^0.0.2-alpha.7",
+    "@mamba/icon": "^0.0.2-alpha.7",
+    "@mamba/pos": "^0.0.2-alpha.7",
+    "@mamba/printable": "^0.0.2-alpha.7",
+    "@mamba/store": "^0.0.2-alpha.7",
+    "@mamba/styles": "^0.0.2-alpha.7",
+    "svelte": "2.13.2"
   }
 }

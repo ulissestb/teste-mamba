@@ -1,21 +1,22 @@
 <App>
-  <AppBar title="Template" />
-  <Route exact path="/" component={Home}/>
+  <AppBar title="Template"/>
+  <Router {routes} />
 </App>
 
 <script>
-  import Home from './routes/Home.html';
+  import App from '@mamba/app';
+  import routes from './routes.js';
 
   export default {
     components: {
-      App: '@mamba/app',
+      App,
+      Router: '@kaisermann/svelte-router',
       AppBar: '@mamba/appbar',
-      Route: 'svelte-routing/Route',
     },
     data() {
       return {
-        Home,
-      };
-    },
+        routes
+      }
+    }
   };
 </script>
