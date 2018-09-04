@@ -4,12 +4,11 @@
 </App>
 
 <script>
-  import App from '@mamba/app';
   import routes from './routes.js';
 
   export default {
     components: {
-      App,
+      App: '@mamba/app',
       Router: 'svelte-page',
       AppBar: '@mamba/appbar',
     },
