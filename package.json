@@ -19,12 +19,12 @@
     "Christian Kaisermann <christian.kaisermann@stone.com.br>"
   ],
   "engines": {
-    "node": ">= 8.11",
+    "node": ">= 8.11.3",
     "npm": ">= 5"
   },
   "scripts": {
     "start": "mamba app start",
-    "start:server": "http-server 'dist/' --cors='*'",
+    "start:http-server": "http-server 'dist/' --cors='*'",
     "build": "mamba app build",
     "build:dev": "mamba app build -d",
     "build:analyze": "mamba app analyze",
@@ -33,10 +33,10 @@
     "build-browser:analyze": "mamba app analyze",
     "lint": "npm run lint:js; npm run lint:css;",
     "lint:js": "eslint *.js \"{src,test,webpack}/**/*.{js,html,svelte}\"",
-    "lint:css": "stylelint --custom-syntax \"postcss-html\" \"src/**/*.{html,svelte,css,pcss}\"",
+    "lint:css": "stylelint \"src/**/*.{html,svelte,css,pcss}\"",
     "format": "npm run format:css; npm run format:js",
     "format:js": "prettier --write *.js \"{src,test,webpack}/**/*.js\" && eslint --fix *.js \"{src,test,webpack}/**/*.{js,html,svelte}\"",
-    "format:css": "stylelint --fix --custom-syntax \"postcss-html\" \"src/**/*.{html,svelte,css,pcss}\"",
+    "format:css": "stylelint --fix \"src/**/*.{html,svelte,css,pcss}\"",
     "check-updates": "ncu"
   },
   "husky": {
@@ -48,7 +48,7 @@
     "linters": {
       "*.{html,svelte}": [
         "eslint --fix",
-        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "stylelint --fix",
         "git add"
       ],
       "*.js": [
@@ -57,7 +57,7 @@
         "git add"
       ],
       "*.{pcss,css}": [
-        "stylelint --fix --custom-syntax \"postcss-html\"",
+        "stylelint --fix",
         "git add"
       ]
     }
