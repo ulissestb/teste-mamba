@@ -55,7 +55,7 @@
   },
 
   /** Auto-fix on save */
-  "eslint.autoFixOnSave": false,
+  "eslint.autoFixOnSave": true,
   /** Validate html/svelte files */
   "eslint.validate": [
     { "language": "javascript", "autoFix": true },
