@@ -24,19 +24,14 @@
   },
   "scripts": {
     "start": "mamba app start",
-    "start:http-server": "http-server 'dist/' --cors='*'",
     "build": "mamba app build",
     "build:dev": "mamba app build -d",
-    "build:analyze": "mamba app analyze",
     "build-browser": "mamba app build -t browser",
     "build-browser:dev": "mamba app build -d -t browser",
-    "build-browser:analyze": "mamba app analyze",
-    "lint": "npm run lint:js; npm run lint:css;",
-    "lint:js": "eslint *.js \"{src,test,webpack}/**/*.{js,html,svelte}\"",
-    "lint:css": "stylelint \"src/**/*.{html,svelte,css,pcss}\"",
-    "format": "npm run format:css; npm run format:js",
-    "format:js": "prettier --write *.js \"{src,test,webpack}/**/*.js\" && eslint --fix *.js \"{src,test,webpack}/**/*.{js,html,svelte}\"",
-    "format:css": "stylelint --fix \"src/**/*.{html,svelte,css,pcss}\"",
+    "serve": "mamba app serve",
+    "analyze": "mamba app analyze",
+    "lint": "mamba app lint",
+    "format": "mamba app format",
     "check-updates": "ncu"
   },
   "husky": {
@@ -63,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
+    "@babel/core": "^7.0.1",
     "@mamba/cli": "^1.0.0-prealpha.5",
     "@mamba/configs": "^1.0.0-prealpha.5",
     "@mamba/webpack": "^1.0.0-prealpha.5",
@@ -93,6 +88,6 @@
     "@mamba/store": "^1.0.0-prealpha.5",
     "@mamba/styles": "^1.0.0-prealpha.5",
     "svelte": "2.13.4",
-    "svelte-page": "0.0.6"
+    "svelte-page": "0.1.0"
   }
 }
