@@ -82,3 +82,7 @@ npm run start:http-server # Starts the local http server
 - `npm run build:analyze` - Analyze the final bundle;
 - `npm run lint` - Lint all style and script files;
 - `npm run format` - Format all style and script files;
+
+## Documentation
+
+- [Svelte](https://svelte.technology/guide)
