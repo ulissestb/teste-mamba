@@ -21,7 +21,7 @@ Recommended:
 npm i -g @mamba/cli
 
 # Create a new mamba app at 'my-mamba-app' directory
-mamba app new my-mamba-app
+mamba new app my-mamba-app
 
 ? Name: My Mamba App
 ? Version: 0.0.1
