@@ -21,7 +21,7 @@ Recommended:
 npm i -g @mamba/cli
 
 # Create a new mamba app at 'my-mamba-app' directory
-mamba app new my-mamba-app
+mamba new app my-mamba-app
 
 ? Name: My Mamba App
 ? Version: 0.0.1
@@ -68,7 +68,7 @@ This will generate the `dist/bundle.pos` directory and a `dist/bundle.pos.tar.gz
 2. Start the local http server
 
 ```shell
-npm run start:http-server # Starts the local http server
+npm run serve # Starts the local http server
 ```
 
 3. Open the `Develop` app and insert your local server ip and the app will automatically look for the `dist/bundle.pos.tar.gz` and install it.
@@ -76,7 +76,7 @@ npm run start:http-server # Starts the local http server
 ### Npm Commands
 
 - `npm run start` - Start the dev server;
-- `npm run start:http-server` - Start a local http server;
+- `npm run serve` - Start a local http server;
 - `npm run build` - Build the production bundle;
 - `npm run build:dev` - Build the development bundle;
 - `npm run build:analyze` - Analyze the final bundle;
