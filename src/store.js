@@ -1,7 +1,8 @@
 import MambaStore from '@mamba/store';
 
-const initialData = {};
-const store = MambaStore(initialData);
+export const INITIAL_DATA = {};
+
+const store = MambaStore(INITIAL_DATA);
 
 if (__DEV__) {
   window.MambaStore = store;
