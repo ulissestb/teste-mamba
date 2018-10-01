@@ -57,7 +57,7 @@
     }
   },
   "devDependencies": {
-    "@babel/core": "^7.1.1",
+    "@babel/core": "^7.1.2",
     "@mamba/cli": "^1.0.0-rc.16",
     "@mamba/configs": "^1.0.0-rc.16",
     "@mamba/webpack": "^1.0.0-rc.16",
@@ -65,7 +65,7 @@
     "cross-env": "^5.2.0",
     "eslint": "^5.6.1",
     "http-server": "^0.11.1",
-    "husky": "^1.0.1",
+    "husky": "^1.1.0",
     "lint-staged": "^7.3.0",
     "postcss": "^7.0.4",
     "prettier": "^1.14.3",
@@ -73,7 +73,7 @@
     "stylelint": "^9.6.0",
     "svelte-preprocess": "^2.3.2",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1"
+    "webpack-cli": "^3.1.2"
   },
   "dependencies": {
     "@mamba/app": "^1.0.0-rc.16",
@@ -86,6 +86,6 @@
     "@mamba/store": "^1.0.0-rc.16",
     "@mamba/styles": "^1.0.0-rc.16",
     "svelte": "2.13.5",
-    "svelte-page": "^1.2.3"
+    "svelte-page": "^2.0.1"
   }
 }
