@@ -58,9 +58,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
-    "@mamba/cli": "^1.0.0-rc.17",
-    "@mamba/configs": "^1.0.0-rc.17",
-    "@mamba/webpack": "^1.0.0-rc.17",
+    "@mamba/cli": "^1.0.0-rc.18",
+    "@mamba/configs": "^1.0.0-rc.18",
+    "@mamba/webpack": "^1.0.0-rc.18",
     "babel-core": "^7.0.0-bridge.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.6.1",
@@ -76,15 +76,15 @@
     "webpack-cli": "^3.1.2"
   },
   "dependencies": {
-    "@mamba/app": "^1.0.0-rc.17",
-    "@mamba/appbar": "^1.0.0-rc.17",
-    "@mamba/button": "^1.0.0-rc.17",
-    "@mamba/dialog": "^1.0.0-rc.17",
-    "@mamba/icon": "^1.0.0-rc.17",
-    "@mamba/pos": "^1.0.0-rc.17",
-    "@mamba/printable": "^1.0.0-rc.17",
-    "@mamba/store": "^1.0.0-rc.17",
-    "@mamba/styles": "^1.0.0-rc.17",
+    "@mamba/app": "^1.0.0-rc.18",
+    "@mamba/appbar": "^1.0.0-rc.18",
+    "@mamba/button": "^1.0.0-rc.18",
+    "@mamba/dialog": "^1.0.0-rc.18",
+    "@mamba/icon": "^1.0.0-rc.18",
+    "@mamba/pos": "^1.0.0-rc.18",
+    "@mamba/printable": "^1.0.0-rc.18",
+    "@mamba/store": "^1.0.0-rc.18",
+    "@mamba/styles": "^1.0.0-rc.18",
     "svelte": "2.13.5",
     "svelte-page": "^2.0.2"
   }
