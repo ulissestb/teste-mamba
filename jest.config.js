@@ -25,8 +25,7 @@ module.exports = {
     'node_modules/(?!(@mamba)|(.+\\.html)|(svelte.+\\.js))',
   ],
   moduleNameMapper: {
-    '\\.(jpg|jpeg|png|gif|svg|ttf)$':
-      '<rootDir>/tests/jest/__mocks__/fileMock.js',
+    '\\.(jpg|jpeg|png|gif|svg|ttf)$': '<rootDir>/tests/setup/mocks/fileMock.js',
     /**
      * act as a resolver for the "svelte" field of a component package.json.,
      * Pass directories which contains used "svelte" packages
