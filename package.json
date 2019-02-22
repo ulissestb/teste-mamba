@@ -77,14 +77,14 @@
     "webpack-cli": "^3.2.1"
   },
   "dependencies": {
-    "@mamba/app": "^2.5.2",
-    "@mamba/appbar": "^2.5.2",
-    "@mamba/button": "^2.5.2",
-    "@mamba/dialog": "^2.5.2",
-    "@mamba/icon": "^2.5.2",
-    "@mamba/pos": "^2.5.2",
-    "@mamba/printable": "^2.5.2",
-    "@mamba/styles": "^2.5.2",
+    "@mamba/app": "^2.5.3",
+    "@mamba/appbar": "^2.5.3",
+    "@mamba/button": "^2.5.3",
+    "@mamba/dialog": "^2.5.3",
+    "@mamba/icon": "^2.5.3",
+    "@mamba/pos": "^2.5.3",
+    "@mamba/printable": "^2.5.3",
+    "@mamba/styles": "^2.5.3",
     "immer": "^2.0.0",
     "svelte": "2.16.1",
     "svelte-page": "^2.2.1"
