@@ -1,0 +1,83 @@
+<AppBarModifier title="Personagens" />
+
+<p><br>
+  Nome: {swapiData.name ? swapiData.name : ''}<br>
+  Altura: {swapiData.height ? swapiData.height : ''}<br>
+  Massa: {swapiData.mass ? swapiData.mass : ''}<br>
+  Cor do Cabelo: {swapiData.hair_color ? swapiData.hair_color : ''}<br>
+  Cor da Pele: {swapiData.skin_color ? swapiData.skin_color : ''}<br>
+  Cor dos Olhos: {swapiData.eye_color ? swapiData.eye_color : ''}<br>
+  Gênero: {swapiData.gender ? swapiData.gender : '' }<br>
+  Ano de Nascimento: {swapiData.birth_year ? swapiData.birth_year : ''}<br>
+
+  <br>
+</p>
+<Button size="full" secondary on:click="handleRandom()">
+  Random
+</Button><br><br>
+<Printable ref:printable>
+  ================================<br />
+  <ul>
+    <li>{swapiData.name} - {hora}</li>
+  </ul>
+  ================================<br />
+</Printable>
+<Button size="full" bottom on:click="refs.printable.print()" shortcut="enter">
+  pressione enter pra imprimir
+</Button>
+
+<script>
+  import Http from '@mamba/pos/api/http.js';
+
+
+
+  export default {
+    components: {
+      AppBarModifier: '@mamba/appbar/Modifier.html',
+      Printable: '@mamba/printable',
+      Button: '@mamba/button',
+
+    },
+
+    data() {
+      return {
+        swapiData: {},
+        swapiRandomNumber: '',
+        hora: '',
+        personnew: [],
+      };
+    },
+
+    methods: {
+      async handleRequest() {
+        const myRequest = {
+          url: `https://swapi.co/api/people/${this.get().swapiRandomNumber}`,
+          method: 'GET',
+        };
+        await Http.send(myRequest)
+          .then((result) => {
+            const data = JSON.parse(result.body);
+            this.set({
+              swapiData: data,
+            });
+          });
+
+      },
+      handleRandom() {
+        this.set({
+          swapiRandomNumber: Math.floor(Math.random() * 85),
+          hora: Date(),
+        });
+        this.handleRequest();
+      },
+
+    },
+  };
+</script>
+
+<style type="text/postcss">
+  p {
+    padding: 10px;
+    font-size: 15px;
+  }
+</style>

@@ -1,23 +1,21 @@
 <AppBarModifier title="Home" />
 
 <p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+  Clique no botão "Random" para selecionar um personagem aleatório de Star Wars e ver suas informações
   <br>
   <br>
-  <a href="/about">About</a>
-</p>
+  <a href="/persons">Iniciar</a>
+  <br>
 
+</p>
 <Printable ref:printable>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga unde dicta at quisquam doloremque sunt soluta architecto debitis, sit quidem placeat qui nam expedita quod, mollitia suscipit porro saepe recusandae.
+  ================================<br />
+
 </Printable>
 
-<Button
-  size="full"
-  bottom
-  on:click="refs.printable.print()"
-  shortcut="enter"
->
-  Imprimir! (press. enter)
+
+<Button size="full" bottom on:click="refs.printable.print()" shortcut="enter">
+  pressione enter pra imprimir
 </Button>
 
 <script>
@@ -26,13 +24,15 @@
       AppBarModifier: '@mamba/appbar/Modifier.html',
       Printable: '@mamba/printable',
       Button: '@mamba/button',
+
     },
   };
+
 </script>
 
 <style type="text/postcss">
   p {
     padding: 20px;
-    font-size: 22px;
+    font-size: 18px;
   }
 </style>
