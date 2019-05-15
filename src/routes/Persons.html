@@ -1,6 +1,7 @@
-<AppBarModifier title="Personagens" />
+<AppBarModifier title="Personagem" />
 
-<p><br>
+<p>
+  <br>
   Nome: {swapiData.name ? swapiData.name : ''}<br>
   Altura: {swapiData.height ? swapiData.height : ''}<br>
   Massa: {swapiData.mass ? swapiData.mass : ''}<br>
@@ -10,74 +11,72 @@
   Gênero: {swapiData.gender ? swapiData.gender : '' }<br>
   Ano de Nascimento: {swapiData.birth_year ? swapiData.birth_year : ''}<br>
 
-  <br>
 </p>
-<Button size="full" secondary on:click="handleRandom()">
-  Random
-</Button><br><br>
-<Printable ref:printable>
-  ================================<br />
-  <ul>
-    <li>{swapiData.name} - {hora}</li>
-  </ul>
-  ================================<br />
+<Printable>
+    ===========================<br>
+
+    ===========================<br>
 </Printable>
-<Button size="full" bottom on:click="refs.printable.print()" shortcut="enter">
-  pressione enter pra imprimir
+<Button size="full" bottom  shortcut="enter">
+    Imprimir! (press. enter)
 </Button>
+
+
+<Button on:click="swapiRandom()" secondary size="full">
+  Random
+</Button>
+
+
 
 <script>
   import Http from '@mamba/pos/api/http.js';
-
-
+  import Storage from '@mamba/pos/api/storage.js';
 
   export default {
     components: {
       AppBarModifier: '@mamba/appbar/Modifier.html',
-      Printable: '@mamba/printable',
-      Button: '@mamba/button',
-
+      Button: '@mamba/Button',
+      Printable: '@mamba/Printable',
     },
-
     data() {
       return {
-        swapiData: {},
         swapiRandomNumber: '',
-        hora: '',
-        personnew: [],
+        swapiData: '',
+        arrayOfNames: [],
       };
+    },
+    onstate() {
+      const {arrayOfNames, swapiData} = this.get();
+      Storage.setItem('names', arrayOfNames.push(swapiData.name));
+      console.log(arrayOfNames);
     },
 
     methods: {
-      async handleRequest() {
-        const myRequest = {
-          url: `https://swapi.co/api/people/${this.get().swapiRandomNumber}`,
+      swapiRandom() {
+        this.set({ swapiRandomNumber: Math.floor(Math.random() * 87) });
+        this.asyncRequest();
+      },
+
+      async asyncRequest() {
+        const {swapiRandomNumber} = this.get();
+        const swapiRequest = {
+          url: `https://swapi.co/api/people/${swapiRandomNumber}`,
           method: 'GET',
         };
-        await Http.send(myRequest)
+        await Http.send(swapiRequest)
           .then((result) => {
-            const data = JSON.parse(result.body);
-            this.set({
-              swapiData: data,
-            });
+            const data = JSON.parse(result);
+            this.set({ swapiData: data });
+
           });
-
       },
-      handleRandom() {
-        this.set({
-          swapiRandomNumber: Math.floor(Math.random() * 85),
-          hora: Date(),
-        });
-        this.handleRequest();
-      },
-
     },
   };
 </script>
 
 <style type="text/postcss">
   p {
-    padding: 10px;
+    padding: 13px;
     font-size: 15px;
   }
 </style>

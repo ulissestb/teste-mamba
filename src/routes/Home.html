@@ -8,23 +8,12 @@
   <br>
 
 </p>
-<Printable ref:printable>
-  ================================<br />
 
-</Printable>
-
-
-<Button size="full" bottom on:click="refs.printable.print()" shortcut="enter">
-  pressione enter pra imprimir
-</Button>
 
 <script>
   export default {
     components: {
       AppBarModifier: '@mamba/appbar/Modifier.html',
-      Printable: '@mamba/printable',
-      Button: '@mamba/button',
-
     },
   };
 
